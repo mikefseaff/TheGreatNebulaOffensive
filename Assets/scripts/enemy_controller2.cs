@@ -18,7 +18,10 @@ public class enemy_controller2 : MonoBehaviour
 
 
     public bool facingRight = true;
+
    
+
+
 
     Vector3 pos, localScale;
 
@@ -30,14 +33,18 @@ public class enemy_controller2 : MonoBehaviour
     public float timerMax = 25f;
     public bool canfireBullets = true;
 
+    public float bulletSpeedCheck;
 
-
-
-
+    private float posBullet;
+    private float negBullet;
 
     // Start is called before the first frame update
     void Start()
     {
+        posBullet = bullet.GetComponent<enemy_bullet_controller>().speedX;
+        Debug.Log(posBullet);
+        negBullet = bullet.GetComponent<enemy_bullet_controller>().speedX * -1;
+        Debug.Log(negBullet);
         pos = transform.position;
 
         localScale = transform.localScale;
@@ -54,12 +61,21 @@ public class enemy_controller2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bulletSpeedCheck = bullet.GetComponent<enemy_bullet_controller>().speedX;
         CheckWhereToFace();
 
         if (facingRight)
+        {
             MoveRight();
+            bullet.GetComponent<enemy_bullet_controller>().speedX = posBullet;
+        }
+
         else
+        {
             MoveLeft();
+            bullet.GetComponent<enemy_bullet_controller>().speedX = negBullet;
+        }
+            
 
         if (Camera.main.WorldToViewportPoint(transform.position).x < 0)
         {
@@ -70,23 +86,27 @@ public class enemy_controller2 : MonoBehaviour
     // checks x location to see when to switch directional movement 
     void CheckWhereToFace()
     {
-        if (pos.x < -7.5f)
+        
+        
+        if (pos.x <= -7.5f)
         {
             facingRight = true;
-            //problem here with direction of the bullet firing 
-            bullet.GetComponent<enemy_bullet_controller>().speedX *= -1;
+            
         }
             
 
-        else if (pos.x > 7.5f)
+        else if (pos.x >= 7.5f)
         {
             facingRight = false;
-            //problem here with direction of bullet firing 
-            bullet.GetComponent<enemy_bullet_controller>().speedX *= -1;
+
         }
 
         if (((facingRight) && (localScale.x < 0)) || ((!facingRight) && (localScale.x > 0)))
+        {
             localScale.x *= -1;
+            
+        }
+           
 
         transform.localScale = localScale;
 
@@ -95,6 +115,8 @@ public class enemy_controller2 : MonoBehaviour
     // method to move the enemy from the left to the right 
     void MoveRight()
     {
+ 
+        
         pos += transform.right * Time.deltaTime * moveSpeed;
         transform.position = pos + transform.up * Mathf.Sin(Time.time * frequency) * magnitude;
     }
@@ -102,6 +124,7 @@ public class enemy_controller2 : MonoBehaviour
     //method to move the enemy from the right to left
     void MoveLeft()
     {
+       
         pos -= transform.right * Time.deltaTime * moveSpeed;
         transform.position = pos + transform.up * Mathf.Sin(Time.time * frequency) * magnitude;
     }

@@ -182,9 +182,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedX: -2
-  speedY: 0
+  speedY: 2
   paceSpeed: 1
   bullet: {fileID: 0}
   timerMin: 5
   timerMax: 25
   canfireBullets: 1
+  speed: 1

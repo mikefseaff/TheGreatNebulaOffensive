@@ -27,8 +27,10 @@ public class enemy_manager : MonoBehaviour
     {
         timer1 = 0;
         timer2 = 0;
+        timer3 = 0;
         maxTimer1 = Random.Range(timerMin1, timerMax1);
         maxTimer2 = Random.Range(timerMin2, timerMax2);
+        maxTimer3 = Random.Range(timerMin3, timerMax3);
         StartCoroutine("SpawnEnemy1Timer");
         StartCoroutine("SpawnEnemy2Timer");
         StartCoroutine("SpawnEnemy3Timer");

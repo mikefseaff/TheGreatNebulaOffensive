@@ -363,8 +363,8 @@ MonoBehaviour:
   timerMax1: 1
   timerMin2: 2
   timerMax2: 3
-  timerMin3: 1
-  timerMax3: 1
+  timerMin3: 30
+  timerMax3: 30
 --- !u!1 &1543819370
 GameObject:
   m_ObjectHideFlags: 0
