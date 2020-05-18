@@ -17,7 +17,7 @@ public class enemy_bullet_controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Camera.main.WorldToViewportPoint(transform.position).y < 0)
+        if (Camera.main.WorldToViewportPoint(transform.position).y < 0 || Camera.main.WorldToViewportPoint(transform.position).x < 0 || Camera.main.WorldToViewportPoint(transform.position).x > 1)
         {
             Destroy(this.gameObject);
         }

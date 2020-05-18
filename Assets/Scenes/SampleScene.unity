@@ -358,10 +358,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy1: {fileID: 1422250508625470161, guid: 668f83f2dcf4948428671dd284c2c4c4, type: 3}
   enemy2: {fileID: 4944056411439678682, guid: 4d7ec9abca2601f4e93a999a7c9fe47d, type: 3}
+  enemy3: {fileID: 6437399200010113262, guid: 67f4aa6dc7d27f64bbb61e32606c55ab, type: 3}
   timerMin1: 1
   timerMax1: 1
   timerMin2: 2
   timerMax2: 3
+  timerMin3: 1
+  timerMax3: 1
 --- !u!1 &1543819370
 GameObject:
   m_ObjectHideFlags: 0

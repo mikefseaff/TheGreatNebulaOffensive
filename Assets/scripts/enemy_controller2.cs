@@ -29,6 +29,12 @@ public class enemy_controller2 : MonoBehaviour
     public float timerMin = 5f;
     public float timerMax = 25f;
     public bool canfireBullets = true;
+
+
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {

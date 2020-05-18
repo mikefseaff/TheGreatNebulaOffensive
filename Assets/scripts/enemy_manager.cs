@@ -8,14 +8,19 @@ public class enemy_manager : MonoBehaviour
     private float maxTimer1;
     private float timer2;
     private float maxTimer2;
+    private float timer3;
+    private float maxTimer3;
     public GameObject enemy1;
     public GameObject enemy2;
+    public GameObject enemy3;
     //public GameObject enemy3;
 
     public float timerMin1 = 5f;
     public float timerMax1 = 12f;
     public float timerMin2 = 5f;
     public float timerMax2 = 12f;
+    public float timerMin3 = 5f;
+    public float timerMax3 = 12f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +31,7 @@ public class enemy_manager : MonoBehaviour
         maxTimer2 = Random.Range(timerMin2, timerMax2);
         StartCoroutine("SpawnEnemy1Timer");
         StartCoroutine("SpawnEnemy2Timer");
+        StartCoroutine("SpawnEnemy3Timer");
     }
 
     // Update is called once per frame
@@ -61,6 +67,14 @@ public class enemy_manager : MonoBehaviour
         spawnPoint.y = Mathf.Clamp(spawnPoint.y, bottomBorder + enemySize.x / 2, topBorder - enemySize.x / 2);
         GameObject.Instantiate(enemy2, spawnPoint, new Quaternion(0, 0, 0, 0));
     }
+    void SpawnEnemy3()
+    {
+        float x = 1.25f;
+        Vector3 spawnPoint = Camera.main.ViewportToWorldPoint(new Vector3(x, 0, 0));
+        spawnPoint.z = 0;
+        spawnPoint.y = 0;
+        GameObject.Instantiate(enemy3, spawnPoint, new Quaternion(0, 0, 0, 0));
+    }
 
     IEnumerator SpawnEnemy1Timer()
     {
@@ -91,6 +105,23 @@ public class enemy_manager : MonoBehaviour
             }
 
             timer2 += 1f;
+            yield return new WaitForSeconds(1f);
+        }
+    }
+    IEnumerator SpawnEnemy3Timer()
+    {
+        while (true)
+        {
+            if (timer3 >= maxTimer3)
+            {
+                //spawn an enemy
+                SpawnEnemy3();
+                timer3 = 0;
+                maxTimer3 = Random.Range(timerMin3, timerMax3);
+                break;
+            }
+
+            timer3 += 1f;
             yield return new WaitForSeconds(1f);
         }
     }
