@@ -35,16 +35,9 @@ public class enemy_controller2 : MonoBehaviour
 
     public float bulletSpeedCheck;
 
-    private float posBullet;
-    private float negBullet;
-
     // Start is called before the first frame update
     void Start()
     {
-        posBullet = bullet.GetComponent<enemy_bullet_controller>().speedX;
-        Debug.Log(posBullet);
-        negBullet = bullet.GetComponent<enemy_bullet_controller>().speedX * -1;
-        Debug.Log(negBullet);
         pos = transform.position;
 
         localScale = transform.localScale;
@@ -67,13 +60,10 @@ public class enemy_controller2 : MonoBehaviour
         if (facingRight)
         {
             MoveRight();
-            bullet.GetComponent<enemy_bullet_controller>().speedX = posBullet;
         }
-
         else
         {
             MoveLeft();
-            bullet.GetComponent<enemy_bullet_controller>().speedX = negBullet;
         }
             
 
@@ -115,8 +105,6 @@ public class enemy_controller2 : MonoBehaviour
     // method to move the enemy from the left to the right 
     void MoveRight()
     {
- 
-        
         pos += transform.right * Time.deltaTime * moveSpeed;
         transform.position = pos + transform.up * Mathf.Sin(Time.time * frequency) * magnitude;
     }
@@ -124,7 +112,6 @@ public class enemy_controller2 : MonoBehaviour
     //method to move the enemy from the right to left
     void MoveLeft()
     {
-       
         pos -= transform.right * Time.deltaTime * moveSpeed;
         transform.position = pos + transform.up * Mathf.Sin(Time.time * frequency) * magnitude;
     }
@@ -133,8 +120,12 @@ public class enemy_controller2 : MonoBehaviour
     {
         Vector3 spawnPoint = transform.position;
         spawnPoint.y -= (bullet.GetComponent<Renderer>().bounds.size.y / 2) + (GetComponent<Renderer>().bounds.size.y / 2);
-        GameObject.Instantiate(bullet, spawnPoint, transform.rotation);
+        GameObject bulletFired = GameObject.Instantiate(bullet, spawnPoint, transform.rotation);
 
+        if (facingRight)
+            bulletFired.GetComponent<enemy_bullet_controller>().speedX = Mathf.Abs(bulletFired.GetComponent<enemy_bullet_controller>().speedX);
+        else
+            bulletFired.GetComponent<enemy_bullet_controller>().speedX = Mathf.Abs(bulletFired.GetComponent<enemy_bullet_controller>().speedX) * -1;
     }
 
     IEnumerator FireBullet()
