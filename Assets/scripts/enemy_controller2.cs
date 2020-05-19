@@ -121,6 +121,7 @@ public class enemy_controller2 : MonoBehaviour
         Vector3 spawnPoint = transform.position;
         spawnPoint.y -= (bullet.GetComponent<Renderer>().bounds.size.y / 2) + (GetComponent<Renderer>().bounds.size.y / 2);
         spawnPoint.x -= (bullet.GetComponent<Renderer>().bounds.size.x / 2) + (GetComponent<Renderer>().bounds.size.x / 2);
+
         GameObject bulletFired = GameObject.Instantiate(bullet, spawnPoint, transform.rotation);
 
         if (facingRight)
