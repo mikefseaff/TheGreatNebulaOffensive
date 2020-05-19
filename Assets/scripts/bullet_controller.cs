@@ -34,7 +34,13 @@ public class bullet_controller : MonoBehaviour
             //scoreText.GetComponent<score_controller>().score += 10;
             //scoreText.GetComponent<score_controller>().UpdateScore();
         }
-        
+        if (collision.gameObject.tag == "Enemy3")
+        {
+            
+            Destroy(this.gameObject);
+        }
+
+
     }
 
 }

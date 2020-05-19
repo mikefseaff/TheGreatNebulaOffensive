@@ -168,4 +168,4 @@ MonoBehaviour:
   bullet: {fileID: 2527700827327191586, guid: c3c1a0576bd4e1e4ab8290e525d41f06, type: 3}
   timerMin: 0.5
   timerMax: 3
-  canfireBullets: 0
+  canfireBullets: 1

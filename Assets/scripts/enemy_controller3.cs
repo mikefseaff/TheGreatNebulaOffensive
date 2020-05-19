@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class enemy_controller3 : MonoBehaviour
 {
+    public float health = 31;
     public float speedX;
     public float speedY;
    
@@ -12,6 +13,8 @@ public class enemy_controller3 : MonoBehaviour
     private float timerBullet;
     private float maxTimerBullet;
     public GameObject bullet;
+
+    private float maxTimerDelay;
 
     public float timerMin = 5f;
     public float timerMax = 25f;
@@ -28,10 +31,10 @@ public class enemy_controller3 : MonoBehaviour
         timerBullet = 0;
         maxTimerBullet = Random.Range(timerMin, timerMax);
 
-        if (canfireBullets)
-        {
-            StartCoroutine("FireBullet");
-        }
+
+            StartCoroutine("BulletDelay");
+            StartCoroutine("BulletDelay2");
+
     }
 
     // Update is called once per frame
@@ -43,19 +46,24 @@ public class enemy_controller3 : MonoBehaviour
         }
         if (Camera.main.WorldToViewportPoint(transform.position).x <= .9)
         {
-           
-                rb.velocity = new Vector2(0, speedY);
+
+
+            rb.velocity = new Vector2(0, speedY);
                 IsGoingUp();
                 if (goingUp)
                 {
-                    Debug.Log("true");
+                    
                     MoveUp();
                 }
                 else if (goingUp == false)
                 {
-                    Debug.Log("false");
+                    
                     MoveDown();
                 }
+        }
+        if(health <= 0)
+        {
+            Destroy(this.gameObject);
         }
         
     }
@@ -84,27 +92,115 @@ public class enemy_controller3 : MonoBehaviour
     }
 
 
-    void SpawnBullet()
+    void SpawnBullet1()
     {
         Vector3 spawnPoint = transform.position;
-        spawnPoint.y -= (bullet.GetComponent<Renderer>().bounds.size.y / 2) + (GetComponent<Renderer>().bounds.size.y / 2);
+        //spawnPoint.y -= (bullet.GetComponent<Renderer>().bounds.size.y / 2);
+        spawnPoint.x -= (2.2f);
         GameObject.Instantiate(bullet, spawnPoint, transform.rotation);
 
     }
+    void SpawnBullet2()
+    {
+        Vector3 spawnPoint1 = transform.position;
+        spawnPoint1.y -= (2.1f);
+        spawnPoint1.x -= (2.2f);
+        GameObject.Instantiate(bullet, spawnPoint1, transform.rotation);
+       
 
-    IEnumerator FireBullet()
+    }
+    void SpawnBullet3()
+    {
+        Vector3 spawnPoint2 = transform.position;
+        spawnPoint2.y += (2.1f);
+        spawnPoint2.x -= (2.2f);
+        GameObject.Instantiate(bullet, spawnPoint2, transform.rotation);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.tag == "bullet_player")
+        {
+            health -= 1;
+            Debug.Log(health);
+        }
+
+    }
+
+    IEnumerator FireBullet1()
     {
         while (true)
         {
             if (timerBullet >= maxTimerBullet)
             {
                 //spawn an enemy
-                SpawnBullet();
+                SpawnBullet1();
+                timerBullet = 0;
+                maxTimerBullet = Random.Range(timerMin, timerMax);
+                Debug.Log("bullet1");
+            }
+
+            timerBullet += .01f;
+            yield return new WaitForSeconds(.01f);
+        }
+
+    }
+    IEnumerator FireBullet2()
+    {
+        StopCoroutine("FireBullet1");
+        while (true)
+        {
+            if (timerBullet >= maxTimerBullet)
+            {
+                //spawn an enemy
+                SpawnBullet1();
+                SpawnBullet2();
+                SpawnBullet3();
                 timerBullet = 0;
                 maxTimerBullet = Random.Range(timerMin, timerMax);
             }
 
             timerBullet += .01f;
+            yield return new WaitForSeconds(.01f);
+        }
+
+    }
+    IEnumerator BulletDelay()
+    {
+        while (true)
+        {
+            if (Camera.main.WorldToViewportPoint(transform.position).x <= .9)
+            {
+                //spawn an enemy
+                if (canfireBullets)
+                {
+                    StartCoroutine("FireBullet1");
+                    
+
+                }
+                StopCoroutine("BulletDelay");
+            }
+
+            yield return new WaitForSeconds(.01f);
+        }
+
+    }
+    IEnumerator BulletDelay2()
+    {
+        while (true)
+        {
+            if (health <= 30)
+            {
+                //spawn an enemy
+                if (canfireBullets)
+                {
+                    StartCoroutine("FireBullet2");
+                }
+                StopCoroutine("BulletDelay2");
+            }
+
+         
             yield return new WaitForSeconds(.01f);
         }
 
