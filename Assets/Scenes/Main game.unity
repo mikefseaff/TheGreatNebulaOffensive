@@ -580,10 +580,10 @@ RectTransform:
   m_Father: {fileID: 2096592210}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -547.6, y: 264}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: -1100, y: -534}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &182902369
 MonoBehaviour:
@@ -1128,8 +1128,8 @@ MonoBehaviour:
   enemy1: {fileID: 1422250508625470161, guid: 668f83f2dcf4948428671dd284c2c4c4, type: 3}
   enemy2: {fileID: 4944056411439678682, guid: 4d7ec9abca2601f4e93a999a7c9fe47d, type: 3}
   enemy3: {fileID: 6437399200010113262, guid: 67f4aa6dc7d27f64bbb61e32606c55ab, type: 3}
-  timerMin1: 1
-  timerMax1: 1
+  timerMin1: 0.75
+  timerMax1: 0.75
   timerMin2: 1.5
   timerMax2: 2.5
   timerMin3: 0
@@ -3526,7 +3526,7 @@ GameObject:
   - component: {fileID: 2096592207}
   - component: {fileID: 2096592211}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: DistanceDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3581,9 +3581,9 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0

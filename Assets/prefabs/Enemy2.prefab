@@ -170,6 +170,6 @@ MonoBehaviour:
   facingRight: 1
   bullet: {fileID: 3732692014435474822, guid: 8f1d8246b6d89b443a357728e18a1e00, type: 3}
   timerMin: 0.5
-  timerMax: 3
+  timerMax: 1.5
   canfireBullets: 1
-  bulletSpeed: 8
+  bulletSpeedCheck: 0

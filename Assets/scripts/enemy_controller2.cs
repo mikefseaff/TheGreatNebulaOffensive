@@ -33,7 +33,7 @@ public class enemy_controller2 : MonoBehaviour
     public float timerMax = 25f;
     public bool canfireBullets = true;
 
-    public float bulletSpeedCheck;
+   // public float bulletSpeedCheck;
 
     // Start is called before the first frame update
     void Start()
@@ -54,7 +54,7 @@ public class enemy_controller2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bulletSpeedCheck = bullet.GetComponent<enemy_bullet_controller>().speedX;
+       // bulletSpeedCheck = bullet.GetComponent<enemy_bullet_controller>().speedX;
         CheckWhereToFace();
 
         if (facingRight)
