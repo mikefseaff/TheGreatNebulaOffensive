@@ -14,13 +14,19 @@ public class enemy_controller3 : MonoBehaviour
     private float maxTimerBullet;
     public GameObject bullet;
 
-    private float maxTimerDelay;
+    public float maxTimerDelay = 30f;
+    private float timerDelay = 0f;
 
     public float timerMin = 5f;
     public float timerMax = 25f;
     public bool canfireBullets = true;
 
     private bool goingUp = true;
+
+    public GameObject explosion;
+    private float timer;
+    public AudioSource enraged;
+    
 
 
     // Start is called before the first frame update
@@ -34,6 +40,8 @@ public class enemy_controller3 : MonoBehaviour
 
             StartCoroutine("BulletDelay");
             StartCoroutine("BulletDelay2");
+            StartCoroutine("MovementDelay");
+            StartCoroutine(Die(this.gameObject));
 
     }
 
@@ -61,10 +69,7 @@ public class enemy_controller3 : MonoBehaviour
                     MoveDown();
                 }
         }
-        if(health <= 0)
-        {
-            Destroy(this.gameObject);
-        }
+        
         
     }
 
@@ -125,6 +130,15 @@ public class enemy_controller3 : MonoBehaviour
             health -= 1;
             Debug.Log(health);
         }
+        if (health == 0)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
+            boom.transform.localScale = new Vector3(this.transform.localScale.x, this.transform.localScale.y);
+            float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+            Destroy(boom.gameObject, animationTime);
+            StopCoroutine("FireBullet2");
+        }
 
     }
 
@@ -138,7 +152,7 @@ public class enemy_controller3 : MonoBehaviour
                 SpawnBullet1();
                 timerBullet = 0;
                 maxTimerBullet = Random.Range(timerMin, timerMax);
-                Debug.Log("bullet1");
+                
             }
 
             timerBullet += .01f;
@@ -195,6 +209,7 @@ public class enemy_controller3 : MonoBehaviour
                 //spawn an enemy
                 if (canfireBullets)
                 {
+                    enraged.Play();
                     StartCoroutine("FireBullet2");
                 }
                 StopCoroutine("BulletDelay2");
@@ -205,4 +220,45 @@ public class enemy_controller3 : MonoBehaviour
         }
 
     }
+    IEnumerator MovementDelay()
+    {
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        while (true)
+        {
+            if (timerDelay >= maxTimerDelay)
+            {
+                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                rb.velocity = new Vector2(speedX, 0);
+                StopCoroutine("MovementDelay");
+            }
+
+            timerDelay += .01f;
+            yield return new WaitForSeconds(.01f);
+        }
+
+    }
+    IEnumerator Die(GameObject Enemy)
+    {
+        while (true)
+        {
+
+            if (Enemy.gameObject.GetComponent<SpriteRenderer>().enabled == false)
+            {
+                Debug.Log("hi");
+                if (timer >= .8f)
+                {
+                    Debug.Log("bye");
+                    GameObject.Destroy(Enemy);
+                }
+                timer += .8f;
+                yield return new WaitForSeconds(.8f);
+            }
+            yield return null;
+
+        }
+
+
+
+    }
 }
+

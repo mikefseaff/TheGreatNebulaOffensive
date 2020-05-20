@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class bullet_controller : MonoBehaviour
 {
+    private float timer = 0;
     public float speed;
     private Rigidbody2D rb;
+    public GameObject explosion;
 
 
     // Start is called before the first frame update
@@ -31,7 +33,13 @@ public class bullet_controller : MonoBehaviour
         {
             GameObject.Destroy(this.gameObject);
             GameObject.Destroy(collision.gameObject);
-            //scoreText.GetComponent<score_controller>().score += 10;
+            GameObject boom = GameObject.Instantiate(explosion, collision.transform.position, new Quaternion(0, 0, 0, 0));
+            boom.transform.localScale = new Vector3(collision.transform.localScale.x, collision.transform.localScale.y);
+            float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+            Destroy(boom.gameObject, animationTime);
+           
+
+;            //scoreText.GetComponent<score_controller>().score += 10;
             //scoreText.GetComponent<score_controller>().UpdateScore();
         }
         if (collision.gameObject.tag == "Enemy3")
@@ -42,5 +50,5 @@ public class bullet_controller : MonoBehaviour
 
 
     }
-
+   
 }

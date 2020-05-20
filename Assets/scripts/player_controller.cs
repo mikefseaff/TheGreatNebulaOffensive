@@ -8,11 +8,14 @@ public class player_controller : MonoBehaviour
     private Rigidbody2D rb;
 
     public GameObject bullet;
+    public GameObject explosion;
+    private float timer;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        StartCoroutine(Die(this.gameObject));
     }
 
     // Update is called once per frame
@@ -67,8 +70,13 @@ public class player_controller : MonoBehaviour
 
         if (collision.gameObject.tag == "Enemy1" || collision.gameObject.tag == "Enemy2")
         {
-            GameObject.Destroy(this.gameObject);
+           
             GameObject.Destroy(collision.gameObject);
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
+            boom.transform.localScale = new Vector3(collision.transform.localScale.x, this.transform.localScale.y);
+            float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+            Destroy(boom.gameObject, animationTime);
             //scoreText.GetComponent<score_controller>().score += 10;
             //scoreText.GetComponent<score_controller>().UpdateScore();
         }
@@ -77,6 +85,29 @@ public class player_controller : MonoBehaviour
 
             Destroy(this.gameObject);
         }
+
+
+    }
+    IEnumerator Die(GameObject player)
+    {
+        while (true)
+        {
+
+            if (player.gameObject.GetComponent<SpriteRenderer>().enabled == false)
+            {
+                Debug.Log("hi");
+                if (timer >= .8f)
+                {
+                    Debug.Log("bye");
+                    GameObject.Destroy(player);
+                }
+                timer += .8f;
+                yield return new WaitForSeconds(.8f);
+            }
+            yield return null;
+
+        }
+
 
 
     }
