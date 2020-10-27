@@ -8,6 +8,9 @@ public class DefeatMenu : MonoBehaviour
 {
     public bool isDefeated;
     public GameObject defeatMenuCanvas;
+    public GameObject imageBeginning;
+    public GameObject imageMiddle;
+    private float timer;
     public AudioSource backgroundMusic;
     // Start is called before the first frame update
 
@@ -16,9 +19,13 @@ public class DefeatMenu : MonoBehaviour
     {
         if (isDefeated)
         {
-            defeatMenuCanvas.SetActive(true);
+            //defeatMenuCanvas.SetActive(true);
             Time.timeScale = 0f;
             backgroundMusic.Pause();
+            //imageMiddle.SetActive(false);
+            DefeatAnimation();
+            enabled = false; 
+            
         }
         else
         {
@@ -30,13 +37,43 @@ public class DefeatMenu : MonoBehaviour
             isDefeated = true;
         }
     }
+
+    private void DefeatAnimation()
+    {
+        defeatMenuCanvas.SetActive(true);
+        imageMiddle.SetActive(false);
+        StartCoroutine(Fade(imageMiddle, imageBeginning));
+    }
     public void Retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void Quit()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene("Main Menu");
     }
-}
+
+    IEnumerator Fade(GameObject imageMiddle, GameObject imageBeginning)
+    {
+        while (true)
+        {
+            
+            if (timer >= 1.5f)
+            {
+                Debug.Log("fade test");
+                imageMiddle.SetActive(true);
+                imageBeginning.SetActive(false);
+                StopCoroutine(Fade(imageMiddle, imageBeginning));
+            }
+            timer += .1f;
+            yield return new WaitForSeconds(.25f);
+            
+        }
+
+        }
+
+
+
+    }
+
 

@@ -13,6 +13,7 @@ public class enemy_manager : MonoBehaviour
     public GameObject enemy1;
     public GameObject enemy2;
     public GameObject enemy3;
+    private GameObject player;
     //public GameObject enemy3;
 
     public float timerMin1 = 5f;
@@ -34,11 +35,20 @@ public class enemy_manager : MonoBehaviour
         StartCoroutine("SpawnEnemy1Timer");
         StartCoroutine("SpawnEnemy2Timer");
         StartCoroutine("SpawnEnemy3Timer");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (player.gameObject.GetComponent<SpriteRenderer>().enabled == false)
+        {
+            StopAllCoroutines();
+        }
+        if(player.GetComponent<Collider2D>().enabled == false)
+        {
+            StopAllCoroutines();
+        }
     }
 
     void SpawnEnemy1()
@@ -77,6 +87,7 @@ public class enemy_manager : MonoBehaviour
         spawnPoint.y = 0;
         GameObject.Instantiate(enemy3, spawnPoint, new Quaternion(0, 0, 0, 0));
     }
+    
 
     IEnumerator SpawnEnemy1Timer()
     {

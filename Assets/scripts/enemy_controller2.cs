@@ -28,6 +28,7 @@ public class enemy_controller2 : MonoBehaviour
     private float timerBullet;
     private float maxTimerBullet;
     public GameObject bullet;
+    private GameObject player;
 
     public float timerMin = 5f;
     public float timerMax = 25f;
@@ -49,6 +50,7 @@ public class enemy_controller2 : MonoBehaviour
         {
             StartCoroutine("FireBullet");
         }
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -70,6 +72,10 @@ public class enemy_controller2 : MonoBehaviour
         if (Camera.main.WorldToViewportPoint(transform.position).x < 0)
         {
             Destroy(this.gameObject);
+        }
+        if (player.gameObject.GetComponent<SpriteRenderer>().enabled == false)
+        {
+            StopAllCoroutines();
         }
     }
 

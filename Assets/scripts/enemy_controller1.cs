@@ -10,6 +10,7 @@ public class enemy_controller1 : MonoBehaviour
     private float timerBullet;
     private float maxTimerBullet;
     public GameObject bullet;
+    private GameObject player;
 
     public float timerMin = 5f;
     public float timerMax = 25f;
@@ -27,15 +28,25 @@ public class enemy_controller1 : MonoBehaviour
         {
             StartCoroutine("FireBullet");
         }
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Camera.main.WorldToViewportPoint(transform.position).x < 0)
+        if (Camera.main.WorldToViewportPoint(transform.position).x <= 0)
         {
-            Destroy(this.gameObject);
+            rb.velocity = new Vector2(-speed, 0);
         }
+        if (Camera.main.WorldToViewportPoint(transform.position).x >= 1)
+        {
+            rb.velocity = new Vector2(speed, 0);
+        }
+        if (player.gameObject.GetComponent<SpriteRenderer>().enabled == false)
+        {
+            StopAllCoroutines();
+        }
+       
     }
 
     void SpawnBullet()

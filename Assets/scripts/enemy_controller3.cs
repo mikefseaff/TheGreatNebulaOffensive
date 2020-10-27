@@ -13,6 +13,7 @@ public class enemy_controller3 : MonoBehaviour
     private float timerBullet;
     private float maxTimerBullet;
     public GameObject bullet;
+    private GameObject player;
 
     public float maxTimerDelay = 30f;
     private float timerDelay = 0f;
@@ -42,6 +43,7 @@ public class enemy_controller3 : MonoBehaviour
             StartCoroutine("BulletDelay2");
             StartCoroutine("MovementDelay");
             StartCoroutine(Die(this.gameObject));
+        player = GameObject.FindGameObjectWithTag("Player");
 
     }
 
@@ -69,8 +71,12 @@ public class enemy_controller3 : MonoBehaviour
                     MoveDown();
                 }
         }
-        
-        
+        if (player.gameObject.GetComponent<SpriteRenderer>().enabled == false)
+        {
+            StopAllCoroutines();
+        }
+
+
     }
 
     void IsGoingUp()

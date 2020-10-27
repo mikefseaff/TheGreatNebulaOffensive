@@ -29,7 +29,7 @@ public class bullet_controller : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
-        if (collision.gameObject.tag == "Enemy1" || collision.gameObject.tag == "Enemy2")
+        if (collision.gameObject.layer == 10)
         {
             GameObject.Destroy(this.gameObject);
             GameObject.Destroy(collision.gameObject);
@@ -42,7 +42,7 @@ public class bullet_controller : MonoBehaviour
 ;            //scoreText.GetComponent<score_controller>().score += 10;
             //scoreText.GetComponent<score_controller>().UpdateScore();
         }
-        if (collision.gameObject.tag == "Enemy3")
+        if (collision.gameObject.layer == 12)
         {
             
             Destroy(this.gameObject);

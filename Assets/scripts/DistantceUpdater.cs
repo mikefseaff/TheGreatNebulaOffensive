@@ -25,7 +25,7 @@ public class DistantceUpdater : MonoBehaviour
         { 
             if (time > 0)
             {
-                Debug.Log("yo");
+                
                 textbox.text = "Distance to Mother Ship : " + time*100000 + " miles";
             }
             if (time <= 0)
