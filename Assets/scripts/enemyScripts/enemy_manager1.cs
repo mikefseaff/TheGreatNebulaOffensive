@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class enemy_manager1 : MonoBehaviour
 {
+    public GameObject moon;
+    public GameObject stars;
+    public GameObject planet;
+    public float timer;
+    public float transitionTime;
+
     public int waveOneCount;
     public int waveTwoCount;
     public int waveThreeCount;
@@ -22,6 +28,8 @@ public class enemy_manager1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+
         tag1 = "Wave1";
         tag2 = "Wave2";
         tag3 = "Wave3";
@@ -49,23 +57,29 @@ public class enemy_manager1 : MonoBehaviour
         waveFourCount = GameObject.FindGameObjectsWithTag(tag4).Length;
         EnemyWaveStart(waveOneCount, waveOne);
         if (waveOneCount == 0)
-        {
-            EnemyWaveStart(waveTwoCount, waveTwo);
-            if (waveTwoCount == 0)
             {
-                EnemyWaveStart(waveThreeCount, waveThree);
-                if (waveThreeCount == 0)
-                {
-                    EnemyWaveStart(waveFourCount, waveFour);
-                    if (waveFourCount == 0)
-                    {
-                        enabled = false;
-                    }
-                }
+
+            //MAKE CORUTINE HERE MICHAEL!
+            //yeild WaitForSecondsRealtime(2);
+            //EnemyWaveStart(waveTwoCount, waveTwo);
+            StartCoroutine(TransitionTimer(waveTwoCount, waveTwo));
+            waveOneCount += 1;
             }
-        }
+        if (waveTwoCount == 0)
+          {
+                EnemyWaveStart(waveThreeCount, waveThree);
+          }   
+        if (waveThreeCount == 0)
+          {
+            EnemyWaveStart(waveFourCount, waveFour);
+          }
+        if (waveFourCount == 0)
+           {
+              enabled = false;
+           }
+    }   
         
-    }
+    
 
     void EnemyWaveStart(int movingWave, GameObject[] movingWaveList)
     {
@@ -86,6 +100,24 @@ public class enemy_manager1 : MonoBehaviour
             enemy.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         }
         
+    }
+    IEnumerator TransitionTimer(int movingWave, GameObject[] movingWaveList)
+    {
+        moon.GetComponent<MoonManager>().canMove = true;
+        if (timer >= transitionTime)
+        {
+            Debug.Log("if statement");
+            moon.GetComponent<MoonManager>().canMove = false;
+            EnemyWaveStart(movingWave, movingWaveList);
+            timer = 0;
+            StopCoroutine("TransitionTimer");
+        }
+
+            timer += .01f;
+        Debug.Log(timer);
+            yield return new WaitForSecondsRealtime(.01f);
+        
+
     }
 
 }
