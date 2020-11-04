@@ -45,7 +45,7 @@ public class MoonManager : MonoBehaviour
         }
         if (!canMove)
         {
-           StopCoroutine("Move");
+           //StopCoroutine("Move");
         }
 
 

@@ -8,6 +8,7 @@ public class bullet_controller : MonoBehaviour
     public float speed;
     private Rigidbody2D rb;
     public GameObject explosion;
+    public static string collidedTag;
 
 
     // Start is called before the first frame update
@@ -28,9 +29,17 @@ public class bullet_controller : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        int returnCount = 0;
         
         if (collision.gameObject.layer == 10)
         {
+
+
+                collidedTag = collision.gameObject.tag;
+                returnCount += 1;
+
+            
+            Debug.Log(collidedTag);
             GameObject.Destroy(this.gameObject);
             GameObject.Destroy(collision.gameObject);
             GameObject boom = GameObject.Instantiate(explosion, collision.transform.position, new Quaternion(0, 0, 0, 0));

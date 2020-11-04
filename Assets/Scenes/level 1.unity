@@ -3652,11 +3652,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a023eebc492df408834a379f28c5c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sun: {fileID: 1400378578}
   moon: {fileID: 512208535}
   stars: {fileID: 284963829}
   planet: {fileID: 1726198388}
+  playerBullet: {fileID: 4010014135567168431, guid: d6a31e9663164a247bdb7a61039a61ac,
+    type: 3}
   timer: 0
-  transitionTime: 2.5
+  transitionTime: 3.640825
   waveOneCount: 1
   waveTwoCount: 1
   waveThreeCount: 1
