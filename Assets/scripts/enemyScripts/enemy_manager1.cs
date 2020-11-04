@@ -42,10 +42,6 @@ public class enemy_manager1 : MonoBehaviour
         waveThree = GameObject.FindGameObjectsWithTag(tag3);
         waveFour = GameObject.FindGameObjectsWithTag(tag4);
 
-        //waveOneCount = waveOne.Length;
-        // waveTwoCount = waveTwo.Length;
-        //waveThreeCount = waveThree.Length;
-        //waveFourCount = waveFour.Length;
 
         EnemyWaveFreeze(waveOne);
         EnemyWaveFreeze(waveTwo);
@@ -57,12 +53,7 @@ public class enemy_manager1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //add one to the end for the annimation couroutine pause
 
-        //waveOneCount = GameObject.FindGameObjectsWithTag(tag1).Length;
-        //waveTwoCount = GameObject.FindGameObjectsWithTag(tag2).Length;
-        //waveThreeCount = GameObject.FindGameObjectsWithTag(tag3).Length;
-        //waveFourCount = GameObject.FindGameObjectsWithTag(tag4).Length;
         waveOne = GameObject.FindGameObjectsWithTag(tag1);
         waveTwo = GameObject.FindGameObjectsWithTag(tag2);
         waveThree = GameObject.FindGameObjectsWithTag(tag3);
@@ -70,31 +61,30 @@ public class enemy_manager1 : MonoBehaviour
         EnemyWaveStart(waveOne);
         if (EnemyWaveCountReduction(waveOne) && waveOneCount == 1)
         {
-
-            //MAKE CORUTINE HERE MICHAEL!
-            //yeild WaitForSecondsRealtime(2);
-            //EnemyWaveStart(waveTwoCount, waveTwo);
-            moon.GetComponent<MoonManager>().canMove = true;
+            moon.GetComponent<MoonManager>().checkPos = true;
+            moon.GetComponent<MoonManager>().anim.Play("moon4");
             StartCoroutine(TransitionTimer(waveTwo));
             waveOneCount = -1;
             Debug.Log("wave1");
         }
         if (EnemyWaveCountReduction(waveTwo) && waveTwoCount == 1)
         {
-            moon.GetComponent<MoonManager>().canMove = true;
+            moon.GetComponent<MoonManager>().checkPos = true;
             StartCoroutine(TransitionTimer(waveThree));
             waveTwoCount = -1;
             Debug.Log("wave2");
         }
         if (EnemyWaveCountReduction(waveThree) && waveThreeCount == 1)
         {
-            moon.GetComponent<MoonManager>().canMove = true;
+            moon.GetComponent<MoonManager>().checkPos = true;
             StartCoroutine(TransitionTimer(waveFour));
             waveThreeCount = -1;
             Debug.Log("wave3");
         }
         if (EnemyWaveCountReduction(waveFour) && waveFourCount == 1)
         {
+            moon.GetComponent<MoonManager>().checkPos = true;
+            waveThreeCount = -1;
             enabled = false;
         }
     }
@@ -138,7 +128,7 @@ public class enemy_manager1 : MonoBehaviour
     {
         if (waveArray.Length == 0)
         {
-            Debug.Log("true");
+            
             return true;
             
         }
@@ -153,31 +143,30 @@ public class enemy_manager1 : MonoBehaviour
     IEnumerator TransitionTimer(GameObject[] movingWaveList)
     {
 
-       while(moon.GetComponent<MoonManager>().canMove == true)
+       while(timer <= transitionTime)
         {
             if (timer >= transitionTime)
             {
-                if (EnemyWaveCountReduction(waveTwo) && waveTwoCount == -1)
-                {
-                    Vector3 tempPos = sun.transform.position;
-                    moon.transform.position = tempPos;
-                    StartCoroutine(TransitionTimer(waveThree));
-                    waveTwoCount = -1;
-                    Debug.Log("wave2");
-                }
+                //if (EnemyWaveCountReduction(waveTwo) && waveTwoCount == -1)
+                //{
+                   // moon.transform.position = sun.transform.position;
+                    //moon.transform.position = new Vector3(moon.transform.position.x, moon.transform.position.y, moon.GetComponent<MoonManager>().zPos);
+               // }
+                
+               
                 //Debug.Log("if statement");
-                moon.GetComponent<MoonManager>().canMove = false;
+                //moon.GetComponent<MoonManager>().canMove = false;
                 EnemyWaveStart(movingWaveList);
-                //StopCoroutine("TransitionTimer");
                 timer = 0;
+                StopAllCoroutines();
                 yield break;
 
             }
-            timer += .01f;
-            //Debug.Log(timer);
-            yield return new WaitForSecondsRealtime(.01f);
+            timer += .001f;
+            Debug.Log(timer);
+            yield return new WaitForSecondsRealtime(.001f);
         }
-        StopAllCoroutines();
+        
        
 
             

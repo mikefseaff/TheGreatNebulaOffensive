@@ -1980,14 +1980,14 @@ Animation:
   m_GameObject: {fileID: 512208535}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 4cae85fe0475d89418d2e86ee7000940, type: 2}
+  m_Animation: {fileID: 0}
   m_Animations:
   - {fileID: 7400000, guid: 4cae85fe0475d89418d2e86ee7000940, type: 2}
   - {fileID: 7400000, guid: 2e354f98572dd71439cf74d996f78266, type: 2}
   - {fileID: 7400000, guid: d09122cf0791128448c89f36ecedd5c0, type: 2}
   - {fileID: 7400000, guid: aa28b85275a88534ab29546cb37b4fc5, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!95 &512208537
@@ -2106,12 +2106,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b55dd6da08811944838cf3f6fb68d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canMove: 1
+  anim: {fileID: 512208537}
+  canMove: 0
   rb: {fileID: 512208540}
   moveSpeed: 1
   frequency: 0.2
   magnitude: 4
   timer: 0
+  zPos: 0
+  checkPos: 0
 --- !u!1 &545944622
 GameObject:
   m_ObjectHideFlags: 0
@@ -3659,7 +3662,7 @@ MonoBehaviour:
   playerBullet: {fileID: 4010014135567168431, guid: d6a31e9663164a247bdb7a61039a61ac,
     type: 3}
   timer: 0
-  transitionTime: 3.640825
+  transitionTime: 1.2
   waveOneCount: 1
   waveTwoCount: 1
   waveThreeCount: 1
