@@ -63,6 +63,8 @@ public class enemy_manager1 : MonoBehaviour
         {
             moon.GetComponent<MoonManager>().checkPos = true;
             moon.GetComponent<MoonManager>().anim.Play("moon4");
+            planet.GetComponent<PlanetManager>().canRotate = true;
+            stars.GetComponent<StarsManager>().canTranslate = true;
             StartCoroutine(TransitionTimer(waveTwo));
             waveOneCount = -1;
             Debug.Log("wave1");
@@ -70,6 +72,7 @@ public class enemy_manager1 : MonoBehaviour
         if (EnemyWaveCountReduction(waveTwo) && waveTwoCount == 1)
         {
             moon.GetComponent<MoonManager>().checkPos = true;
+            planet.GetComponent<PlanetManager>().canRotate = true;
             StartCoroutine(TransitionTimer(waveThree));
             waveTwoCount = -1;
             Debug.Log("wave2");
@@ -77,6 +80,7 @@ public class enemy_manager1 : MonoBehaviour
         if (EnemyWaveCountReduction(waveThree) && waveThreeCount == 1)
         {
             moon.GetComponent<MoonManager>().checkPos = true;
+            planet.GetComponent<PlanetManager>().canRotate = true;
             StartCoroutine(TransitionTimer(waveFour));
             waveThreeCount = -1;
             Debug.Log("wave3");
@@ -84,6 +88,7 @@ public class enemy_manager1 : MonoBehaviour
         if (EnemyWaveCountReduction(waveFour) && waveFourCount == 1)
         {
             moon.GetComponent<MoonManager>().checkPos = true;
+            planet.GetComponent<PlanetManager>().canRotate = true;
             waveThreeCount = -1;
             enabled = false;
         }
@@ -158,12 +163,11 @@ public class enemy_manager1 : MonoBehaviour
                 //moon.GetComponent<MoonManager>().canMove = false;
                 EnemyWaveStart(movingWaveList);
                 timer = 0;
-                StopAllCoroutines();
                 yield break;
 
             }
             timer += .001f;
-            Debug.Log(timer);
+           // Debug.Log(timer);
             yield return new WaitForSecondsRealtime(.001f);
         }
         

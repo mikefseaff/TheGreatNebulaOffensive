@@ -27,6 +27,7 @@ public class MoonManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         checkPos = false;
         canMove = false;
         pos = transform.position;
