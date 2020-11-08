@@ -34,7 +34,6 @@ public class MoonManager : MonoBehaviour
         zPos = transform.position.z;
 
         localScale = transform.localScale;
-        Debug.Log(transform.localPosition);
         anim.GetComponent<Animator>();
         //StartCoroutine("move");
     }
@@ -46,11 +45,7 @@ public class MoonManager : MonoBehaviour
         if(canMove)
         {
             StartCoroutine("Move");
-            //Time.time *
-            //pos -= transform.right * Time.deltaTime * moveSpeed;
-            //transform.position = pos + transform.up * Mathf.Sin(Time.time * frequency) * magnitude;
 
-            //Debug.Log(Time.time + "real");
             
         }
         if (!canMove)
@@ -103,7 +98,6 @@ public class MoonManager : MonoBehaviour
             localTime += Time.deltaTime;
             pos -= transform.right * Time.deltaTime * moveSpeed;
             transform.position = pos + transform.up * Mathf.Sin(localTime * frequency) * magnitude;
-            //Debug.Log(localTime);
             yield return new WaitForSeconds(Time.deltaTime);
         }
         else
@@ -111,7 +105,6 @@ public class MoonManager : MonoBehaviour
             localTime += Time.deltaTime;
             pos -= transform.right * Time.deltaTime * moveSpeed;
             transform.position = pos + transform.up * Mathf.Sin(localTime * frequency) * magnitude;
-            //Debug.Log(localTime);
             yield return new WaitForSeconds(Time.deltaTime);
         }
         

@@ -61,29 +61,21 @@ public class enemy_manager1 : MonoBehaviour
         EnemyWaveStart(waveOne);
         if (EnemyWaveCountReduction(waveOne) && waveOneCount == 1)
         {
-            moon.GetComponent<MoonManager>().checkPos = true;
-            moon.GetComponent<MoonManager>().anim.Play("moon4");
-            planet.GetComponent<PlanetManager>().canRotate = true;
-            stars.GetComponent<StarsManager>().canTranslate = true;
-            StartCoroutine(TransitionTimer(waveTwo));
+            Transition(waveTwo);
             waveOneCount = -1;
-            Debug.Log("wave1");
+            
         }
         if (EnemyWaveCountReduction(waveTwo) && waveTwoCount == 1)
         {
-            moon.GetComponent<MoonManager>().checkPos = true;
-            planet.GetComponent<PlanetManager>().canRotate = true;
-            StartCoroutine(TransitionTimer(waveThree));
+            Transition(waveThree);
             waveTwoCount = -1;
-            Debug.Log("wave2");
+           
         }
         if (EnemyWaveCountReduction(waveThree) && waveThreeCount == 1)
         {
-            moon.GetComponent<MoonManager>().checkPos = true;
-            planet.GetComponent<PlanetManager>().canRotate = true;
-            StartCoroutine(TransitionTimer(waveFour));
+            Transition(waveFour);
             waveThreeCount = -1;
-            Debug.Log("wave3");
+            
         }
         if (EnemyWaveCountReduction(waveFour) && waveFourCount == 1)
         {
@@ -144,6 +136,14 @@ public class enemy_manager1 : MonoBehaviour
         
     }
 
+    void Transition(GameObject[] movingWaveList)
+    {
+        moon.GetComponent<MoonManager>().checkPos = true;
+        planet.GetComponent<PlanetManager>().canRotate = true;
+        stars.GetComponent<StarsManager>().canTranslate = true;
+        StartCoroutine(TransitionTimer(movingWaveList));
+    }
+
  
     IEnumerator TransitionTimer(GameObject[] movingWaveList)
     {
@@ -152,22 +152,13 @@ public class enemy_manager1 : MonoBehaviour
         {
             if (timer >= transitionTime)
             {
-                //if (EnemyWaveCountReduction(waveTwo) && waveTwoCount == -1)
-                //{
-                   // moon.transform.position = sun.transform.position;
-                    //moon.transform.position = new Vector3(moon.transform.position.x, moon.transform.position.y, moon.GetComponent<MoonManager>().zPos);
-               // }
-                
                
-                //Debug.Log("if statement");
-                //moon.GetComponent<MoonManager>().canMove = false;
                 EnemyWaveStart(movingWaveList);
                 timer = 0;
                 yield break;
 
             }
             timer += .001f;
-           // Debug.Log(timer);
             yield return new WaitForSecondsRealtime(.001f);
         }
         
