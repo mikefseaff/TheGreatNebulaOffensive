@@ -140,7 +140,7 @@ public class enemy_manager1 : MonoBehaviour
     {
         moon.GetComponent<MoonManager>().checkPos = true;
         planet.GetComponent<PlanetManager>().canRotate = true;
-        stars.GetComponent<StarsManager>().canTranslate = true;
+        stars.GetComponent<StarManager>().canTranslate = true;
         StartCoroutine(TransitionTimer(movingWaveList));
     }
 
