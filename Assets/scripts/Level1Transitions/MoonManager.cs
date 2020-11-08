@@ -5,6 +5,7 @@ using UnityEngine;
 public class MoonManager : MonoBehaviour
 {
     public Animator anim;
+    private int moonStageValue;
 
     public bool canMove;
     public Rigidbody2D rb;
@@ -35,6 +36,8 @@ public class MoonManager : MonoBehaviour
 
         localScale = transform.localScale;
         anim.GetComponent<Animator>();
+        anim.enabled = false;
+        anim.SetInteger("moonStage", -1);
         //StartCoroutine("move");
     }
 
@@ -76,6 +79,9 @@ public class MoonManager : MonoBehaviour
             finalPos = startPos - 4.25f;
             checkPos = false;
             canMove = true;
+            anim.enabled = true;
+            moonStageValue++;
+            anim.SetInteger("moonStage", moonStageValue);
         }
         else if(!checkPos && canMove)
         {
@@ -93,21 +99,11 @@ public class MoonManager : MonoBehaviour
     IEnumerator Move()
     {
       
-        if (this.transform.position.x > 0)
-        {
             localTime += Time.deltaTime;
             pos -= transform.right * Time.deltaTime * moveSpeed;
             transform.position = pos + transform.up * Mathf.Sin(localTime * frequency) * magnitude;
             yield return new WaitForSeconds(Time.deltaTime);
-        }
-        else
-        {
-            localTime += Time.deltaTime;
-            pos -= transform.right * Time.deltaTime * moveSpeed;
-            transform.position = pos + transform.up * Mathf.Sin(localTime * frequency) * magnitude;
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-        
+
         
         
         if (!canMove)

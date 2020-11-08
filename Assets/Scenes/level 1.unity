@@ -1877,7 +1877,7 @@ Animator:
   m_GameObject: {fileID: 512208535}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 079ff13eef38fe24f9ada5625da1deaa, type: 2}
+  m_Controller: {fileID: 9100000, guid: 39727396f5f18624b8c2b52984283af2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2197,9 +2197,9 @@ Animation:
   m_GameObject: {fileID: 548446361}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: e4a7c5e7238cb4c4092aca3fb4cf6c5d, type: 2}
+  m_Animation: {fileID: 0}
   m_Animations:
-  - {fileID: 7400000, guid: e4a7c5e7238cb4c4092aca3fb4cf6c5d, type: 2}
+  - {fileID: 0}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -4411,7 +4411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canTranslate: 0
-  transitionTime: 3.1
+  transitionTime: 3
   timer: 0
 --- !u!111 &1627156877
 Animation:
@@ -4425,7 +4425,7 @@ Animation:
   m_Animation: {fileID: 7400000, guid: 55467e1ef7028da438eabfd5f4d58d1e, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 55467e1ef7028da438eabfd5f4d58d1e, type: 2}
-  - {fileID: 7400000, guid: e4a7c5e7238cb4c4092aca3fb4cf6c5d, type: 2}
+  - {fileID: 0}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
