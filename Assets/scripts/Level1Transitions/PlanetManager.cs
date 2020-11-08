@@ -9,6 +9,10 @@ public class PlanetManager : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject waveManager;
     public bool canRotate;
+    public bool canDarken;
+    public bool canLighten;
+    private float rgbValue;
+    private Color32 spriteColor;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +20,7 @@ public class PlanetManager : MonoBehaviour
         
         //transitionTime = waveManager.GetComponent<enemy_manager1>().transitionTime;
         StartCoroutine("Rotate");
+        rgbValue = 1f;
     }
 
     // Update is called once per frame
@@ -36,14 +41,27 @@ public class PlanetManager : MonoBehaviour
                 Vector2 vel = rb.velocity;
                 transform.Rotate(0, 0, .025f);
                 rb.velocity = Quaternion.Euler(1, 1, .0025f) * vel;
-                
+                if (canDarken)
+                {
+                    rgbValue -= .001f;
+                    spriteColor = new Color(rgbValue, rgbValue, rgbValue, 225);
+                    this.GetComponent<SpriteRenderer>().color = spriteColor;
+                }
+                if (canLighten)
+                {
+                    rgbValue += .001f;
+                    spriteColor = new Color(rgbValue, rgbValue, rgbValue, 225);
+                    this.GetComponent<SpriteRenderer>().color = spriteColor;
+                }
+
 
 
 
             }
             else if (!canRotate)
             {
-                
+                canDarken = false;
+                canLighten = false;
                 timer = 0;
                 canRotate = false;
             }

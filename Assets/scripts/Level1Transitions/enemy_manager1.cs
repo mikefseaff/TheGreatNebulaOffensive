@@ -18,16 +18,19 @@ public class enemy_manager1 : MonoBehaviour
     public int waveTwoCount;
     public int waveThreeCount;
     public int waveFourCount;
+    public int waveFiveCount;
 
     private string tag1;
     private string tag2;
     private string tag3;
     private string tag4;
+    private string tag5;
 
     private GameObject[] waveOne;
     private GameObject[] waveTwo;
     private GameObject[] waveThree;
     private GameObject[] waveFour;
+    private GameObject[] waveFive;
 
 
 
@@ -38,17 +41,20 @@ public class enemy_manager1 : MonoBehaviour
         tag2 = "Wave2";
         tag3 = "Wave3";
         tag4 = "Wave4";
+        tag5 = "Wave5";
 
         waveOne = GameObject.FindGameObjectsWithTag(tag1);
         waveTwo = GameObject.FindGameObjectsWithTag(tag2);
         waveThree = GameObject.FindGameObjectsWithTag(tag3);
         waveFour = GameObject.FindGameObjectsWithTag(tag4);
+        waveFive = GameObject.FindGameObjectsWithTag(tag5);
 
 
         EnemyWaveFreeze(waveOne);
         EnemyWaveFreeze(waveTwo);
         EnemyWaveFreeze(waveThree);
         EnemyWaveFreeze(waveFour);
+        EnemyWaveFreeze(waveFive);
 
         playerStartPos = player.transform.position;
         startBackgroundTransition = false;
@@ -63,39 +69,58 @@ public class enemy_manager1 : MonoBehaviour
         waveTwo = GameObject.FindGameObjectsWithTag(tag2);
         waveThree = GameObject.FindGameObjectsWithTag(tag3);
         waveFour = GameObject.FindGameObjectsWithTag(tag4);
+        waveFive = GameObject.FindGameObjectsWithTag(tag5);
         EnemyWaveStart(waveOne);
         if (EnemyWaveCountReduction(waveOne) && waveOneCount == 1)
         {
-            //fix player instant move to the start position
-            StartCoroutine(PlayerTransition(player, playerStartPos));
-            StartCoroutine("PlayerTransitionTimer");
+            PlayerTransition(playerStartPos);
             if (startBackgroundTransition)
             {
-                player.GetComponent<player_controller>().canMove = true;
-                Transition(waveTwo);
+
+                BackgroundTransition(waveTwo);
                 waveOneCount = -1;
+
             }
-            //Transition(waveTwo);
-            //waveOneCount = -1;
-            
         }
         if (EnemyWaveCountReduction(waveTwo) && waveTwoCount == 1)
         {
-            Transition(waveThree);
-            waveTwoCount = -1;
+            PlayerTransition(playerStartPos);
+            planet.GetComponent<PlanetManager>().canDarken = true;
+            if (startBackgroundTransition)
+            {
+
+                BackgroundTransition(waveThree);
+                waveTwoCount = -1;
+
+            }
            
         }
         if (EnemyWaveCountReduction(waveThree) && waveThreeCount == 1)
         {
-            Transition(waveFour);
-            waveThreeCount = -1;
-            
+            PlayerTransition(playerStartPos);
+            planet.GetComponent<PlanetManager>().canLighten = true;
+            if (startBackgroundTransition)
+            {
+
+                BackgroundTransition(waveFour);
+                waveThreeCount = -1;
+
+            }
+
         }
         if (EnemyWaveCountReduction(waveFour) && waveFourCount == 1)
         {
-            moon.GetComponent<MoonManager>().checkPos = true;
-            planet.GetComponent<PlanetManager>().canRotate = true;
-            waveThreeCount = -1;
+            PlayerTransition(playerStartPos);
+            if (startBackgroundTransition)
+            {
+
+                BackgroundTransition(waveFive);
+                waveFourCount = -1;
+
+            }
+        }
+        if (EnemyWaveCountReduction(waveFive) && waveFiveCount == 1)
+        {
             enabled = false;
         }
     }
@@ -110,6 +135,8 @@ public class enemy_manager1 : MonoBehaviour
             {
 
                 enemy.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+                player.GetComponent<player_controller>().canMove = true;
+                
             }
 
         }
@@ -150,18 +177,33 @@ public class enemy_manager1 : MonoBehaviour
         
     }
 
-    void Transition(GameObject[] movingWaveList)
+    void BackgroundTransition(GameObject[] movingWaveList)
     {
-        //StartCoroutine(PlayerTransition(player,playerStartPos));
+            sun.GetComponent<SunManager>().checkPos = true;
             moon.GetComponent<MoonManager>().checkPos = true;
             planet.GetComponent<PlanetManager>().canRotate = true;
             stars.GetComponent<StarManager>().canTranslate = true;
+            player.GetComponent<Animator>().SetBool("isBlastingOff", true);
             StartCoroutine(TransitionTimer(movingWaveList));
 
 
     }
 
- 
+    void PlayerTransition(Vector3 startingPlayerPos)
+    {
+        startBackgroundTransition = false;
+        player.GetComponent<player_controller>().canMove = false;
+        Debug.Log(player.transform.position);
+        player.transform.position = Vector3.MoveTowards(player.transform.position, startingPlayerPos, 5*Time.deltaTime);
+        if(player.transform.position == startingPlayerPos)
+        {
+            startBackgroundTransition = true;
+        }
+    }
+
+    //Purpose:  
+    //Input:
+    //Output: 
     IEnumerator TransitionTimer(GameObject[] movingWaveList)
     {
 
@@ -169,7 +211,7 @@ public class enemy_manager1 : MonoBehaviour
         {
             if (timer >= transitionTime)
             {
-               
+                player.GetComponent<Animator>().SetBool("isBlastingOff", false);
                 EnemyWaveStart(movingWaveList);
                 timer = 0;
                 yield break;
@@ -184,34 +226,6 @@ public class enemy_manager1 : MonoBehaviour
             
         
 
-    }
-    IEnumerator PlayerTransition(GameObject player, Vector3 startingPlayerPos)
-    {
-        while (player.transform.position != startingPlayerPos)
-        {
-            player.GetComponent<player_controller>().canMove = false;
-            player.transform.position = Vector3.MoveTowards(player.transform.position, startingPlayerPos, 5*Time.deltaTime);
-            yield return new WaitForSecondsRealtime(.001f);
-        }
-        Debug.Log("true");
-        startBackgroundTransition = true;
-
-    }
-    IEnumerator PlayerTransitionTimer()
-    {
-
-        while (timer <= transitionTime)
-        {
-            if (timer >= transitionTime)
-            {
-
-                timer = 0;
-                yield break;
-
-            }
-            timer += .001f;
-            yield return new WaitForSecondsRealtime(.001f);
-        }
     }
 
     }
