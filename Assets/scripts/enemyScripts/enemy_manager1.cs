@@ -8,7 +8,9 @@ public class enemy_manager1 : MonoBehaviour
     public GameObject moon;
     public GameObject stars;
     public GameObject planet;
-    public GameObject playerBullet;
+    public GameObject player;
+    public Vector3 playerStartPos;
+    public bool startBackgroundTransition;
     public float timer;
     public float transitionTime;
 
@@ -48,6 +50,9 @@ public class enemy_manager1 : MonoBehaviour
         EnemyWaveFreeze(waveThree);
         EnemyWaveFreeze(waveFour);
 
+        playerStartPos = player.transform.position;
+        startBackgroundTransition = false;
+
     }
 
     // Update is called once per frame
@@ -61,8 +66,17 @@ public class enemy_manager1 : MonoBehaviour
         EnemyWaveStart(waveOne);
         if (EnemyWaveCountReduction(waveOne) && waveOneCount == 1)
         {
-            Transition(waveTwo);
-            waveOneCount = -1;
+            //fix player instant move to the start position
+            StartCoroutine(PlayerTransition(player, playerStartPos));
+            StartCoroutine("PlayerTransitionTimer");
+            if (startBackgroundTransition)
+            {
+                player.GetComponent<player_controller>().canMove = true;
+                Transition(waveTwo);
+                waveOneCount = -1;
+            }
+            //Transition(waveTwo);
+            //waveOneCount = -1;
             
         }
         if (EnemyWaveCountReduction(waveTwo) && waveTwoCount == 1)
@@ -138,10 +152,13 @@ public class enemy_manager1 : MonoBehaviour
 
     void Transition(GameObject[] movingWaveList)
     {
-        moon.GetComponent<MoonManager>().checkPos = true;
-        planet.GetComponent<PlanetManager>().canRotate = true;
-        stars.GetComponent<StarManager>().canTranslate = true;
-        StartCoroutine(TransitionTimer(movingWaveList));
+        //StartCoroutine(PlayerTransition(player,playerStartPos));
+            moon.GetComponent<MoonManager>().checkPos = true;
+            planet.GetComponent<PlanetManager>().canRotate = true;
+            stars.GetComponent<StarManager>().canTranslate = true;
+            StartCoroutine(TransitionTimer(movingWaveList));
+
+
     }
 
  
@@ -168,5 +185,33 @@ public class enemy_manager1 : MonoBehaviour
         
 
     }
+    IEnumerator PlayerTransition(GameObject player, Vector3 startingPlayerPos)
+    {
+        while (player.transform.position != startingPlayerPos)
+        {
+            player.GetComponent<player_controller>().canMove = false;
+            player.transform.position = Vector3.MoveTowards(player.transform.position, startingPlayerPos, 5*Time.deltaTime);
+            yield return new WaitForSecondsRealtime(.001f);
+        }
+        Debug.Log("true");
+        startBackgroundTransition = true;
 
-}
+    }
+    IEnumerator PlayerTransitionTimer()
+    {
+
+        while (timer <= transitionTime)
+        {
+            if (timer >= transitionTime)
+            {
+
+                timer = 0;
+                yield break;
+
+            }
+            timer += .001f;
+            yield return new WaitForSecondsRealtime(.001f);
+        }
+    }
+
+    }

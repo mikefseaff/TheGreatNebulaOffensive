@@ -10,12 +10,14 @@ public class player_controller : MonoBehaviour
     public GameObject bullet;
     public GameObject explosion;
     private float timer;
+    public bool canMove;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(Die(this.gameObject));
+        canMove = true;
     }
 
     // Update is called once per frame
@@ -38,13 +40,17 @@ public class player_controller : MonoBehaviour
 
     void Move()
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
+        if (canMove)
+        {
+            float x = Input.GetAxisRaw("Horizontal");
+            float y = Input.GetAxisRaw("Vertical");
 
-        float moveX = x * speed;
-        float moveY = y * speed;
+            float moveX = x * speed;
+            float moveY = y * speed;
 
-        rb.velocity = new Vector2(moveX, moveY);
+            rb.velocity = new Vector2(moveX, moveY);
+        }
+
     }
 
     void BoundMovement()
