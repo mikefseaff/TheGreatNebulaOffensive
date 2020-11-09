@@ -135,7 +135,7 @@ public class enemy_manager1 : MonoBehaviour
             {
 
                 enemy.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-                player.GetComponent<player_controller>().canMove = true;
+                player.GetComponent<player_controller>().enabled = true;
                 
             }
 
@@ -191,9 +191,10 @@ public class enemy_manager1 : MonoBehaviour
 
     void PlayerTransition(Vector3 startingPlayerPos)
     {
+        player.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll; //Fixes velocity bug when moving while transition happens
+        player.GetComponent<player_controller>().enabled = false;
         startBackgroundTransition = false;
-        player.GetComponent<player_controller>().canMove = false;
-        Debug.Log(player.transform.position);
+        player.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         player.transform.position = Vector3.MoveTowards(player.transform.position, startingPlayerPos, 5*Time.deltaTime);
         if(player.transform.position == startingPlayerPos)
         {
@@ -209,8 +210,10 @@ public class enemy_manager1 : MonoBehaviour
 
        while(timer <= transitionTime)
         {
+            //Debug.Log("less than");
             if (timer >= transitionTime)
             {
+               // Debug.Log("greater than");
                 player.GetComponent<Animator>().SetBool("isBlastingOff", false);
                 EnemyWaveStart(movingWaveList);
                 timer = 0;
@@ -220,12 +223,6 @@ public class enemy_manager1 : MonoBehaviour
             timer += .001f;
             yield return new WaitForSecondsRealtime(.001f);
         }
-        
-       
-
-            
-        
 
     }
-
-    }
+}

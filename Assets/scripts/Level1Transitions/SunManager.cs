@@ -37,7 +37,7 @@ public class SunManager : MonoBehaviour
         if (checkPos)
         {
             startPos = transform.position.x;
-            finalPos = startPos - .1f;
+            finalPos = startPos - .2f;
             checkPos = false;
             canMove = true;
         }
