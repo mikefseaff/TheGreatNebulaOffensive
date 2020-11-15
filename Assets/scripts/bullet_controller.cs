@@ -6,7 +6,7 @@ public class bullet_controller : MonoBehaviour
 {
     private float timer = 0;
     public float speed;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     public GameObject explosion;
     public static string collidedTag;
 
@@ -14,7 +14,7 @@ public class bullet_controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        
         rb.velocity = new Vector2(speed, 0);
     }
 

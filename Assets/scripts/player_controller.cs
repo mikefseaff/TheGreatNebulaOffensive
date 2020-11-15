@@ -8,14 +8,19 @@ public class player_controller : MonoBehaviour
     private Rigidbody2D rb;
 
     public GameObject bullet;
+    public GameObject specialAbility;
     public GameObject explosion;
     private float timer;
+
+    public int currentSpecialCharge;
+    public int maxSpecialCharge;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(Die(this.gameObject));
+        maxSpecialCharge = 1;
     }
 
     // Update is called once per frame
@@ -33,6 +38,14 @@ public class player_controller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             GameObject.Instantiate(bullet, transform.position, transform.rotation);
+        }
+    }
+
+    void ShootSpecial()
+    {
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift) && currentSpecialCharge == maxSpecialCharge))
+        {
+            GameObject.Instantiate(specialAbility, transform.position, transform.rotation);
         }
     }
 

@@ -213,7 +213,7 @@ public class enemy_manager1 : MonoBehaviour
             //Debug.Log("less than");
             if (timer >= transitionTime)
             {
-               // Debug.Log("greater than");
+               Debug.Log("transtitiontimer");
                 player.GetComponent<Animator>().SetBool("isBlastingOff", false);
                 EnemyWaveStart(movingWaveList);
                 timer = 0;
