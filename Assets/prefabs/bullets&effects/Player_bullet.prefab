@@ -155,10 +155,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e28c92bc3145f74fbb2e5b155dd0a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speedX: 10
+  speedY: 0
   rb: {fileID: 4010014135567168428}
   explosion: {fileID: 8800585099716028810, guid: 991157e4dfd58904dbf971360e90c556,
     type: 3}
+  player: {fileID: 8454087688214841224, guid: df5cb4039dc7b664e9ff3db962b86b37, type: 3}
 --- !u!82 &-2241915564378389018
 AudioSource:
   m_ObjectHideFlags: 0

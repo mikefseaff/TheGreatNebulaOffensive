@@ -5,25 +5,31 @@ using UnityEngine;
 public class bullet_controller : MonoBehaviour
 {
     private float timer = 0;
-    public float speed;
+    public float speedX;
+    public float speedY;
     public Rigidbody2D rb;
     public GameObject explosion;
     public static string collidedTag;
+    private GameObject player;
 
 
     // Start is called before the first frame update
     void Start()
     {
         
-        rb.velocity = new Vector2(speed, 0);
+        rb.velocity = new Vector2(speedX, speedY);
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Camera.main.WorldToViewportPoint(transform.position).x > 1)
+       
+        if (Camera.main.WorldToViewportPoint(transform.position).x > 1 || Camera.main.WorldToViewportPoint(transform.position).x < 0 || 
+            Camera.main.WorldToViewportPoint(transform.position).y > 1 || Camera.main.WorldToViewportPoint(transform.position).y < 0)
         {
             Destroy(this.gameObject);
+            
         }
     }
 
@@ -35,8 +41,9 @@ public class bullet_controller : MonoBehaviour
         {
 
 
-                collidedTag = collision.gameObject.tag;
-                returnCount += 1;
+            collidedTag = collision.gameObject.tag;
+            returnCount += 1;
+            player.GetComponent<player_controller>().currentSpecialCharge += 1;
 
             
             Debug.Log(collidedTag);

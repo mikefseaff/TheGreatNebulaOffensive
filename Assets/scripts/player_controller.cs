@@ -20,7 +20,10 @@ public class player_controller : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(Die(this.gameObject));
-        maxSpecialCharge = 1;
+        maxSpecialCharge = 5;
+        currentSpecialCharge = 0;
+        Debug.Log(Time.timeScale);
+        
     }
 
     // Update is called once per frame
@@ -28,7 +31,7 @@ public class player_controller : MonoBehaviour
     {
         Move();
         BoundMovement();
-
+        ShootSpecial();
         Shoot();
 
     }
@@ -43,9 +46,10 @@ public class player_controller : MonoBehaviour
 
     void ShootSpecial()
     {
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift) && currentSpecialCharge == maxSpecialCharge))
+        if (((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) && currentSpecialCharge >= maxSpecialCharge))
         {
             GameObject.Instantiate(specialAbility, transform.position, transform.rotation);
+            currentSpecialCharge = 0;
         }
     }
 

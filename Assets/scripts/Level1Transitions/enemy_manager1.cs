@@ -211,17 +211,18 @@ public class enemy_manager1 : MonoBehaviour
        while(timer <= transitionTime)
         {
             //Debug.Log("less than");
-            if (timer >= transitionTime)
-            {
-               Debug.Log("transtitiontimer");
-                player.GetComponent<Animator>().SetBool("isBlastingOff", false);
-                EnemyWaveStart(movingWaveList);
-                timer = 0;
-                yield break;
 
-            }
             timer += .001f;
             yield return new WaitForSecondsRealtime(.001f);
+        }
+        if (timer >= transitionTime)
+        {
+            Debug.Log("transtitiontimer");
+            player.GetComponent<Animator>().SetBool("isBlastingOff", false);
+            EnemyWaveStart(movingWaveList);
+            timer = 0;
+            yield break;
+
         }
 
     }
