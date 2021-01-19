@@ -439,12 +439,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9088860}
   m_CullTransparentMesh: 0
---- !u!1 &74371147 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1785823506096426647, guid: df5cb4039dc7b664e9ff3db962b86b37,
-    type: 3}
-  m_PrefabInstance: {fileID: 1785823505492696829}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &170801396
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +818,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &559343712
 GameObject:
@@ -1278,10 +1272,10 @@ MonoBehaviour:
   enemy1: {fileID: 1422250508625470161, guid: 668f83f2dcf4948428671dd284c2c4c4, type: 3}
   enemy2: {fileID: 4944056411439678682, guid: 4d7ec9abca2601f4e93a999a7c9fe47d, type: 3}
   enemy3: {fileID: 6437399200010113262, guid: 67f4aa6dc7d27f64bbb61e32606c55ab, type: 3}
-  timerMin1: 0.75
-  timerMax1: 0.75
-  timerMin2: 1.5
-  timerMax2: 2.5
+  timerMin1: 0.25
+  timerMax1: 0.35
+  timerMin2: 0.5
+  timerMax2: 0.75
   timerMin3: 0
   timerMax3: 0
 --- !u!1 &654878173
@@ -2350,7 +2344,7 @@ MonoBehaviour:
   isVictory: 0
   victoryMenuCanvas: {fileID: 1337473130}
   backgroundMusic: {fileID: 2087783171}
-  player: {fileID: 74371147}
+  player: {fileID: 0}
 --- !u!1 &1529467865
 GameObject:
   m_ObjectHideFlags: 0
@@ -4023,7 +4017,7 @@ PrefabInstance:
     - target: {fileID: 560919115921448717, guid: 22806aecc984d4049979797ac0a77a10,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 560919115921448717, guid: 22806aecc984d4049979797ac0a77a10,
         type: 3}
@@ -4134,6 +4128,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8454087688214841234, guid: df5cb4039dc7b664e9ff3db962b86b37,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df5cb4039dc7b664e9ff3db962b86b37, type: 3}
 --- !u!1001 &5304122602099987386
@@ -4181,7 +4180,7 @@ PrefabInstance:
     - target: {fileID: 5304122601361707052, guid: ca24a6f70e60d0647b80f02472814e74,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5304122601361707052, guid: ca24a6f70e60d0647b80f02472814e74,
         type: 3}

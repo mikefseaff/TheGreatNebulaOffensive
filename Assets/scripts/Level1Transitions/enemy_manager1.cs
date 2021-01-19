@@ -14,47 +14,78 @@ public class enemy_manager1 : MonoBehaviour
     public float timer;
     public float transitionTime;
 
-    public int waveOneCount;
-    public int waveTwoCount;
-    public int waveThreeCount;
-    public int waveFourCount;
-    public int waveFiveCount;
+    public int waveOneACount;
+    public int waveTwoACount;
+    public int waveThreeACount;
+    public int waveFourACount;
+    public int waveFiveACount;
 
-    private string tag1;
-    private string tag2;
-    private string tag3;
-    private string tag4;
-    private string tag5;
+    public int waveTwoBCount;
+    public int waveThreeBCount;
+    public int waveFourBCount;
+    public int waveFiveBCount;
 
-    private GameObject[] waveOne;
-    private GameObject[] waveTwo;
-    private GameObject[] waveThree;
-    private GameObject[] waveFour;
-    private GameObject[] waveFive;
+    private string tag1A;
+    private string tag2A;
+    private string tag3A;
+    private string tag4A;
+    private string tag5A;
+
+    private string tag2B;
+    private string tag3B;
+    private string tag4B;
+    private string tag5B;
+
+
+    private GameObject[] waveOneA;
+    private GameObject[] waveTwoA;
+    private GameObject[] waveThreeA;
+    private GameObject[] waveFourA;
+    private GameObject[] waveFiveA;
+
+
+    private GameObject[] waveTwoB;
+    private GameObject[] waveThreeB;
+    private GameObject[] waveFourB;
+    private GameObject[] waveFiveB;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        tag1 = "Wave1";
-        tag2 = "Wave2";
-        tag3 = "Wave3";
-        tag4 = "Wave4";
-        tag5 = "Wave5";
+        tag1A = "Wave1A";
+        tag2A = "Wave2A";
+        tag3A = "Wave3A";
+        tag4A = "Wave4A";
+        tag5A = "Wave5A";
 
-        waveOne = GameObject.FindGameObjectsWithTag(tag1);
-        waveTwo = GameObject.FindGameObjectsWithTag(tag2);
-        waveThree = GameObject.FindGameObjectsWithTag(tag3);
-        waveFour = GameObject.FindGameObjectsWithTag(tag4);
-        waveFive = GameObject.FindGameObjectsWithTag(tag5);
+        tag2B = "Wave2B";
+        tag3B = "Wave3B";
+        tag4B = "Wave4B";
+        tag5B = "Wave5B";
 
+        waveOneA = GameObject.FindGameObjectsWithTag(tag1A);
+        waveTwoA = GameObject.FindGameObjectsWithTag(tag2A);
+        waveThreeA = GameObject.FindGameObjectsWithTag(tag3A);
+        waveFourA = GameObject.FindGameObjectsWithTag(tag4A);
+        waveFiveA = GameObject.FindGameObjectsWithTag(tag5A);
 
-        EnemyWaveFreeze(waveOne);
-        EnemyWaveFreeze(waveTwo);
-        EnemyWaveFreeze(waveThree);
-        EnemyWaveFreeze(waveFour);
-        EnemyWaveFreeze(waveFive);
+        waveTwoB = GameObject.FindGameObjectsWithTag(tag2B);
+        waveThreeB = GameObject.FindGameObjectsWithTag(tag3B);
+        waveFourB = GameObject.FindGameObjectsWithTag(tag4B);
+        waveFiveB = GameObject.FindGameObjectsWithTag(tag5B);
+
+        EnemyWaveFreezeA(waveOneA);
+        EnemyWaveFreezeA(waveTwoA);
+        EnemyWaveFreezeA(waveThreeA);
+        EnemyWaveFreezeA(waveFourA);
+        EnemyWaveFreezeA(waveFiveA);
+
+        EnemyWaveFreezeB(waveTwoB);
+        EnemyWaveFreezeB(waveThreeB);
+        EnemyWaveFreezeB(waveFourB);
+        EnemyWaveFreezeB(waveFiveB);
 
         playerStartPos = player.transform.position;
         startBackgroundTransition = false;
@@ -65,76 +96,87 @@ public class enemy_manager1 : MonoBehaviour
     void Update()
     {
 
-        waveOne = GameObject.FindGameObjectsWithTag(tag1);
-        waveTwo = GameObject.FindGameObjectsWithTag(tag2);
-        waveThree = GameObject.FindGameObjectsWithTag(tag3);
-        waveFour = GameObject.FindGameObjectsWithTag(tag4);
-        waveFive = GameObject.FindGameObjectsWithTag(tag5);
-        EnemyWaveStart(waveOne);
-        if (EnemyWaveCountReduction(waveOne) && waveOneCount == 1)
+        waveOneA = GameObject.FindGameObjectsWithTag(tag1A);
+        waveTwoA = GameObject.FindGameObjectsWithTag(tag2A);
+        waveThreeA = GameObject.FindGameObjectsWithTag(tag3A);
+        waveFourA = GameObject.FindGameObjectsWithTag(tag4A);
+        waveFiveA = GameObject.FindGameObjectsWithTag(tag5A);
+
+        waveTwoB = GameObject.FindGameObjectsWithTag(tag2B);
+        waveThreeB = GameObject.FindGameObjectsWithTag(tag3B);
+        waveFourB = GameObject.FindGameObjectsWithTag(tag4B);
+        waveFiveB = GameObject.FindGameObjectsWithTag(tag5B);
+        EnemyWaveStartA(waveOneA);
+        if (EnemyWaveCountReduction(waveOneA) && waveOneACount == 1)
         {
             PlayerTransition(playerStartPos);
             if (startBackgroundTransition)
             {
 
-                BackgroundTransition(waveTwo);
-                waveOneCount = -1;
+                BackgroundTransition(waveTwoA, waveTwoB);
+                waveOneACount = -1;
 
             }
         }
-        if (EnemyWaveCountReduction(waveTwo) && waveTwoCount == 1)
+        if (EnemyWaveCountReduction(waveTwoA) && waveTwoACount == 1 && EnemyWaveCountReduction(waveTwoB) && waveTwoBCount == 1)
         {
             PlayerTransition(playerStartPos);
             planet.GetComponent<PlanetManager>().canDarken = true;
             if (startBackgroundTransition)
             {
 
-                BackgroundTransition(waveThree);
-                waveTwoCount = -1;
+                BackgroundTransition(waveThreeA, waveThreeB);
+                waveTwoACount = -1;
+                waveTwoBCount = -1;
 
             }
            
         }
-        if (EnemyWaveCountReduction(waveThree) && waveThreeCount == 1)
+        if (EnemyWaveCountReduction(waveThreeA) && waveThreeACount == 1 && EnemyWaveCountReduction(waveThreeB) && waveThreeBCount == 1)
         {
             PlayerTransition(playerStartPos);
             planet.GetComponent<PlanetManager>().canLighten = true;
             if (startBackgroundTransition)
             {
 
-                BackgroundTransition(waveFour);
-                waveThreeCount = -1;
+                BackgroundTransition(waveFourA, waveFourB);
+                waveThreeACount = -1;
+                waveThreeBCount = -1;
 
             }
 
         }
-        if (EnemyWaveCountReduction(waveFour) && waveFourCount == 1)
+        if (EnemyWaveCountReduction(waveFourA) && waveFourACount == 1 && EnemyWaveCountReduction(waveFourB) && waveFourBCount == 1)
         {
             PlayerTransition(playerStartPos);
             if (startBackgroundTransition)
             {
 
-                BackgroundTransition(waveFive);
-                waveFourCount = -1;
+                BackgroundTransition(waveFiveA, waveFiveB);
+                waveFourACount = -1;
+                waveFourBCount = -1;
 
             }
         }
-        if (EnemyWaveCountReduction(waveFive) && waveFiveCount == 1)
+        if (EnemyWaveCountReduction(waveFiveA) && waveFiveACount == 1 && EnemyWaveCountReduction(waveFiveB) && waveFiveBCount == 1)
         {
+            waveFiveACount = -1;
+            waveFiveBCount = -1;
             enabled = false;
         }
     }
 
 
 
-    void EnemyWaveStart(GameObject[] movingWaveList)
+    void EnemyWaveStartA(GameObject[] movingWaveListA)
     {
-        if (movingWaveList.Length > 0)
+        if (movingWaveListA.Length > 0)
         {
-            foreach (GameObject enemy in movingWaveList)
+            foreach (GameObject enemy in movingWaveListA)
             {
 
                 enemy.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+                
                 player.GetComponent<player_controller>().enabled = true;
                 
             }
@@ -142,11 +184,36 @@ public class enemy_manager1 : MonoBehaviour
         }
 
     }
-    void EnemyWaveFreeze(GameObject[] waveList)
+
+    void EnemyWaveStartB(GameObject[] movingWaveListA)
+    {
+        if (movingWaveListA.Length > 0)
+        {
+            foreach (GameObject enemy in movingWaveListA)
+            {
+
+                enemy.gameObject.GetComponent<enemy_controller2>().canMove = true;
+
+
+            }
+
+        }
+
+    }
+    void EnemyWaveFreezeA(GameObject[] waveList)
     {
         foreach (GameObject enemy in waveList)
         {
             enemy.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+
+    }
+
+    void EnemyWaveFreezeB(GameObject[] waveList)
+    {
+        foreach (GameObject enemy in waveList)
+        {
+            enemy.gameObject.GetComponent<enemy_controller2>().canMove = false;
         }
 
     }
@@ -177,14 +244,15 @@ public class enemy_manager1 : MonoBehaviour
         
     }
 
-    void BackgroundTransition(GameObject[] movingWaveList)
+    void BackgroundTransition(GameObject[] movingWaveListA, GameObject[] movingWaveListB)
     {
             sun.GetComponent<SunManager>().checkPos = true;
             moon.GetComponent<MoonManager>().checkPos = true;
             planet.GetComponent<PlanetManager>().canRotate = true;
             stars.GetComponent<StarManager>().canTranslate = true;
             player.GetComponent<Animator>().SetBool("isBlastingOff", true);
-            StartCoroutine(TransitionTimer(movingWaveList));
+            StartCoroutine(TransitionTimer(movingWaveListA, movingWaveListB));
+            
 
 
     }
@@ -205,7 +273,7 @@ public class enemy_manager1 : MonoBehaviour
     //Purpose:  
     //Input:
     //Output: 
-    IEnumerator TransitionTimer(GameObject[] movingWaveList)
+    IEnumerator TransitionTimer(GameObject[] movingWaveListA, GameObject[] movingWaveListB)
     {
 
        while(timer <= transitionTime)
@@ -213,13 +281,14 @@ public class enemy_manager1 : MonoBehaviour
             //Debug.Log("less than");
 
             timer += .001f;
-            yield return new WaitForSecondsRealtime(.001f);
+            yield return new WaitForSeconds(.001f);
         }
         if (timer >= transitionTime)
         {
             Debug.Log("transtitiontimer");
             player.GetComponent<Animator>().SetBool("isBlastingOff", false);
-            EnemyWaveStart(movingWaveList);
+            EnemyWaveStartA(movingWaveListA);
+            EnemyWaveStartB(movingWaveListB);
             timer = 0;
             yield break;
 

@@ -6,11 +6,15 @@ TagManager:
   tags:
   - bullet_enemy
   - bullet_player
-  - Wave1
-  - Wave2
-  - Wave3
-  - Wave4
-  - Wave5
+  - Wave1A
+  - Wave2A
+  - Wave3A
+  - Wave4A
+  - Wave5A
+  - Wave2B
+  - Wave3B
+  - Wave4B
+  - Wave5B
   layers:
   - Default
   - TransparentFX

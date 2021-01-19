@@ -10,7 +10,7 @@ public class VictoryMenu1 : MonoBehaviour
     public AudioSource backgroundMusic;
     public GameObject player;
     public GameObject EnemyManager1;
-    private float timer;
+    public float timer;
     // Start is called before the first frame update
 
 
@@ -29,8 +29,7 @@ public class VictoryMenu1 : MonoBehaviour
             victoryMenuCanvas.SetActive(false);
 
         }
-        if (EnemyManager1.GetComponent<enemy_manager1>().waveOneCount == 0 && EnemyManager1.GetComponent<enemy_manager1>().waveTwoCount == 0 
-            && EnemyManager1.GetComponent<enemy_manager1>().waveThreeCount == 0 && EnemyManager1.GetComponent<enemy_manager1>().waveFourCount == 0)
+        if (EnemyManager1.GetComponent<enemy_manager1>().waveFiveACount == -1 && EnemyManager1.GetComponent<enemy_manager1>().waveFiveBCount == -1)
         {
             StartCoroutine("VictoryDelay");
         }
@@ -42,16 +41,24 @@ public class VictoryMenu1 : MonoBehaviour
     }
     IEnumerator VictoryDelay()
     {
-            if (timer == .8f)
-            {
-                isVictory = true;
-            }
-            if (timer >= .8f)
-             {
-                StopAllCoroutines();
-             }
+        while (timer <= .8f)
+        {
+            //Debug.Log("less than");
 
-            timer += .01f;
-            yield return new WaitForSeconds(.01f);
+            timer += .001f;
+            yield return new WaitForSeconds(.001f);
+        }
+        if (timer > .8f)
+        {
+            isVictory = true;
+            StopAllCoroutines();
+        }
+            //if (timer >= .8f)
+            // {
+                
+            // }
+
+            //timer += .01f;
+            //yield return new WaitForSeconds(.01f);
     }
 }

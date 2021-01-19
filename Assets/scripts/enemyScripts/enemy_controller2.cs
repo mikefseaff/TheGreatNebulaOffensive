@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class enemy_controller2 : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class enemy_controller2 : MonoBehaviour
 
     public bool facingRight = true;
 
+    public bool isLevel1 = false;
+
 
 
 
@@ -33,6 +36,7 @@ public class enemy_controller2 : MonoBehaviour
     public float timerMin = 5f;
     public float timerMax = 25f;
     public bool canfireBullets = true;
+    public bool canMove = true;
 
    // public float bulletSpeedCheck;
 
@@ -46,6 +50,14 @@ public class enemy_controller2 : MonoBehaviour
         timerBullet = 0;
         maxTimerBullet = Random.Range(timerMin, timerMax);
 
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            isLevel1 = true;
+            magnitude = 0;
+            canMove = false;
+            
+        }
+
         if (canfireBullets)
         {
             StartCoroutine("FireBullet");
@@ -57,19 +69,23 @@ public class enemy_controller2 : MonoBehaviour
     void Update()
     {
        // bulletSpeedCheck = bullet.GetComponent<enemy_bullet_controller>().speedX;
-        CheckWhereToFace();
-
-        if (facingRight)
+       if ( canMove)
         {
-            MoveRight();
-        }
-        else
-        {
-            MoveLeft();
+            CheckWhereToFace();
+
+            if (facingRight)
+            {
+                MoveRight();
+            }
+            else
+            {
+                MoveLeft();
+            }
+
         }
 
 
-        if (Camera.main.WorldToViewportPoint(transform.position).x < 0)
+        if (Camera.main.WorldToViewportPoint(transform.position).x < 0 && !isLevel1)
         {
             Destroy(this.gameObject);
         }

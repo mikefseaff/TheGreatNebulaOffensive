@@ -20,7 +20,6 @@ public class player_controller : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(Die(this.gameObject));
-        maxSpecialCharge = 5;
         currentSpecialCharge = 0;
         Debug.Log(Time.timeScale);
         
