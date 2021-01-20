@@ -35,9 +35,9 @@ public class VictoryMenu1 : MonoBehaviour
         }
     }
 
-    public void Quit()
+    public void Continue()
     {
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("Level 2");
     }
     IEnumerator VictoryDelay()
     {
@@ -53,12 +53,6 @@ public class VictoryMenu1 : MonoBehaviour
             isVictory = true;
             StopAllCoroutines();
         }
-            //if (timer >= .8f)
-            // {
-                
-            // }
-
-            //timer += .01f;
-            //yield return new WaitForSeconds(.01f);
+            
     }
 }

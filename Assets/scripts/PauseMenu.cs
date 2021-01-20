@@ -12,6 +12,8 @@ public class PauseMenu : MonoBehaviour
 
     public AudioSource backgroundMusic;
 
+    public bool isPlaying;
+
     void Update()
     {
         if (isPaused)
@@ -20,27 +22,24 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 0f;
             backgroundMusic.Pause();
         }
-        else
+        else if (!isPaused && isPlaying)
         {
             pauseMenuCanvas.SetActive(false);
             Time.timeScale = 1f;
             
+           
+            
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !isPaused)
         {
             isPaused = !isPaused;
-            if (!isPaused)
-            {
-                backgroundMusic.Play();
-            }
-
-
         }
     }
     public void Resume()
     {
         isPaused = false;
+        isPlaying = true;
         backgroundMusic.Play();
     }
     public void Quit()

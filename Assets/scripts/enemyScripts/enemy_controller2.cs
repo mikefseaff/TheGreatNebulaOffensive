@@ -8,7 +8,7 @@ public class enemy_controller2 : MonoBehaviour
     //Class used to control the second enemy type
 
 
-    public float moveSpeed = 5f;
+    public float moveSpeed;
 
     //frequency of the enemies sin movement
     public float frequency = 20f;
@@ -55,6 +55,9 @@ public class enemy_controller2 : MonoBehaviour
             isLevel1 = true;
             magnitude = 0;
             canMove = false;
+            canfireBullets = false;
+            moveSpeed = 5f;
+
             
         }
 
@@ -92,6 +95,7 @@ public class enemy_controller2 : MonoBehaviour
         if (player.gameObject.GetComponent<SpriteRenderer>().enabled == false)
         {
             StopAllCoroutines();
+            enabled = false;
         }
     }
 
@@ -100,14 +104,14 @@ public class enemy_controller2 : MonoBehaviour
     {
 
 
-        if (pos.x <= -7.5f)
+        if (Camera.main.WorldToViewportPoint(transform.position).x <= 0 && isLevel1)
         {
             facingRight = true;
 
         }
 
 
-        else if (pos.x >= 7.5f)
+        else if (Camera.main.WorldToViewportPoint(transform.position).x >= 1)
         {
             facingRight = false;
 

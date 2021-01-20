@@ -90,6 +90,8 @@ public class enemy_manager1 : MonoBehaviour
         playerStartPos = player.transform.position;
         startBackgroundTransition = false;
 
+        EnemyWaveStartA(waveOneA);
+
     }
 
     // Update is called once per frame
@@ -106,7 +108,7 @@ public class enemy_manager1 : MonoBehaviour
         waveThreeB = GameObject.FindGameObjectsWithTag(tag3B);
         waveFourB = GameObject.FindGameObjectsWithTag(tag4B);
         waveFiveB = GameObject.FindGameObjectsWithTag(tag5B);
-        EnemyWaveStartA(waveOneA);
+        
         if (EnemyWaveCountReduction(waveOneA) && waveOneACount == 1)
         {
             PlayerTransition(playerStartPos);
@@ -176,10 +178,16 @@ public class enemy_manager1 : MonoBehaviour
             {
 
                 enemy.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-                
-                player.GetComponent<player_controller>().enabled = true;
-                
+                enemy.gameObject.GetComponent<enemy_controller1>().canfireBullets = true;
+                enemy.gameObject.GetComponent<enemy_controller1>().StartCoroutine("FireBullet");
+
+
+
+
+
             }
+            
+            player.GetComponent<player_controller>().enabled = true;
 
         }
 
@@ -193,6 +201,9 @@ public class enemy_manager1 : MonoBehaviour
             {
 
                 enemy.gameObject.GetComponent<enemy_controller2>().canMove = true;
+                enemy.gameObject.GetComponent<enemy_controller2>().canfireBullets = true;
+                enemy.gameObject.GetComponent<enemy_controller2>().StartCoroutine("FireBullet");
+
 
 
             }
@@ -205,6 +216,8 @@ public class enemy_manager1 : MonoBehaviour
         foreach (GameObject enemy in waveList)
         {
             enemy.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            //enemy.gameObject.GetComponent<enemy_controller1>().canfireBullets = false;
+            
         }
 
     }
@@ -214,6 +227,7 @@ public class enemy_manager1 : MonoBehaviour
         foreach (GameObject enemy in waveList)
         {
             enemy.gameObject.GetComponent<enemy_controller2>().canMove = false;
+            //enemy.gameObject.GetComponent<enemy_controller2>().canfireBullets = false;
         }
 
     }

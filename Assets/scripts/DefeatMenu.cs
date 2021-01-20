@@ -20,7 +20,7 @@ public class DefeatMenu : MonoBehaviour
         if (isDefeated)
         {
             //defeatMenuCanvas.SetActive(true);
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
             backgroundMusic.Pause();
             //imageMiddle.SetActive(false);
             DefeatAnimation();
@@ -55,22 +55,23 @@ public class DefeatMenu : MonoBehaviour
 
     IEnumerator Fade(GameObject imageMiddle, GameObject imageBeginning)
     {
-        while (true)
+        while (timer < 1.5f)
         {
             
-            if (timer >= 1.5f)
-            {
-                Debug.Log("fade test");
-                imageMiddle.SetActive(true);
-                imageBeginning.SetActive(false);
-                StopCoroutine(Fade(imageMiddle, imageBeginning));
-            }
+           
             timer += .1f;
             yield return new WaitForSeconds(.25f);
             
         }
-
+        if (timer >= 1.5f)
+        {
+            Debug.Log("fade test");
+            imageMiddle.SetActive(true);
+            imageBeginning.SetActive(false);
+            StopCoroutine(Fade(imageMiddle, imageBeginning));
         }
+
+    }
 
 
 

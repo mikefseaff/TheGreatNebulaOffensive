@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class enemy_controller1 : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class enemy_controller1 : MonoBehaviour
     public float timerMax = 25f;
     public bool canfireBullets = true;
     public bool canMove = true;
+    public bool isLevel1;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,18 +26,23 @@ public class enemy_controller1 : MonoBehaviour
 
         timerBullet = 0;
         maxTimerBullet = Random.Range(timerMin, timerMax);
-
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            isLevel1 = true;
+            canfireBullets = false;
+        }
         if (canfireBullets)
         {
             StartCoroutine("FireBullet");
         }
         player = GameObject.FindGameObjectWithTag("Player");
+ 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Camera.main.WorldToViewportPoint(transform.position).x <= 0)
+        if (Camera.main.WorldToViewportPoint(transform.position).x <= 0 && isLevel1)
         {
             rb.velocity = new Vector2(-speed, 0);
         }
@@ -43,9 +50,14 @@ public class enemy_controller1 : MonoBehaviour
         {
             rb.velocity = new Vector2(speed, 0);
         }
+        if (!isLevel1 && Camera.main.WorldToViewportPoint(transform.position).x <= 0)
+        {
+            Destroy(this.gameObject);
+        }
         if (player.gameObject.GetComponent<SpriteRenderer>().enabled == false)
         {
             StopAllCoroutines();
+            enabled = false;
         }
        
     }

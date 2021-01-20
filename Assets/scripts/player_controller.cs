@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class player_controller : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class player_controller : MonoBehaviour
     public int currentSpecialCharge;
     public int maxSpecialCharge;
 
+    public Text abilityChargeDisplay;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +25,8 @@ public class player_controller : MonoBehaviour
         StartCoroutine(Die(this.gameObject));
         currentSpecialCharge = 0;
         Debug.Log(Time.timeScale);
-        
+        abilityChargeDisplay = abilityChargeDisplay.GetComponent<Text>();
+
     }
 
     // Update is called once per frame
@@ -32,6 +36,7 @@ public class player_controller : MonoBehaviour
         BoundMovement();
         ShootSpecial();
         Shoot();
+        UpdateText();
 
     }
 
@@ -85,6 +90,15 @@ public class player_controller : MonoBehaviour
 
 
     }
+
+    void UpdateText()
+    {
+        if (currentSpecialCharge <= 25)
+        {
+            abilityChargeDisplay.text = "Ability Charge: " + currentSpecialCharge * 4 + " %";
+        }
+    }
+        
     private void OnCollisionEnter2D(Collision2D collision)
     {
 

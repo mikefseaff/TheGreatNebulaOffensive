@@ -164,11 +164,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65834e99623eeb448a6b2c5d0ec4ae88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 8
   frequency: 10
   magnitude: 0.5
   facingRight: 1
+  isLevel1: 0
   bullet: {fileID: 3732692014435474822, guid: 8f1d8246b6d89b443a357728e18a1e00, type: 3}
-  timerMin: 0.5
-  timerMax: 1.5
+  timerMin: 1
+  timerMax: 2
   canfireBullets: 1
+  canMove: 1
