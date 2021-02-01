@@ -11,12 +11,16 @@ public class SpecialBulletController : MonoBehaviour
     public GameObject bullet;
     public float rotationValue;
     private GameObject specialBullet;
+    public GameObject explosion;
+
+    public int numShots;
+    public int numShotsMax;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = new Vector3(speed, 0);
-       // StartCoroutine("ShotTimer");
+        StartCoroutine("SelfDestruct");
         InvokeRepeating("SpecialAbilityFire", 0f, .2f);
 
     }
@@ -35,43 +39,30 @@ public class SpecialBulletController : MonoBehaviour
 
     void SpecialAbilityFire()
     {
-        for (int i = 0; i < 4; i++)
+        if (numShots <= numShotsMax)
         {
-            GameObject specialBullet = Instantiate(bullet, new Vector3(transform.position.x + .1f, transform.position.y), transform.rotation);
-            specialBullet.GetComponent<bullet_controller>().speedX = 5 * Mathf.Cos(Mathf.Deg2Rad * (transform.localEulerAngles.z + (i * 90)));
-            specialBullet.GetComponent<bullet_controller>().speedY = 5 * Mathf.Sin(Mathf.Deg2Rad * (transform.localEulerAngles.z + (i * 90)));
-            //Debug.Log(specialBullet.GetComponent<Rigidbody2D>().velocity);
-        }
-    }
-
-    IEnumerator ShotTimer()
-    {
-
-        while (timer <= shootingTimer)
-        {
-            
-            //Debug.Log("less than");
-            if (timer >= shootingTimer)
+            for (int i = 0; i < 4; i++)
             {
-                for (int i = 0; i < 4; i++)
-                {
-                    GameObject specialBullet = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y),transform.rotation);
-                    specialBullet.GetComponent<bullet_controller>().speedX = 7 * Mathf.Cos(Mathf.Deg2Rad * (transform.localEulerAngles.z + (i * 90)));
-                    specialBullet.GetComponent<bullet_controller>().speedY = 7 * Mathf.Sin(Mathf.Deg2Rad * (transform.localEulerAngles.z + (i * 90)));
-                    //Debug.Log(specialBullet.GetComponent<Rigidbody2D>().velocity);
-                }
-                
-                
-
-                //figure out this stupidity michael it doesnt change the velocity :sadge:
-
-
-                timer = 0;
-
+                GameObject specialBullet = Instantiate(bullet, new Vector3(transform.position.x + .1f, transform.position.y), transform.rotation);
+                specialBullet.GetComponent<bullet_controller>().speedX = 5 * Mathf.Cos(Mathf.Deg2Rad * (transform.localEulerAngles.z + (i * 90)));
+                specialBullet.GetComponent<bullet_controller>().speedY = 5 * Mathf.Sin(Mathf.Deg2Rad * (transform.localEulerAngles.z + (i * 90)));
+                //Debug.Log(specialBullet.GetComponent<Rigidbody2D>().velocity);
             }
-            timer += .001f;
-            yield return new WaitForSecondsRealtime(.001f);
+            numShots += 1;
         }
-
+        else
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
+            //boom.transform.localScale = new Vector3(collision.transform.localScale.x, this.transform.localScale.y);
+            float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+            Destroy(boom.gameObject, animationTime);
+            Destroy(this.gameObject);
+        }
+       
     }
+
+ 
+
+
 }

@@ -143,6 +143,10 @@ MonoBehaviour:
   shootingTimer: 1.2
   bullet: {fileID: 8699452830200038844, guid: b3507414654bbca4a82b803f99e47edb, type: 3}
   rotationValue: 0
+  explosion: {fileID: 8800585099716028810, guid: 991157e4dfd58904dbf971360e90c556,
+    type: 3}
+  numShots: 0
+  numShotsMax: 15
 --- !u!1 &3854205835632257284
 GameObject:
   m_ObjectHideFlags: 0

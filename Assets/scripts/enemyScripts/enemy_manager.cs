@@ -59,7 +59,7 @@ public class enemy_manager : MonoBehaviour
 
         // adjust x-axis position
         float dist = (this.transform.position - Camera.main.transform.position).z;
-        float bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, .75f, dist)).y;
+        float bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, .85f, dist)).y;
         float topBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, dist)).y;
         Vector3 enemySize = enemy1.GetComponent<Renderer>().bounds.size;
         spawnPoint.y = Mathf.Clamp(spawnPoint.y, bottomBorder + enemySize.x / 2, topBorder - enemySize.x / 2);
@@ -73,8 +73,8 @@ public class enemy_manager : MonoBehaviour
 
         // adjust x-axis position
         float dist = (this.transform.position - Camera.main.transform.position).z;
-        float bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, .2f, dist)).y;
-        float topBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, .7f, dist)).y;
+        float bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, .1f, dist)).y;
+        float topBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, .9f, dist)).y;
         Vector3 enemySize = enemy2.GetComponent<Renderer>().bounds.size;
         spawnPoint.y = Mathf.Clamp(spawnPoint.y, bottomBorder + enemySize.x / 2, topBorder - enemySize.x / 2);
         GameObject.Instantiate(enemy2, spawnPoint, new Quaternion(0, 0, 0, 0));
