@@ -10,7 +10,7 @@ public class enemy_controller1 : MonoBehaviour
 
     private float timerBullet;
     private float maxTimerBullet;
-    public GameObject bullet;
+    //public GameObject bullet;
     private GameObject player;
 
     public float timerMin = 5f;
@@ -64,9 +64,18 @@ public class enemy_controller1 : MonoBehaviour
 
     void SpawnBullet()
     {
-        Vector3 spawnPoint = transform.position;
-        spawnPoint.y -= (bullet.GetComponent<Renderer>().bounds.size.y / 2) + (GetComponent<Renderer>().bounds.size.y / 2);
-        GameObject.Instantiate(bullet, spawnPoint, transform.rotation);
+        
+        //GameObject.Instantiate(bullet, spawnPoint, transform.rotation);
+        GameObject bullet = Enemy1BulletPool.SharedInstance.GetPooledBullet();
+        if(bullet != null)
+        {
+            Vector3 spawnPoint = transform.position;
+            spawnPoint.y -= (bullet.GetComponent<Renderer>().bounds.size.y / 2) + (GetComponent<Renderer>().bounds.size.y / 2);
+            bullet.transform.position = spawnPoint;
+            bullet.SetActive(true);
+            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(bullet.GetComponent<enemy_bullet_controller>().speedX, bullet.GetComponent<enemy_bullet_controller>().speedY);
+            
+        }
 
     }
 

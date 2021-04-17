@@ -30,7 +30,7 @@ public class enemy_controller2 : MonoBehaviour
 
     private float timerBullet;
     private float maxTimerBullet;
-    public GameObject bullet;
+    //public GameObject bullet;
     private GameObject player;
 
     public float timerMin = 5f;
@@ -144,24 +144,32 @@ public class enemy_controller2 : MonoBehaviour
 
     void SpawnBullet()
     {
-        Vector3 spawnPoint = transform.position;
-        //spawnPoint.y -= (bullet.GetComponent<Renderer>().bounds.size.y / 2) + (GetComponent<Renderer>().bounds.size.y / 2);
-        if (facingRight)
+        GameObject bullet = Enemy2BulletPool.SharedInstance.GetPooledBullet();
+        Debug.Log("fire2");
+        if (bullet != null)
         {
-            spawnPoint.x += (bullet.GetComponent<Renderer>().bounds.size.x / 2) + (GetComponent<Renderer>().bounds.size.x / 2);
+            Vector3 spawnPoint = transform.position;
+            //spawnPoint.y -= (bullet.GetComponent<Renderer>().bounds.size.y / 2) + (GetComponent<Renderer>().bounds.size.y / 2);
+            if (facingRight)
+            {
+                spawnPoint.x += (bullet.GetComponent<Renderer>().bounds.size.x / 2) + (GetComponent<Renderer>().bounds.size.x / 2);
+            }
+            else if (!facingRight)
+            {
+                spawnPoint.x -= (bullet.GetComponent<Renderer>().bounds.size.x / 2) + (GetComponent<Renderer>().bounds.size.x / 2);
+            }
+            bullet.transform.position = spawnPoint;
+            bullet.SetActive(true);
+            if (facingRight)
+                bullet.GetComponent<enemy_bullet_controller>().speedX = Mathf.Abs(bullet.GetComponent<enemy_bullet_controller>().speedX);
+            else
+                bullet.GetComponent<enemy_bullet_controller>().speedX = Mathf.Abs(bullet.GetComponent<enemy_bullet_controller>().speedX) * -1;
+
+            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(bullet.GetComponent<enemy_bullet_controller>().speedX, bullet.GetComponent<enemy_bullet_controller>().speedY);
+
         }
-        else if (!facingRight)
-        {
-            spawnPoint.x -= (bullet.GetComponent<Renderer>().bounds.size.x / 2) + (GetComponent<Renderer>().bounds.size.x / 2);
-        }
+
         
-
-        GameObject bulletFired = GameObject.Instantiate(bullet, spawnPoint, transform.rotation);
-
-        if (facingRight)
-            bulletFired.GetComponent<enemy_bullet_controller>().speedX = Mathf.Abs(bulletFired.GetComponent<enemy_bullet_controller>().speedX);
-        else
-            bulletFired.GetComponent<enemy_bullet_controller>().speedX = Mathf.Abs(bulletFired.GetComponent<enemy_bullet_controller>().speedX) * -1;
     }
 
     IEnumerator FireBullet()

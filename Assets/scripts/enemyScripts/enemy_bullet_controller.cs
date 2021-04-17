@@ -24,7 +24,7 @@ public class enemy_bullet_controller : MonoBehaviour
     {
         if (Camera.main.WorldToViewportPoint(transform.position).y < 0 || Camera.main.WorldToViewportPoint(transform.position).x < 0 || Camera.main.WorldToViewportPoint(transform.position).x > 1)
         {
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
     }
 
@@ -32,7 +32,7 @@ public class enemy_bullet_controller : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            GameObject.Destroy(this.gameObject);
+            gameObject.SetActive(false);
             //collision.gameObject.SetActive(false);
             collision.gameObject.GetComponent<SpriteRenderer>().enabled = false;
             GameObject boom = GameObject.Instantiate(explosion, collision.transform.position, new Quaternion(0, 0, 0, 0));
