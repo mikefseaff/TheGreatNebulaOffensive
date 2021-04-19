@@ -53,31 +53,37 @@ public class enemy_manager : MonoBehaviour
 
     void SpawnEnemy1()
     {
+        GameObject tempEnemy;
         float x = 1.25f;
-        Vector3 spawnPoint = Camera.main.ViewportToWorldPoint(new Vector3(x, Random.Range(0, 1f), 0));
+        Vector3 spawnPoint = Camera.main.ViewportToWorldPoint(new Vector3(x, Random.Range(.7f, 1f), 0));
         spawnPoint.z = 0;
 
         // adjust x-axis position
         float dist = (this.transform.position - Camera.main.transform.position).z;
-        float bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, .85f, dist)).y;
+        float bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, .7f, dist)).y;
         float topBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, dist)).y;
         Vector3 enemySize = enemy1.GetComponent<Renderer>().bounds.size;
         spawnPoint.y = Mathf.Clamp(spawnPoint.y, bottomBorder + enemySize.x / 2, topBorder - enemySize.x / 2);
-        GameObject.Instantiate(enemy1, spawnPoint, new Quaternion(0, 0, 0, 0));
+        tempEnemy = GameObject.Instantiate(enemy1, spawnPoint, new Quaternion(0, 0, 0, 0));
+        tempEnemy.GetComponent<enemy_controller1>().speed = -6;
     }
     void SpawnEnemy2()
     {
+        GameObject tempEnemy;
         float x = 1.25f;
-        Vector3 spawnPoint = Camera.main.ViewportToWorldPoint(new Vector3(x, Random.Range(0, 1f), 0));
+        Vector3 spawnPoint = Camera.main.ViewportToWorldPoint(new Vector3(x, Random.Range(.3f, .7f), 0));
         spawnPoint.z = 0;
 
         // adjust x-axis position
         float dist = (this.transform.position - Camera.main.transform.position).z;
-        float bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, .1f, dist)).y;
-        float topBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, .9f, dist)).y;
+        float bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, .3f, dist)).y;
+        float topBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, .7f, dist)).y;
         Vector3 enemySize = enemy2.GetComponent<Renderer>().bounds.size;
         spawnPoint.y = Mathf.Clamp(spawnPoint.y, bottomBorder + enemySize.x / 2, topBorder - enemySize.x / 2);
-        GameObject.Instantiate(enemy2, spawnPoint, new Quaternion(0, 0, 0, 0));
+        tempEnemy = GameObject.Instantiate(enemy2, spawnPoint, new Quaternion(0, 0, 0, 0));
+        tempEnemy.GetComponent<enemy_controller2>().frequency = Random.Range(5, 11);
+        tempEnemy.GetComponent<enemy_controller2>().magnitude = Random.Range(.5f,1f);
+
     }
     void SpawnEnemy3()
     {
@@ -101,8 +107,8 @@ public class enemy_manager : MonoBehaviour
                 maxTimer1 = Random.Range(timerMin1, timerMax1);
             }
 
-            timer1 += 1f;
-            yield return new WaitForSeconds(1f);
+            timer1 += .01f;
+            yield return new WaitForSeconds(.01f);
         }
     }
     IEnumerator SpawnEnemy2Timer()
@@ -117,8 +123,8 @@ public class enemy_manager : MonoBehaviour
                 maxTimer2 = Random.Range(timerMin2, timerMax2);
             }
 
-            timer2 += 1f;
-            yield return new WaitForSeconds(1f);
+            timer2 += .01f;
+            yield return new WaitForSeconds(.01f);
         }
     }
     IEnumerator SpawnEnemy3Timer()

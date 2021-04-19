@@ -8,7 +8,7 @@ public class player_controller : MonoBehaviour
     public float speed;
     private Rigidbody2D rb;
 
-    public GameObject bullet;
+    //public GameObject bullet;
     public GameObject specialAbility;
     public GameObject explosion;
     private float timer;
@@ -44,7 +44,16 @@ public class player_controller : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameObject.Instantiate(bullet, transform.position, transform.rotation);
+            GameObject bullet = PlayerBulletObjectPool.SharedInstance.GetPooledBullet();
+            if (bullet != null)
+            {
+             
+                bullet.transform.position = this.transform.position;
+                bullet.transform.rotation = this.transform.rotation;
+                bullet.SetActive(true);
+                bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(bullet.GetComponent<bullet_controller>().speedX, bullet.GetComponent<bullet_controller>().speedY);
+
+            }
         }
     }
 

@@ -273,6 +273,7 @@ public class enemy_manager1 : MonoBehaviour
 
     void PlayerTransition(Vector3 startingPlayerPos)
     {
+        player.GetComponent<CircleCollider2D>().enabled = false;
         player.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll; //Fixes velocity bug when moving while transition happens
         player.GetComponent<player_controller>().enabled = false;
         startBackgroundTransition = false;
@@ -301,6 +302,7 @@ public class enemy_manager1 : MonoBehaviour
         {
             Debug.Log("transtitiontimer");
             player.GetComponent<Animator>().SetBool("isBlastingOff", false);
+            player.GetComponent<CircleCollider2D>().enabled = true;
             EnemyWaveStartA(movingWaveListA);
             EnemyWaveStartB(movingWaveListB);
             timer = 0;

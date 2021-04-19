@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy2BulletPool : MonoBehaviour
+public class PlayerBulletObjectPool : MonoBehaviour
 {
-    public static Enemy2BulletPool SharedInstance;
+    public static PlayerBulletObjectPool SharedInstance;
     public List<GameObject> pooledBullets;
     public GameObject bulletToPool;
-    public int amountToPool = 20;
+    public int amountToPool = 10;
 
     private void Awake()
     {

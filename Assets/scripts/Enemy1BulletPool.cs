@@ -7,7 +7,7 @@ public class Enemy1BulletPool : MonoBehaviour
     public static Enemy1BulletPool SharedInstance;
     public List<GameObject> pooledBullets;
     public GameObject bulletToPool;
-    public int amountToPool;
+    public int amountToPool = 20;
 
     private void Awake()
     {

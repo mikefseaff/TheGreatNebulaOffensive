@@ -134,6 +134,8 @@ public class enemy_controller3 : MonoBehaviour
         if (collision.gameObject.tag == "bullet_player")
         {
             health -= 1;
+            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(.7f, .7f, .7f, 1);
+            StartCoroutine("HitDelay");
             Debug.Log(health);
         }
         if (health == 0)
@@ -264,6 +266,13 @@ public class enemy_controller3 : MonoBehaviour
         }
 
 
+
+    }
+
+    IEnumerator HitDelay()
+    {
+        yield return new WaitForSeconds(.2f);
+        this.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
 
     }
 }

@@ -28,8 +28,8 @@ public class bullet_controller : MonoBehaviour
         if (Camera.main.WorldToViewportPoint(transform.position).x > 1 || Camera.main.WorldToViewportPoint(transform.position).x < 0 || 
             Camera.main.WorldToViewportPoint(transform.position).y > 1 || Camera.main.WorldToViewportPoint(transform.position).y < 0)
         {
-            Destroy(this.gameObject);
-            
+            gameObject.SetActive(false);
+
         }
     }
 
@@ -47,7 +47,7 @@ public class bullet_controller : MonoBehaviour
 
             
             Debug.Log(collidedTag);
-            GameObject.Destroy(this.gameObject);
+            gameObject.SetActive(false);
             GameObject.Destroy(collision.gameObject);
             GameObject boom = GameObject.Instantiate(explosion, collision.transform.position, new Quaternion(0, 0, 0, 0));
             boom.transform.localScale = new Vector3(collision.transform.localScale.x, collision.transform.localScale.y);
@@ -60,8 +60,8 @@ public class bullet_controller : MonoBehaviour
         }
         if (collision.gameObject.layer == 12)
         {
-            
-            Destroy(this.gameObject);
+
+            gameObject.SetActive(false);
         }
 
 

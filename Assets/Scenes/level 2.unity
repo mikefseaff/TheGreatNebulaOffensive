@@ -950,9 +950,9 @@ MonoBehaviour:
   enemy2: {fileID: 4944056411439678682, guid: 4d7ec9abca2601f4e93a999a7c9fe47d, type: 3}
   enemy3: {fileID: 6437399200010113262, guid: 67f4aa6dc7d27f64bbb61e32606c55ab, type: 3}
   timerMin1: 0.2
-  timerMax1: 0.25
-  timerMin2: 0.1
-  timerMax2: 0.15
+  timerMax1: 0.3
+  timerMin2: 0.3
+  timerMax2: 0.5
   timerMin3: 0
   timerMax3: 0
 --- !u!1001 &765396477
@@ -2211,6 +2211,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilityCharge
       objectReference: {fileID: 0}
+    - target: {fileID: 118116690873658164, guid: 97d254b55042f3347a3fb3103c859128,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97d254b55042f3347a3fb3103c859128, type: 3}
 --- !u!1 &1629818861
@@ -3199,6 +3204,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MissionLogManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197327957882623939, guid: 3441d99d558554a4db4fb8bb19a1bf4b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3441d99d558554a4db4fb8bb19a1bf4b, type: 3}
