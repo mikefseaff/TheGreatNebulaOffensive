@@ -36,7 +36,7 @@ public class PlanetManager : MonoBehaviour
             
             if (canRotate)
             {
-                // not rotating again after 1st wave is beaten
+                
                 
                 Vector2 vel = rb.velocity;
                 transform.Rotate(0, 0, .025f);
