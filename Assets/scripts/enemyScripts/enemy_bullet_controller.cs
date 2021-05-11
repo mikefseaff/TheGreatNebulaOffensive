@@ -10,6 +10,8 @@ public class enemy_bullet_controller : MonoBehaviour
     private Rigidbody2D rb;
     public GameObject explosion;
     private GameObject player;
+    public bool moveToTarget;
+    public Vector2 targetToMoveTo;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +24,13 @@ public class enemy_bullet_controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Camera.main.WorldToViewportPoint(transform.position).y < 0 || Camera.main.WorldToViewportPoint(transform.position).x < 0 || Camera.main.WorldToViewportPoint(transform.position).x > 1)
+        if (Camera.main.WorldToViewportPoint(transform.position).y < 0 || Camera.main.WorldToViewportPoint(transform.position).y > 1 || Camera.main.WorldToViewportPoint(transform.position).x < 0 || Camera.main.WorldToViewportPoint(transform.position).x > 1)
         {
             gameObject.SetActive(false);
+        }
+        if (moveToTarget)
+        {
+            moveBullet();
         }
     }
 
@@ -42,6 +48,11 @@ public class enemy_bullet_controller : MonoBehaviour
             
 
         }
+    }
+
+    public void moveBullet()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, targetToMoveTo, (speedX*-1)*Time.deltaTime);
     }
     IEnumerator Die(GameObject player)
     {

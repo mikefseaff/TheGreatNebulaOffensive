@@ -44,6 +44,7 @@ public class enemy_controller3 : MonoBehaviour
             StartCoroutine("MovementDelay");
             StartCoroutine(Die(this.gameObject));
         player = GameObject.FindGameObjectWithTag("Player");
+        bullet.GetComponent<enemy_bullet_controller>().speedY = 0;
 
     }
 
@@ -108,7 +109,7 @@ public class enemy_controller3 : MonoBehaviour
         Vector3 spawnPoint = transform.position;
         //spawnPoint.y -= (bullet.GetComponent<Renderer>().bounds.size.y / 2);
         spawnPoint.x -= (2.2f);
-        GameObject.Instantiate(bullet, spawnPoint, transform.rotation);
+        GameObject spawnedBullet = GameObject.Instantiate(bullet, spawnPoint, transform.rotation);
 
     }
     void SpawnBullet2()

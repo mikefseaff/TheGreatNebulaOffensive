@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy1BulletPool : MonoBehaviour
+public class SprayCannonBulletPool : MonoBehaviour
 {
-    public static Enemy1BulletPool SharedInstance;
+    public static SprayCannonBulletPool SharedInstance;
     public List<GameObject> pooledBullets;
     public GameObject bulletToPool;
     public int amountToPool = 20;
@@ -12,6 +12,10 @@ public class Enemy1BulletPool : MonoBehaviour
     private void Awake()
     {
         SharedInstance = this;
+    }
+
+    private void Start()
+    {
         pooledBullets = new List<GameObject>();
         GameObject tmp;
         for (int i = 0; i < amountToPool; i++)
@@ -22,14 +26,9 @@ public class Enemy1BulletPool : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        
-    }
-    
     public GameObject GetPooledBullet()
     {
-        for(int i = 0; i < amountToPool; i++)
+        for (int i = 0; i < amountToPool; i++)
         {
             if (!pooledBullets[i].activeInHierarchy)
             {

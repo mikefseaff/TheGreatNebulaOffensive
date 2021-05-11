@@ -1712,8 +1712,11 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'How to play: Use wasd to move and the space bar to shoot
 
-    press esc
-    to pause
+    Press left
+    shift to use your special ability when it is charged from defeating enemies!
+
+    press
+    esc to pause
 
     you only have 1 life make it count!'
 --- !u!222 &1909519012
