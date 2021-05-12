@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class enemy_bullet_controller : MonoBehaviour
 {
     private float timer;
@@ -12,6 +13,7 @@ public class enemy_bullet_controller : MonoBehaviour
     private GameObject player;
     public bool moveToTarget;
     public Vector2 targetToMoveTo;
+    public bool isSniperBullet;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,12 +34,17 @@ public class enemy_bullet_controller : MonoBehaviour
         {
             moveBullet();
         }
+        if (this.transform.position.x <= targetToMoveTo.x && isSniperBullet)
+        {
+            sniperSpecialCase();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
+            
             gameObject.SetActive(false);
             //collision.gameObject.SetActive(false);
             collision.gameObject.GetComponent<SpriteRenderer>().enabled = false;
@@ -45,9 +52,20 @@ public class enemy_bullet_controller : MonoBehaviour
             boom.transform.localScale = new Vector3(collision.transform.localScale.x, collision.transform.localScale.y);
             float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
             Destroy(boom.gameObject, animationTime);
+
             
 
         }
+    }
+
+    private void sniperSpecialCase()
+    {
+        gameObject.SetActive(false);
+        //collision.gameObject.SetActive(false);
+        GameObject boom = GameObject.Instantiate(explosion, transform.position, new Quaternion(0, 0, 0, 0));
+        boom.transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y);
+        float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+        Destroy(boom.gameObject, animationTime);
     }
 
     public void moveBullet()
