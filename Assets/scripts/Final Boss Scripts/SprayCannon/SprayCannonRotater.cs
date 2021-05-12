@@ -33,6 +33,7 @@ public class SprayCannonRotater : MonoBehaviour
         {
      
             transform.Rotate(0, 0, .6f*wayToRotate);
+            //Debug.Log(transform.rotation.z);
             
             
             if (this.transform.rotation.z >= .7 || this.transform.rotation.z <= -.7)
