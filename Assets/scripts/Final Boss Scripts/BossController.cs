@@ -6,11 +6,21 @@ public class BossController : MonoBehaviour
 {
     public int phaseNumber;
     private Vector2 startingPos;
-
+    //need to subcribe to generator event that will be called when the generator is destroyed which will call the move out coroutine which will then call the next phase
     void Start()
     {
         startingPos = this.transform.position;
-        rotateShip(45, 22.13f, 3.68f);
+        phaseNumber = 1;
+    }
+
+    private void OnEnable()
+    {
+        PhaseController.Phase += determineRotation;
+    }
+
+    private void OnDisable()
+    {
+        PhaseController.Phase -= determineRotation;
     }
 
     // Update is called once per frame
@@ -19,6 +29,28 @@ public class BossController : MonoBehaviour
         transform.Rotate(new Vector3(0, 0, degrees));
         transform.position = new Vector2(startingPos.x, y);
         StartCoroutine(MoveIn(degrees,x));
+    }
+
+    private void determineRotation()
+    {
+        switch (PhaseController.SharedInstance.UniversalPhaseNumber)
+        {
+            case 1:
+                rotateShip(45, 22.13f, 3.68f);
+                break;
+            case 2:
+                rotateShip(105, 19.54f, -6.67f);
+                break;
+            case 3:
+                rotateShip(-105, 19.54f, 6.67f);
+                break;
+            case 4:
+                rotateShip(-45, 22f, -3.68f);
+                break;
+            default:
+                rotateShip(0, startingPos.x, startingPos.y);
+                break;
+        }
     }
 
     IEnumerator MoveIn(int degrees,float xPos)
@@ -38,7 +70,7 @@ public class BossController : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         yield return new WaitForSeconds(2f);
-        StartCoroutine(MoveOut(degrees));
+        
     }
 
     IEnumerator MoveOut(int degrees)
@@ -59,11 +91,16 @@ public class BossController : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         yield return new WaitForSeconds(1f);
-        rotateShip(105, 19.54f, -6.67f);
+        PhaseController.SharedInstance.UniversalPhaseNumber++;
+      
     }
 
     //phase one Rotate 45 degress x = 22.13 y = 3.68
     //phase two rotate 105 x = 19.54 y = -6.67
     //phase three rotate -105 x = 19.54 y = 6.67
     //phase four rotate -45 x = 22   y = -3.68
+
+
+    //send out event that if its the correct phase will take all the hidden objects on an arm out. when the generator is destroyed 
+    //incriment phase number on shared instance object which will auto call the next phase
 }
