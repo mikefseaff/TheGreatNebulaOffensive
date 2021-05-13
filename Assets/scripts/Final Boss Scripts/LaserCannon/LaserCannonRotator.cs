@@ -7,7 +7,7 @@ public class LaserCannonRotator : MonoBehaviour
     private Rigidbody2D rb;
     public GameObject rotatePoint;
     public int wayToRotate;
-    public bool readyToFire;
+    public bool readyToAttack;
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -66,7 +66,7 @@ public class LaserCannonRotator : MonoBehaviour
 
             if (this.transform.rotation.z >= .7 || this.transform.rotation.z <= -.7)
             {
-
+                transform.rotation = Quaternion.Euler(0, 0, -90f*wayToRotate);
                 break;
             }
 

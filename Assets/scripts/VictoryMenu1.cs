@@ -23,6 +23,9 @@ public class VictoryMenu1 : MonoBehaviour
             Time.timeScale = 0f;
             backgroundMusic.Pause();
             player.GetComponent<Collider2D>().enabled = false;
+            TrackStats.SharedInstance.NumLevelOneCompleted += 1;
+            TrackStats.SharedInstance.Save();
+            enabled = false;
         }
         else
         {

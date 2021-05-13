@@ -21,6 +21,11 @@ public class VictoryMenu2 : MonoBehaviour
             Time.timeScale = 0f;
             backgroundMusic.Pause();
             player.GetComponent<Collider2D>().enabled = false;
+            TrackStats.SharedInstance.NumLevelTwoCompleted += 1;
+            TrackStats.SharedInstance.EnemiesDestroyed += 1;
+            TrackStats.SharedInstance.Save();
+            Debug.Log("WON");
+            enabled = false;
         }
         else
         {
@@ -35,6 +40,7 @@ public class VictoryMenu2 : MonoBehaviour
 
     public void Quit()
     {
+        TrackStats.SharedInstance.Save();
         SceneManager.LoadScene("Main Menu");
     }
 }

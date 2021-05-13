@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class PauseMenu : MonoBehaviour
@@ -14,6 +15,13 @@ public class PauseMenu : MonoBehaviour
 
     public bool isPlaying;
 
+    public Slider volume;
+
+    private void Start()
+    {
+        AudioListener.volume = TrackStats.SharedInstance.AudioLevel;
+        volume.value = TrackStats.SharedInstance.AudioLevel;
+    }
     void Update()
     {
         if (isPaused)
@@ -45,5 +53,10 @@ public class PauseMenu : MonoBehaviour
     public void Quit()
     {
         SceneManager.LoadScene("Main Menu");
+    }
+
+    public void setVolume()
+    {
+        TrackStats.SharedInstance.AudioLevel = volume.value;
     }
 }

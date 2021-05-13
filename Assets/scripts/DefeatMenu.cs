@@ -34,12 +34,15 @@ public class DefeatMenu : MonoBehaviour
         }
         if (GameObject.FindWithTag("Player") == null)
         {
+            
             isDefeated = true;
         }
     }
 
     private void DefeatAnimation()
     {
+        TrackStats.SharedInstance.TotalDeaths += 1;
+        TrackStats.SharedInstance.Save();
         defeatMenuCanvas.SetActive(true);
         imageMiddle.SetActive(false);
         StartCoroutine(Fade(imageMiddle, imageBeginning));

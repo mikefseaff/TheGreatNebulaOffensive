@@ -40,7 +40,7 @@ public class bullet_controller : MonoBehaviour
         if (collision.gameObject.layer == 10)
         {
 
-
+            TrackStats.SharedInstance.EnemiesDestroyed += 1;
             collidedTag = collision.gameObject.tag;
             returnCount += 1;
             player.GetComponent<player_controller>().currentSpecialCharge += 1;

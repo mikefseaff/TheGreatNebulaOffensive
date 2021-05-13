@@ -18,6 +18,8 @@ public class player_controller : MonoBehaviour
 
     public Text abilityChargeDisplay;
 
+    public int deaths;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +54,7 @@ public class player_controller : MonoBehaviour
                 bullet.transform.rotation = this.transform.rotation;
                 bullet.SetActive(true);
                 bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(bullet.GetComponent<bullet_controller>().speedX, bullet.GetComponent<bullet_controller>().speedY);
+                TrackStats.SharedInstance.BulletsFired += 1;
 
             }
         }
@@ -61,6 +64,7 @@ public class player_controller : MonoBehaviour
     {
         if (((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) && currentSpecialCharge >= maxSpecialCharge))
         {
+            TrackStats.SharedInstance.TotalSpecialAbilitiesUsed += 1;
             GameObject.Instantiate(specialAbility, transform.position, transform.rotation);
             currentSpecialCharge = 0;
         }
@@ -120,8 +124,6 @@ public class player_controller : MonoBehaviour
             boom.transform.localScale = new Vector3(collision.transform.localScale.x, this.transform.localScale.y);
             float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
             Destroy(boom.gameObject, animationTime);
-            //scoreText.GetComponent<score_controller>().score += 10;
-            //scoreText.GetComponent<score_controller>().UpdateScore();
         }
         if (collision.gameObject.layer == 12)
         {
@@ -133,6 +135,7 @@ public class player_controller : MonoBehaviour
     }
     IEnumerator Die(GameObject player)
     {
+        
         while (true)
         {
 
