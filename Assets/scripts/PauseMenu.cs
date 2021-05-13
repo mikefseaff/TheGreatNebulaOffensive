@@ -53,10 +53,12 @@ public class PauseMenu : MonoBehaviour
     public void Quit()
     {
         SceneManager.LoadScene("Main Menu");
+        TrackStats.SharedInstance.Save();
     }
 
     public void setVolume()
     {
         TrackStats.SharedInstance.AudioLevel = volume.value;
+        
     }
 }

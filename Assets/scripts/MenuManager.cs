@@ -48,6 +48,7 @@ public class MenuManager : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("game quit");
+        TrackStats.SharedInstance.Save();
         Application.Quit();
     }
 
@@ -131,6 +132,8 @@ public class MenuManager : MonoBehaviour
 
                    "Times Level One Completed: " + TrackStats.SharedInstance.NumLevelOneCompleted + '\n' + '\n' +
 
-                   "Times Level Two Completed: " + TrackStats.SharedInstance.NumLevelTwoCompleted + '\n'+ '\n';
+                   "Times Level Two Completed: " + TrackStats.SharedInstance.NumLevelTwoCompleted + '\n'+ '\n' +
+
+                   "Times Level Three Completed: " + TrackStats.SharedInstance.NumLevelThreeCompleted + '\n' + '\n';
     }
 }
