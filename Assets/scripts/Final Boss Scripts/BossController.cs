@@ -6,6 +6,9 @@ public class BossController : MonoBehaviour
 {
     public int phaseNumber;
     private Vector2 startingPos;
+
+    public delegate void StartShooting();
+    public static event StartShooting Shoot;
     //need to subcribe to generator event that will be called when the generator is destroyed which will call the move out coroutine which will then call the next phase
     void Start()
     {
@@ -16,11 +19,20 @@ public class BossController : MonoBehaviour
     private void OnEnable()
     {
         PhaseController.Phase += determineRotation;
+        SheildGeneratorController.Destroyed += EndPhaseMovement;
     }
 
     private void OnDisable()
     {
         PhaseController.Phase -= determineRotation;
+        SheildGeneratorController.Destroyed -= EndPhaseMovement;
+    }
+
+    public void ShootingEvent()
+    {
+
+        if (Shoot != null)
+            Shoot();
     }
 
     // Update is called once per frame
@@ -53,6 +65,28 @@ public class BossController : MonoBehaviour
         }
     }
 
+    private void EndPhaseMovement()
+    {
+        switch (PhaseController.SharedInstance.UniversalPhaseNumber)
+        {
+            case 1:
+                StartCoroutine(MoveOut(45));
+                break;
+            case 2:
+                StartCoroutine(MoveOut(105));
+                break;
+            case 3:
+                StartCoroutine(MoveOut(-105));
+                break;
+            case 4:
+                StartCoroutine(MoveOut(-45));
+                break;
+            default:
+                rotateShip(0, startingPos.x, startingPos.y);
+                break;
+        }
+    }
+
     IEnumerator MoveIn(int degrees,float xPos)
     {
         
@@ -69,7 +103,8 @@ public class BossController : MonoBehaviour
 
             yield return new WaitForSeconds(0.01f);
         }
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(.5f);
+        ShootingEvent();
         
     }
 
@@ -92,6 +127,7 @@ public class BossController : MonoBehaviour
         }
         yield return new WaitForSeconds(1f);
         PhaseController.SharedInstance.UniversalPhaseNumber++;
+        PhaseController.SharedInstance.PhaseEvent();
       
     }
 

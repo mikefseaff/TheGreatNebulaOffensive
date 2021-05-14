@@ -22,7 +22,7 @@ public class PhaseController : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void PhaseEvent()
+    public void PhaseEvent()
     {
 
         if (Phase != null)

@@ -148,6 +148,7 @@ public class enemy_controller3 : MonoBehaviour
             Destroy(boom.gameObject, animationTime);
             StopCoroutine("FireBullet2");
         }
+       
 
     }
 

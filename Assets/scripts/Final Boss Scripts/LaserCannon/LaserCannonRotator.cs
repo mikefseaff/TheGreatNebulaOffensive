@@ -8,27 +8,27 @@ public class LaserCannonRotator : MonoBehaviour
     public GameObject rotatePoint;
     public int wayToRotate;
     public bool readyToAttack;
+    public int phase;
+    public int health;
+    private float timer;
+    public GameObject explosion;
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        if (this.transform.position.y < 0)
-        {
-            wayToRotate = -1;
-        }
-        else
-        {
-            wayToRotate = 1;
-        }
+        StartCoroutine(Die(this.gameObject));
+
     }
 
     private void OnEnable()
     {
         LaserGunManager.Attack += BeginAttack;
+        BossController.Shoot += IsPhase;
     }
 
     private void OnDisable()
     {
         LaserGunManager.Attack -= BeginAttack;
+        BossController.Shoot -= IsPhase;
     }
 
     public void AttackOne()
@@ -41,16 +41,36 @@ public class LaserCannonRotator : MonoBehaviour
         StartCoroutine("AttackTwoSetUp");
     }
 
+    public void IsPhase()
+    {
+        if(phase == PhaseController.SharedInstance.UniversalPhaseNumber)
+        {
+            if (this.transform.position.y < 0)
+            {
+                wayToRotate = -1;
+            }
+            else
+            {
+                wayToRotate = 1;
+            }
+            readyToAttack = true;
+        }
+    }
+
     public void BeginAttack()
     {
-        if(LaserGunManager.SharedInstance.AttackNum == 1)
+        if (readyToAttack)
         {
-            AttackOne();
+            if (LaserGunManager.SharedInstance.AttackNum == 1)
+            {
+                AttackOne();
+            }
+            if (LaserGunManager.SharedInstance.AttackNum == 2)
+            {
+                AttackTwo();
+            }
         }
-        if(LaserGunManager.SharedInstance.AttackNum == 2)
-        {
-            AttackTwo();
-        }
+        
     }
 
     IEnumerator AttackSetUp(GameObject point)
@@ -195,5 +215,57 @@ public class LaserCannonRotator : MonoBehaviour
 
             yield return new WaitForSeconds(0.01f);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.tag == "bullet_player")
+        {
+            health -= 1;
+            this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = new Color(.7f, .7f, .7f, 1);
+            StartCoroutine("HitDelay");
+
+        }
+        if (health == 0)
+        {
+            this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
+            boom.transform.localScale = new Vector3(this.transform.localScale.x * 4.5f, this.transform.localScale.y * 4.5f);
+            float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+            Destroy(boom.gameObject, animationTime);
+
+        }
+
+    }
+
+    IEnumerator Die(GameObject Enemy)
+    {
+        while (true)
+        {
+
+            if (Enemy.gameObject.GetComponent<SpriteRenderer>().enabled == false)
+            {
+                Debug.Log("hi");
+                if (timer >= .8f)
+                {
+                    Debug.Log("bye");
+                    GameObject.Destroy(Enemy);
+                }
+                timer += .8f;
+                yield return new WaitForSeconds(.8f);
+            }
+            yield return null;
+
+        }
+
+
+
+    }
+    IEnumerator HitDelay()
+    {
+        yield return new WaitForSeconds(.2f);
+        this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+
     }
 }

@@ -60,6 +60,7 @@ public class bullet_controller : MonoBehaviour
         }
         if (collision.gameObject.layer == 12)
         {
+            Debug.Log("yo");
 
             gameObject.SetActive(false);
         }
