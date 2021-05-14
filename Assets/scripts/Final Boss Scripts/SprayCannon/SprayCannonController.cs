@@ -72,7 +72,7 @@ public class SprayCannonController : MonoBehaviour
         {
             this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
             GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
-            boom.transform.localScale = new Vector3(this.transform.localScale.x * 4.5f, this.transform.localScale.y * 4.5f);
+            boom.transform.localScale = new Vector3(this.transform.localScale.x * 7f, this.transform.localScale.y * 7f);
             float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
             Destroy(boom.gameObject, animationTime);
 

@@ -244,7 +244,7 @@ public class LaserCannonRotator : MonoBehaviour
         while (true)
         {
 
-            if (Enemy.gameObject.GetComponent<SpriteRenderer>().enabled == false)
+            if (Enemy.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled == false)
             {
                 Debug.Log("hi");
                 if (timer >= .8f)

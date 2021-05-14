@@ -59,6 +59,9 @@ public class BossController : MonoBehaviour
             case 4:
                 rotateShip(-45, 22f, -3.68f);
                 break;
+            case 5:
+                rotateShip(0, 12.52f, 0f);
+                break;
             default:
                 rotateShip(0, startingPos.x, startingPos.y);
                 break;
@@ -81,6 +84,7 @@ public class BossController : MonoBehaviour
             case 4:
                 StartCoroutine(MoveOut(-45));
                 break;
+
             default:
                 rotateShip(0, startingPos.x, startingPos.y);
                 break;

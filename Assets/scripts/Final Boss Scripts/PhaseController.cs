@@ -17,7 +17,7 @@ public class PhaseController : MonoBehaviour
 
     void Start()
     {
-        UniversalPhaseNumber = 1;
+        UniversalPhaseNumber += 1;
         Invoke("PhaseEvent", 2);
     }
 
