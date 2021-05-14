@@ -11,6 +11,7 @@ public class BossController : MonoBehaviour
     public static event StartShooting Shoot;
     public delegate void DestroyLeftOver();
     public static event StartShooting LeftOver;
+    public float ShrinkRate;
     //need to subcribe to generator event that will be called when the generator is destroyed which will call the move out coroutine which will then call the next phase
     void Start()
     {
@@ -22,12 +23,14 @@ public class BossController : MonoBehaviour
     {
         PhaseController.Phase += determineRotation;
         SheildGeneratorController.Destroyed += EndPhaseMovement;
+        BridgeController.BridgeDestroyed += GameWon;
     }
 
     private void OnDisable()
     {
         PhaseController.Phase -= determineRotation;
         SheildGeneratorController.Destroyed -= EndPhaseMovement;
+        BridgeController.BridgeDestroyed -= GameWon;
     }
 
     public void ShootingEvent()
@@ -43,7 +46,10 @@ public class BossController : MonoBehaviour
             LeftOver();
     }
 
-
+    private void GameWon()
+    {
+        StartCoroutine(BossDefeated(ShrinkRate));
+    }
 
     // Update is called once per frame
     private void rotateShip(int degrees,float x, float y)
@@ -85,6 +91,7 @@ public class BossController : MonoBehaviour
 
     private void EndPhaseMovement()
     {
+        Debug.Log("Case");
         switch (PhaseController.SharedInstance.UniversalPhaseNumber)
         {
             case 1:
@@ -100,7 +107,13 @@ public class BossController : MonoBehaviour
                 StartCoroutine(MoveOut(-45));
                 break;
             case 6:
+                LeftOverEvent();
                 rotateShip(0, 3.09f, 0f);
+                break;
+            case 7:
+                
+                LeftOverEvent();
+                rotateShip(0, -20.52f, 0f);
                 break;
 
             default:
@@ -151,6 +164,21 @@ public class BossController : MonoBehaviour
         PhaseController.SharedInstance.UniversalPhaseNumber++;
         PhaseController.SharedInstance.PhaseEvent();
       
+    }
+
+    IEnumerator BossDefeated(float ShrinkRate)
+    {
+        while(this.transform.localScale.x >= 0)
+        {
+            transform.localScale += new Vector3(.15f, .15f, .15f) * ShrinkRate * Time.deltaTime;
+            if(transform.position.x <= 0)
+            transform.position += new Vector3(-.75f, 0, 0) * ShrinkRate * Time.deltaTime;
+           
+            
+            yield return new WaitForSeconds(0.01f);
+
+        }
+
     }
 
     //phase one Rotate 45 degress x = 22.13 y = 3.68

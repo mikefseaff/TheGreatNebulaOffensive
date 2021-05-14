@@ -31,6 +31,7 @@ public class SheildGeneratorController : MonoBehaviour
     private void OnDisable()
     {
         DestroyedEvent();
+        Debug.Log("disabled");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -46,8 +47,9 @@ public class SheildGeneratorController : MonoBehaviour
         if (health == 0)
         {
             this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            this.transform.gameObject.GetComponent<Collider2D>().enabled = false;
             GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
-            boom.transform.localScale = new Vector3(this.transform.localScale.x * 4.5f, this.transform.localScale.y * 4.5f);
+            boom.transform.localScale = new Vector3(this.transform.root.transform.localScale.x, this.transform.root.transform.localScale.y);
             float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
             Destroy(boom.gameObject, animationTime);
 
@@ -62,10 +64,10 @@ public class SheildGeneratorController : MonoBehaviour
 
             if (Enemy.gameObject.GetComponent<SpriteRenderer>().enabled == false)
             {
-                Debug.Log("hi");
+                
                 if (timer >= .8f)
                 {
-                    Debug.Log("bye");
+                    
                     GameObject.Destroy(Enemy);
                 }
                 timer += .8f;

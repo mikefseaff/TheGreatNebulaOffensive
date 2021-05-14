@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8214458339860827043}
   - component: {fileID: 8214458339860827041}
   - component: {fileID: 8214458339860827040}
-  - component: {fileID: 6845939720847328547}
+  - component: {fileID: 1727148062917599143}
   m_Layer: 12
   m_Name: sniper cannon0000
   m_TagString: Untagged
@@ -122,8 +122,8 @@ MonoBehaviour:
   health: 10
   explosion: {fileID: 8800585099716028810, guid: 991157e4dfd58904dbf971360e90c556,
     type: 3}
---- !u!61 &6845939720847328547
-BoxCollider2D:
+--- !u!68 &1727148062917599143
+EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -135,19 +135,17 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08077744, y: -0.0009075552}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 0.64}
-    newSize: {x: 1.28, y: 0.64}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.88609666, y: 0.47844526}
+  m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
+  m_Points:
+  - {x: 0.3474816, y: 0.25050074}
+  - {x: 0.5213944, y: 0.07479274}
+  - {x: 0.525069, y: -0.065660186}
+  - {x: 0.34255025, y: -0.25303057}
+  - {x: 0.19587685, y: -0.20263062}
+  - {x: -0.40408838, y: -0.00046646685}
+  - {x: -0.30492783, y: 0.034518547}
+  - {x: 0.34230322, y: 0.24868548}
 --- !u!1 &8214458340925373896
 GameObject:
   m_ObjectHideFlags: 0

@@ -169,6 +169,10 @@ MonoBehaviour:
   magnitude: 0.5
   facingRight: 1
   isLevel1: 0
+  explosion: {fileID: 8800585099716028810, guid: 991157e4dfd58904dbf971360e90c556,
+    type: 3}
+  pos: {x: 0, y: 0, z: 0}
+  localScale: {x: 0, y: 0, z: 0}
   timerMin: 1
   timerMax: 2
   canfireBullets: 1

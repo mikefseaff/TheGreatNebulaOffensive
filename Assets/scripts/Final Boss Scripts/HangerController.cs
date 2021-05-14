@@ -2,24 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HangerController : MonoBehaviour
+public class HangerController : SheildGeneratorController
 {
     public GameObject spawnPoint;
+    private float timer;
+  
     void Start()
     {
         gameObject.GetComponent<Animator>().enabled = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        StartCoroutine(Die(this.gameObject));
     }
 
     private void OnEnable()
     {
 
         BossController.Shoot += IsPhase;
+        BossController.LeftOver += StopInvoke;
         
     }
 
@@ -27,7 +31,8 @@ public class HangerController : MonoBehaviour
     {
 
         BossController.Shoot -= IsPhase;
-        
+        BossController.LeftOver -= StopInvoke;
+
     }
 
 
@@ -39,12 +44,17 @@ public class HangerController : MonoBehaviour
         }
         else if(PhaseController.SharedInstance.UniversalPhaseNumber == 6)
         {
-            CancelInvoke();
+            
             gameObject.GetComponent<Animator>().enabled = true;
-            InvokeRepeating("SpawnEnemy", 1, .7f);
+            InvokeRepeating("SpawnEnemy", 1.75f, .2f);
         }
       
 
+    }
+
+    private void StopInvoke()
+    {
+        CancelInvoke();
     }
 
     private void SpawnEnemy()
@@ -57,8 +67,68 @@ public class HangerController : MonoBehaviour
             enemy.SetActive(true);
             enemy.GetComponent<Rigidbody2D>().velocity = new Vector2(enemy.GetComponent<enemy_controller2>().moveSpeed*-1,0);
             enemy.GetComponent<enemy_controller2>().pos = spawnPointTmp;
+            enemy.GetComponent<enemy_controller2>().timerMin = .75f;
+            enemy.GetComponent<enemy_controller2>().timerMax = 1.5f;
 
 
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.tag == "bullet_player")
+        {
+            health -= 1;
+            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(.7f, .7f, .7f, 1);
+            StartCoroutine("HitDelay");
+
+        }
+        if (health == 0)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
+            boom.transform.localScale = new Vector3(this.transform.root.transform.localScale.x, this.transform.root.transform.localScale.y);
+            float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+            Destroy(boom.gameObject, animationTime);
+            PhaseController.SharedInstance.UniversalPhaseNumber += 1;
+            Debug.Log(PhaseController.SharedInstance.UniversalPhaseNumber);
+            DestroyedEvent();
+            Destroy(this.gameObject);
+
+        }
+
+    }
+
+    IEnumerator Die(GameObject Enemy)
+    {
+        while (true)
+        {
+
+            if (Enemy.gameObject.GetComponent<SpriteRenderer>().enabled == false)
+            {
+                
+                if (timer >= .8f)
+                {
+                    
+                    GameObject.Destroy(Enemy);
+                }
+                timer += .8f;
+                yield return new WaitForSeconds(.8f);
+            }
+            yield return null;
+
+        }
+
+
+
+    }
+    IEnumerator HitDelay()
+    {
+        yield return new WaitForSeconds(.2f);
+        this.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+
+    }
+
+
 }

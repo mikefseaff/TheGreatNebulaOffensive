@@ -31,7 +31,7 @@ public class SniperCannonRotator : MonoBehaviour
 
     public void IsPhase()
     {
-        Debug.Log("work please");
+        
 
         if(phase == PhaseController.SharedInstance.UniversalPhaseNumber)
         {

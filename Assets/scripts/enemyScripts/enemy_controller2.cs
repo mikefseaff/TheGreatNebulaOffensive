@@ -23,7 +23,7 @@ public class enemy_controller2 : MonoBehaviour
     public bool isLevel1 = false;
 
 
-
+    public GameObject explosion;
 
 
     public Vector3 pos, localScale;
@@ -63,7 +63,7 @@ public class enemy_controller2 : MonoBehaviour
         if(SceneManager.GetActiveScene().buildIndex == 3)
         {
             isLevel1 = true;
-            magnitude = 0;
+            magnitude = .35f;
             canMove = true;
             canfireBullets = true;
             moveSpeed = 5f;
@@ -75,6 +75,20 @@ public class enemy_controller2 : MonoBehaviour
             StartCoroutine("FireBullet");
         }
         player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    private void OnEnable()
+    {
+        if (canfireBullets)
+        {
+            StartCoroutine("FireBullet");
+        }
+        BossController.LeftOver += IsLeftOver;
+    }
+
+    private void OnDisable()
+    {
+        BossController.LeftOver -= IsLeftOver;
     }
 
     // Update is called once per frame
@@ -153,7 +167,7 @@ public class enemy_controller2 : MonoBehaviour
     void SpawnBullet()
     {
         GameObject bullet = Enemy2BulletPool.SharedInstance.GetPooledBullet();
-        Debug.Log("fire2");
+        
         if (bullet != null)
         {
             Vector3 spawnPoint = transform.position;
@@ -195,5 +209,20 @@ public class enemy_controller2 : MonoBehaviour
             yield return new WaitForSeconds(.01f);
         }
 
+    }
+
+    private void IsLeftOver()
+    {
+        TrackStats.SharedInstance.EnemiesDestroyed += 1;
+        player.GetComponent<player_controller>().currentSpecialCharge += 1;
+
+
+
+        gameObject.SetActive(false);
+        
+        GameObject boom = GameObject.Instantiate(explosion, transform.position, new Quaternion(0, 0, 0, 0));
+        boom.transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y);
+        float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+        Destroy(boom.gameObject, animationTime);
     }
 }

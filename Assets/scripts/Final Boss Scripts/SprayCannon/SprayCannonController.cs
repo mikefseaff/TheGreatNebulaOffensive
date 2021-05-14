@@ -48,8 +48,12 @@ public class SprayCannonController : MonoBehaviour
             canShoot = false;  
             health = 0;
             this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            foreach (Collider2D c in this.gameObject.GetComponents<Collider2D>())
+            {
+                c.enabled = false;
+            }
             GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
-            boom.transform.localScale = new Vector3(this.transform.localScale.x * 7f, this.transform.localScale.y * 7f);
+            boom.transform.localScale = new Vector3(this.transform.root.transform.localScale.x, this.transform.root.transform.localScale.y);
             float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
             Destroy(boom.gameObject, animationTime);
         }
@@ -89,8 +93,12 @@ public class SprayCannonController : MonoBehaviour
         {
             canShoot = false;
             this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            foreach (Collider2D c in this.gameObject.GetComponents<Collider2D>())
+            {
+                c.enabled = false;
+            }
             GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
-            boom.transform.localScale = new Vector3(this.transform.localScale.x * 7f, this.transform.localScale.y * 7f);
+            boom.transform.localScale = new Vector3(this.transform.root.transform.localScale.x, this.transform.root.transform.localScale.y);
             float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
             Destroy(boom.gameObject, animationTime);
             Destroy(this.transform.parent.gameObject, animationTime);

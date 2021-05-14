@@ -75,18 +75,7 @@ public class LaserCannonRotator : MonoBehaviour
         
     }
 
-    public void IsLeftOver()
-    {
-        if (phase == PhaseController.SharedInstance.UniversalPhaseNumber)
-        {
-            health = 0;
-            this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
-            boom.transform.localScale = new Vector3(this.transform.localScale.x * 16f, this.transform.localScale.y * 16f);
-            float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
-            Destroy(boom.gameObject, animationTime);
-        }
-    }
+   
 
     IEnumerator AttackSetUp(GameObject point)
     {
@@ -232,6 +221,22 @@ public class LaserCannonRotator : MonoBehaviour
         }
     }
 
+
+    public void IsLeftOver()
+    {
+        if (phase == PhaseController.SharedInstance.UniversalPhaseNumber)
+        {
+            health = 0;
+            this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            this.transform.gameObject.GetComponent<Collider2D>().enabled = false;
+            GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
+            boom.transform.localScale = new Vector3(this.transform.root.transform.localScale.x, this.transform.root.transform.localScale.y);
+            float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+            Destroy(boom.gameObject, animationTime);
+        }
+    }
+
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
@@ -245,8 +250,9 @@ public class LaserCannonRotator : MonoBehaviour
         if (health == 0)
         {
             this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            this.transform.gameObject.GetComponent<Collider2D>().enabled = false;
             GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
-            boom.transform.localScale = new Vector3(this.transform.localScale.x * 4.5f, this.transform.localScale.y * 4.5f);
+            boom.transform.localScale = new Vector3(this.transform.root.transform.localScale.x, this.transform.root.transform.localScale.y);
             float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
             Destroy(boom.gameObject, animationTime);
 
