@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phaseNumber: 1
-  health: 3
+  health: 30
   explosion: {fileID: 8800585099716028810, guid: 991157e4dfd58904dbf971360e90c556,
     type: 3}
 --- !u!61 &8116960396223232554

@@ -43,7 +43,7 @@ public class LaserGunManager : MonoBehaviour
 
     private void StopInvoke()
     {
-        StopInvoke();
+        CancelInvoke();
     }
 
     private void StartInvoke()

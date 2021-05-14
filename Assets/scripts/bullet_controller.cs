@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class bullet_controller : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class bullet_controller : MonoBehaviour
     {
         int returnCount = 0;
         
-        if (collision.gameObject.layer == 10)
+        if (collision.gameObject.layer == 10 && SceneManager.GetActiveScene().buildIndex != 3)
         {
 
             TrackStats.SharedInstance.EnemiesDestroyed += 1;
@@ -46,7 +47,7 @@ public class bullet_controller : MonoBehaviour
             player.GetComponent<player_controller>().currentSpecialCharge += 1;
 
             
-            Debug.Log(collidedTag);
+           
             gameObject.SetActive(false);
             GameObject.Destroy(collision.gameObject);
             GameObject boom = GameObject.Instantiate(explosion, collision.transform.position, new Quaternion(0, 0, 0, 0));
@@ -58,9 +59,25 @@ public class bullet_controller : MonoBehaviour
 ;            //scoreText.GetComponent<score_controller>().score += 10;
             //scoreText.GetComponent<score_controller>().UpdateScore();
         }
+        else if (collision.gameObject.layer == 10 && SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            TrackStats.SharedInstance.EnemiesDestroyed += 1;
+            collidedTag = collision.gameObject.tag;
+            returnCount += 1;
+            player.GetComponent<player_controller>().currentSpecialCharge += 1;
+
+
+           
+            gameObject.SetActive(false);
+            collision.gameObject.SetActive(false);
+            GameObject boom = GameObject.Instantiate(explosion, collision.transform.position, new Quaternion(0, 0, 0, 0));
+            boom.transform.localScale = new Vector3(collision.transform.localScale.x, collision.transform.localScale.y);
+            float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+            Destroy(boom.gameObject, animationTime);
+        }
         if (collision.gameObject.layer == 12)
         {
-            Debug.Log("yo");
+
 
             gameObject.SetActive(false);
         }

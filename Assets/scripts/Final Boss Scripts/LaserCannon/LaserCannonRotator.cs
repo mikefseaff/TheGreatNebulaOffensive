@@ -23,12 +23,14 @@ public class LaserCannonRotator : MonoBehaviour
     {
         LaserGunManager.Attack += BeginAttack;
         BossController.Shoot += IsPhase;
+        BossController.LeftOver += IsLeftOver;
     }
 
     private void OnDisable()
     {
         LaserGunManager.Attack -= BeginAttack;
         BossController.Shoot -= IsPhase;
+        BossController.LeftOver -= IsLeftOver;
     }
 
     public void AttackOne()
@@ -71,6 +73,19 @@ public class LaserCannonRotator : MonoBehaviour
             }
         }
         
+    }
+
+    public void IsLeftOver()
+    {
+        if (phase == PhaseController.SharedInstance.UniversalPhaseNumber)
+        {
+            health = 0;
+            this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
+            boom.transform.localScale = new Vector3(this.transform.localScale.x * 16f, this.transform.localScale.y * 16f);
+            float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+            Destroy(boom.gameObject, animationTime);
+        }
     }
 
     IEnumerator AttackSetUp(GameObject point)
@@ -246,10 +261,10 @@ public class LaserCannonRotator : MonoBehaviour
 
             if (Enemy.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled == false)
             {
-                Debug.Log("hi");
+                
                 if (timer >= .8f)
                 {
-                    Debug.Log("bye");
+                    
                     GameObject.Destroy(Enemy);
                 }
                 timer += .8f;

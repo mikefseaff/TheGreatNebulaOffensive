@@ -11,11 +11,13 @@ public class SprayCannonController : MonoBehaviour
     public int health;
     private float timer;
     public GameObject explosion;
+    private bool canShoot = true;
 
     private void OnEnable()
     {
         
         BossController.Shoot += IsPhase;
+        BossController.LeftOver += IsLeftOver;
         StartCoroutine(Die(this.gameObject));
     }
 
@@ -23,6 +25,7 @@ public class SprayCannonController : MonoBehaviour
     {
         
         BossController.Shoot -= IsPhase;
+        BossController.LeftOver -= IsLeftOver;
     }
 
     public void IsPhase()
@@ -38,9 +41,23 @@ public class SprayCannonController : MonoBehaviour
        
     }
 
+    public void IsLeftOver()
+    {
+        if(phase == PhaseController.SharedInstance.UniversalPhaseNumber)
+        {
+            canShoot = false;  
+            health = 0;
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
+            boom.transform.localScale = new Vector3(this.transform.localScale.x * 7f, this.transform.localScale.y * 7f);
+            float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+            Destroy(boom.gameObject, animationTime);
+        }
+    }
+
     void SpawnBullet()
     {
-        if (transform.parent.gameObject.activeInHierarchy)
+        if (transform.parent.gameObject.activeInHierarchy && canShoot)
         {
             GameObject bullet = SprayCannonBulletPool.SharedInstance.GetPooledBullet();
             if (bullet != null)
@@ -70,11 +87,13 @@ public class SprayCannonController : MonoBehaviour
         }
         if (health == 0)
         {
+            canShoot = false;
             this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
             GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
             boom.transform.localScale = new Vector3(this.transform.localScale.x * 7f, this.transform.localScale.y * 7f);
             float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
             Destroy(boom.gameObject, animationTime);
+            Destroy(this.transform.parent.gameObject, animationTime);
 
         }
 
@@ -87,10 +106,10 @@ public class SprayCannonController : MonoBehaviour
 
             if (Enemy.gameObject.GetComponent<SpriteRenderer>().enabled == false)
             {
-                Debug.Log("hi");
+                
                 if (timer >= .8f)
                 {
-                    Debug.Log("bye");
+                    
                     GameObject.Destroy(Enemy);
                 }
                 timer += .8f;

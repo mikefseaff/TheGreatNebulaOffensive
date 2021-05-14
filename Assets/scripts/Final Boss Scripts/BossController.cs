@@ -9,6 +9,8 @@ public class BossController : MonoBehaviour
 
     public delegate void StartShooting();
     public static event StartShooting Shoot;
+    public delegate void DestroyLeftOver();
+    public static event StartShooting LeftOver;
     //need to subcribe to generator event that will be called when the generator is destroyed which will call the move out coroutine which will then call the next phase
     void Start()
     {
@@ -35,11 +37,23 @@ public class BossController : MonoBehaviour
             Shoot();
     }
 
+    public void LeftOverEvent()
+    {
+        if (LeftOver != null)
+            LeftOver();
+    }
+
+
+
     // Update is called once per frame
     private void rotateShip(int degrees,float x, float y)
     {
         transform.Rotate(new Vector3(0, 0, degrees));
-        transform.position = new Vector2(startingPos.x, y);
+        if(PhaseController.SharedInstance.UniversalPhaseNumber < 6)
+        {
+            transform.position = new Vector2(startingPos.x, y);
+        }
+        
         StartCoroutine(MoveIn(degrees,x));
     }
 
@@ -62,6 +76,7 @@ public class BossController : MonoBehaviour
             case 5:
                 rotateShip(0, 12.52f, 0f);
                 break;
+            
             default:
                 rotateShip(0, startingPos.x, startingPos.y);
                 break;
@@ -83,6 +98,9 @@ public class BossController : MonoBehaviour
                 break;
             case 4:
                 StartCoroutine(MoveOut(-45));
+                break;
+            case 6:
+                rotateShip(0, 3.09f, 0f);
                 break;
 
             default:
@@ -114,7 +132,7 @@ public class BossController : MonoBehaviour
 
     IEnumerator MoveOut(int degrees)
     {
-
+        LeftOverEvent();
         while (true)
         {
             this.GetComponent<Rigidbody2D>().velocity = new Vector2(3, 0);

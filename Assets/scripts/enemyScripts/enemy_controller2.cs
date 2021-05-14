@@ -26,7 +26,7 @@ public class enemy_controller2 : MonoBehaviour
 
 
 
-    Vector3 pos, localScale;
+    public Vector3 pos, localScale;
 
     private float timerBullet;
     private float maxTimerBullet;
@@ -59,6 +59,15 @@ public class enemy_controller2 : MonoBehaviour
             moveSpeed = 5f;
 
             
+        }
+        if(SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            isLevel1 = true;
+            magnitude = 0;
+            canMove = true;
+            canfireBullets = true;
+            moveSpeed = 5f;
+            this.GetComponent<Rigidbody2D>().freezeRotation = true;
         }
 
         if (canfireBullets)
@@ -122,7 +131,6 @@ public class enemy_controller2 : MonoBehaviour
             localScale.x *= -1;
 
         }
-
 
         transform.localScale = localScale;
 

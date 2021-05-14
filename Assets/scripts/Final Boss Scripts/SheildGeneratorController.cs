@@ -22,7 +22,7 @@ public class SheildGeneratorController : MonoBehaviour
         
     }
 
-    private void DestroyedEvent()
+    public void DestroyedEvent()
     {
         if (Destroyed != null)
             Destroyed();

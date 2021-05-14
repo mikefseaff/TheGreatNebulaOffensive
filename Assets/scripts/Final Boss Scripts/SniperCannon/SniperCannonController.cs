@@ -37,12 +37,14 @@ public class SniperCannonController : MonoBehaviour
     {
 
         BossController.Shoot += IsPhase;
+        BossController.LeftOver += IsLeftOver;
     }
 
     private void OnDisable()
     {
 
         BossController.Shoot -= IsPhase;
+        BossController.LeftOver -= IsLeftOver;
     }
 
     private void IsPhase()
@@ -56,6 +58,20 @@ public class SniperCannonController : MonoBehaviour
         else
         {
             gameObject.GetComponent<Animator>().enabled = false;
+        }
+    }
+
+    public void IsLeftOver()
+    {
+        if (phase == PhaseController.SharedInstance.UniversalPhaseNumber)
+        {
+            
+            health = 0;
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
+            boom.transform.localScale = new Vector3(this.transform.localScale.x * 7f, this.transform.localScale.y * 7f);
+            float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+            Destroy(boom.gameObject, animationTime);
         }
     }
 
@@ -102,7 +118,8 @@ public class SniperCannonController : MonoBehaviour
             boom.transform.localScale = new Vector3(this.transform.localScale.x*4.5f, this.transform.localScale.y*4.5f);
             float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
             Destroy(boom.gameObject, animationTime);
-            
+            Destroy(this.transform.parent.gameObject, animationTime);
+
         }
 
     }
