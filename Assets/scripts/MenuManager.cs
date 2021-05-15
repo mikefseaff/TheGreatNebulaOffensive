@@ -28,6 +28,7 @@ public class MenuManager : MonoBehaviour
         {
             LevelSelect.SetActive(true);
         }
+        Time.timeScale = 1f;
     }
     public void StartGame()
     {

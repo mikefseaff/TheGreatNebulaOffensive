@@ -159,7 +159,7 @@ MonoBehaviour:
   speedX: -2
   speedY: 2
   bullet: {fileID: 6247267510164517976, guid: 1135905552f04804e88faa7c26d50b5a, type: 3}
-  maxTimerDelay: 2
+  maxTimerDelay: 56
   timerMin: 0.35
   timerMax: 0.35
   canfireBullets: 1
