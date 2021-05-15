@@ -10,7 +10,10 @@ public class BossController : MonoBehaviour
     public delegate void StartShooting();
     public static event StartShooting Shoot;
     public delegate void DestroyLeftOver();
-    public static event StartShooting LeftOver;
+    public static event DestroyLeftOver LeftOver;
+
+    public delegate void EndGame();
+    public static event EndGame End;
     public float ShrinkRate;
     //need to subcribe to generator event that will be called when the generator is destroyed which will call the move out coroutine which will then call the next phase
     void Start()
@@ -44,6 +47,12 @@ public class BossController : MonoBehaviour
     {
         if (LeftOver != null)
             LeftOver();
+    }
+
+    private void EndEvent()
+    {
+        if (End != null)
+            End();
     }
 
     private void GameWon()
@@ -178,6 +187,11 @@ public class BossController : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
 
         }
+        TrackStats.SharedInstance.NumLevelThreeCompleted += 1;
+        TrackStats.SharedInstance.Save();
+        this.gameObject.SetActive(false);
+        EndEvent();
+        
 
     }
 

@@ -32,6 +32,6 @@ public class VictoryMenu : MonoBehaviour
     }
     public void Quit()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene("Main Menu");
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class enemy_bullet_controller : MonoBehaviour
@@ -19,6 +20,7 @@ public class enemy_bullet_controller : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
+        if(SceneManager.GetActiveScene().buildIndex != 3)
         rb.velocity = new Vector2(speedX, speedY);
         StartCoroutine(Die(player.gameObject));
     }

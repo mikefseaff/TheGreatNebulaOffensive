@@ -128,7 +128,11 @@ public class player_controller : MonoBehaviour
         if (collision.gameObject.layer == 12)
         {
 
-            Destroy(this.gameObject);
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
+            boom.transform.localScale = new Vector3(collision.transform.localScale.x, this.transform.localScale.y);
+            float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+            Destroy(boom.gameObject, animationTime);
         }
 
 
