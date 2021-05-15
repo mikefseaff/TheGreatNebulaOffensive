@@ -12,6 +12,10 @@ public class LaserCannonRotator : MonoBehaviour
     public int health;
     private float timer;
     public GameObject explosion;
+
+    public GameObject Laser;
+    public GameObject Laser_FadeOut;
+    public GameObject Laser_ChargeUp;
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -99,7 +103,9 @@ public class LaserCannonRotator : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         //add invoke delay here for beam charge up
+        Laser_ChargeUp.SetActive(true);
         yield return new WaitForSeconds(2f);
+        Laser_ChargeUp.SetActive(false);
         StartCoroutine("AttackOneSweep");
 
     }
@@ -122,13 +128,15 @@ public class LaserCannonRotator : MonoBehaviour
 
             yield return new WaitForSeconds(0.01f);
         }
+        Laser_ChargeUp.SetActive(true);
         yield return new WaitForSeconds(2f);
+        Laser_ChargeUp.SetActive(false);
         StartCoroutine(AttackTwoSweep(rotatePoint));
     }
 
     IEnumerator AttackOneSweep()
     {
-        
+        Laser.SetActive(true);
         while (true)
         {
 
@@ -145,13 +153,17 @@ public class LaserCannonRotator : MonoBehaviour
 
             yield return new WaitForSeconds(0.01f);
         }
+        Laser.SetActive(false);
+        Laser_FadeOut.SetActive(true);
         yield return new WaitForSeconds(1f);
+        Laser_FadeOut.SetActive(false);
         StartCoroutine("ResetRotationOne");
     }
 
 
     IEnumerator AttackTwoSweep(GameObject point)
     {
+        Laser.SetActive(true);
         Vector3 tmpPoint = new Vector3(point.transform.position.x + 5.5f, point.transform.position.y, point.transform.position.z);
         Vector3 relativePos = tmpPoint - transform.position;
 
@@ -173,7 +185,10 @@ public class LaserCannonRotator : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         //add invoke delay here for beam charge up
+        Laser.SetActive(false);
+        Laser_FadeOut.SetActive(true);
         yield return new WaitForSeconds(2f);
+        Laser_FadeOut.SetActive(false);
         StartCoroutine("ResetRotationTwo");
     }
 

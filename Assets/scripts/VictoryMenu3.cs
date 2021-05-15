@@ -35,6 +35,8 @@ public class VictoryMenu3 : MonoBehaviour
 
     public void Quit()
     {
+
         SceneManager.LoadScene("Main Menu");
+        Time.timeScale = 1f;
     }
 }

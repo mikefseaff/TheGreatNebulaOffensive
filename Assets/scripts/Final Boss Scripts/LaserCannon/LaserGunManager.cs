@@ -10,6 +10,8 @@ public class LaserGunManager : MonoBehaviour
 
     public delegate void StartAttack();
     public static event StartAttack Attack;
+
+   
     private void Awake()
     {
         SharedInstance = this;
