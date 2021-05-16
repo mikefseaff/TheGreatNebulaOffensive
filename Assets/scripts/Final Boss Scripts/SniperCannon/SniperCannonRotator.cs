@@ -47,13 +47,17 @@ public class SniperCannonRotator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (canRotate)
         {
+
             Vector3 relativePos = player.transform.position - transform.position;
 
-            // the second argument, upwards, defaults to Vector3.up
+            
+
             Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
             transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+           
         }
        
     }

@@ -32,7 +32,8 @@ public class MenuManager : MonoBehaviour
     }
     public void StartGame()
     {
-        if(TrackStats.SharedInstance.NumLevelTwoCompleted > 0)
+        TrackStats.SharedInstance.Save();
+        if (TrackStats.SharedInstance.NumLevelTwoCompleted > 0)
         {
             SceneManager.LoadScene("level 3");
         }

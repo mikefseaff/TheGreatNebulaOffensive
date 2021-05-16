@@ -91,6 +91,8 @@ public class SprayCannonController : MonoBehaviour
         }
         if (health == 0)
         {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.GetComponent<player_controller>().currentSpecialCharge += 5;
             canShoot = false;
             this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
             foreach (Collider2D c in this.gameObject.GetComponents<Collider2D>())
@@ -101,7 +103,7 @@ public class SprayCannonController : MonoBehaviour
             boom.transform.localScale = new Vector3(this.transform.root.transform.localScale.x, this.transform.root.transform.localScale.y);
             float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
             Destroy(boom.gameObject, animationTime);
-            Destroy(this.transform.parent.gameObject, animationTime);
+            Destroy(this.transform.parent.gameObject);
 
         }
 

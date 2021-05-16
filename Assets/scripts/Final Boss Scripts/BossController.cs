@@ -181,7 +181,7 @@ public class BossController : MonoBehaviour
         {
             transform.localScale += new Vector3(.15f, .15f, .15f) * ShrinkRate * Time.deltaTime;
             if(transform.position.x <= 0)
-            transform.position += new Vector3(-.75f, 0, 0) * ShrinkRate * Time.deltaTime;
+            transform.position += new Vector3(-.6f, 0, 0) * ShrinkRate * Time.deltaTime;
            
             
             yield return new WaitForSeconds(0.01f);

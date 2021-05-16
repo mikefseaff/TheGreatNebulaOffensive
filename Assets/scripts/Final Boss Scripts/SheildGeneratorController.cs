@@ -46,6 +46,8 @@ public class SheildGeneratorController : MonoBehaviour
         }
         if (health == 0)
         {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.GetComponent<player_controller>().currentSpecialCharge += 5;
             this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
             this.transform.gameObject.GetComponent<Collider2D>().enabled = false;
             GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));

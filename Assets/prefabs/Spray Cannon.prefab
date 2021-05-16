@@ -268,7 +268,7 @@ MonoBehaviour:
   target: {fileID: 8532281310689729202}
   spawnPoint: {fileID: 8532281310242027655}
   phase: 0
-  health: 20
+  health: 30
   explosion: {fileID: 8800585099716028810, guid: 991157e4dfd58904dbf971360e90c556,
     type: 3}
 --- !u!1 &8532281310689729202

@@ -41,6 +41,6 @@ public class VictoryMenu2 : MonoBehaviour
     public void Quit()
     {
         TrackStats.SharedInstance.Save();
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("level 3");
     }
 }

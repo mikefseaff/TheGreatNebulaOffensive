@@ -45,10 +45,12 @@ public class DefeatMenu : MonoBehaviour
         TrackStats.SharedInstance.Save();
         defeatMenuCanvas.SetActive(true);
         imageMiddle.SetActive(false);
+        
         StartCoroutine(Fade(imageMiddle, imageBeginning));
     }
     public void Retry()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void Quit()
@@ -72,6 +74,7 @@ public class DefeatMenu : MonoBehaviour
             imageMiddle.SetActive(true);
             imageBeginning.SetActive(false);
             StopCoroutine(Fade(imageMiddle, imageBeginning));
+            Time.timeScale = 0f;
         }
 
     }
