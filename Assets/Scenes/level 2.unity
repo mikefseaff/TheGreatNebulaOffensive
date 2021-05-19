@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3709b2d0202589468143954b59e9440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: -0.75
+  ScrollSpeed: -1
 --- !u!1 &182902367
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,7 +418,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Distance to Mother Ship : '
+  m_Text: 'Distance to Nebula Exit  : '
 --- !u!222 &182902370
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2342,7 +2342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textbox: {fileID: 182902369}
-  time: 57
+  time: 56
 --- !u!1001 &560919115003312379
 PrefabInstance:
   m_ObjectHideFlags: 0

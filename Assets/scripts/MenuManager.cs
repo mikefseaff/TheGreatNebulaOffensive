@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/*
+*   Name: Michael Efseaff
+*   ID: 2343166
+*   Email: Efseaff@chapman.edu
+*   Class: CPSC245-01
+*   Final proj
+*   This is my own work. I did not cheat on this assignment
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,6 +14,7 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
+    //Canvas elements to be controlled by the manager
     public GameObject OptionsPanel;
     public GameObject StatsPanel;
     public Text statsText;
@@ -30,6 +39,8 @@ public class MenuManager : MonoBehaviour
         }
         Time.timeScale = 1f;
     }
+
+    //"play" button that loads the level based on completion of previous levels
     public void StartGame()
     {
         TrackStats.SharedInstance.Save();
@@ -47,6 +58,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    //exits and saves the game
     public void QuitGame()
     {
         Debug.Log("game quit");
@@ -54,11 +66,13 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
 
+    //opens the options menu
     public void Options()
     {
         OptionsPanel.SetActive(true);
     }
 
+    //shows the stats panel
     public void Stats()
     {
         if(StatsPanel.activeInHierarchy == true)
@@ -71,16 +85,19 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    //closes the options menu and returns to the main menu
     public void Menu()
     {
         OptionsPanel.SetActive(false);
     }
 
+    //gets slider value and sets volume
     public void setVolume()
     {
         TrackStats.SharedInstance.AudioLevel = volume.value;
     }
 
+    //openes the level select screen and shows launch buttons is player has beaten the level
     public void selectLevel()
     {
         if (LevelSelectMenu.activeInHierarchy == true)
@@ -107,6 +124,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    //level load buttons
     public void LoadLevel1()
     {
         SceneManager.LoadScene("level 1");
@@ -119,9 +137,10 @@ public class MenuManager : MonoBehaviour
 
     public void LoadLevel3()
     {
-        SceneManager.LoadScene("level 2");
+        SceneManager.LoadScene("level 3");
     }
 
+    //writes the stats to the stats page
     public void writeStats()
     {
         statsText.text = "Enemies Destroyed: " + TrackStats.SharedInstance.EnemiesDestroyed + '\n' + '\n' +

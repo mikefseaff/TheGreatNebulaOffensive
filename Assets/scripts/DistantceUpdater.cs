@@ -26,7 +26,7 @@ public class DistantceUpdater : MonoBehaviour
             if (time > 0)
             {
                 
-                textbox.text = "Distance to Mother Ship : " + time*100000 + " miles";
+                textbox.text = "Distance to Nebula Exit : " + time*100000 + " miles";
             }
             if (time <= 0)
             {
