@@ -5238,12 +5238,22 @@ PrefabInstance:
     - target: {fileID: 3696623932730378029, guid: 3bc9ee5f96525e14aacd9771be93ef99,
         type: 3}
       propertyPath: NumLevelOneCompleted
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3696623932730378029, guid: 3bc9ee5f96525e14aacd9771be93ef99,
         type: 3}
       propertyPath: AudioLevel
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3696623932730378029, guid: 3bc9ee5f96525e14aacd9771be93ef99,
+        type: 3}
+      propertyPath: NumLevelTwoCompleted
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3696623932730378029, guid: 3bc9ee5f96525e14aacd9771be93ef99,
+        type: 3}
+      propertyPath: NumLevelThreeCompleted
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bc9ee5f96525e14aacd9771be93ef99, type: 3}

@@ -1074,7 +1074,7 @@ Transform:
   m_LocalScale: {x: 7.3805733, y: 5.9641, z: 5.9641}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &280049384
 Animator:
@@ -1342,7 +1342,7 @@ PrefabInstance:
     - target: {fileID: 4885667381271977167, guid: 15efc2f86c21b5a4f8b9e52d3e23aac3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4885667381271977167, guid: 15efc2f86c21b5a4f8b9e52d3e23aac3,
         type: 3}
@@ -1988,7 +1988,7 @@ Transform:
   m_Children:
   - {fileID: 138975719}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &539883521 stripped
 Transform:
@@ -3878,7 +3878,7 @@ Transform:
   m_LocalScale: {x: 0.46135, y: 0.46135, z: 0.46135}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!95 &1034080786
 Animator:
@@ -3980,7 +3980,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1037037910
 Rigidbody2D:
@@ -4112,7 +4112,7 @@ Transform:
   - {fileID: 418396861}
   - {fileID: 691167813}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1051368261
 MonoBehaviour:
@@ -4433,7 +4433,12 @@ PrefabInstance:
     - target: {fileID: 8454087688214841234, guid: df5cb4039dc7b664e9ff3db962b86b37,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454087688214841237, guid: df5cb4039dc7b664e9ff3db962b86b37,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8454087688214841239, guid: df5cb4039dc7b664e9ff3db962b86b37,
         type: 3}
@@ -6872,7 +6877,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1697206652 stripped
 Transform:
@@ -6973,7 +6978,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1719269215
 MonoBehaviour:
@@ -7781,7 +7786,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1860222921
 Rigidbody2D:
@@ -8886,7 +8891,7 @@ Transform:
   m_LocalScale: {x: 0.46135, y: 0.46135, z: 0.46135}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!95 &2128136590
 Animator:
