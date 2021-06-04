@@ -120,6 +120,10 @@ public class enemy_controller2 : MonoBehaviour
             StopAllCoroutines();
             enabled = false;
         }
+        if (Camera.main.WorldToViewportPoint(transform.position).y >= 1)
+            this.gameObject.SetActive(false);
+        if (Camera.main.WorldToViewportPoint(transform.position).y <= 0)
+            this.gameObject.SetActive(false);
     }
 
     // checks x location to see when to switch directional movement 

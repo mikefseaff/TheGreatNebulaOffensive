@@ -13,7 +13,7 @@ public class PhaseController : MonoBehaviour
     private void Awake()
     {
         SharedInstance = this;
-        UniversalPhaseNumber = 0;
+        //UniversalPhaseNumber = 0;
     }
 
     void Start()

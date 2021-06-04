@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class enemy_controller3 : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class enemy_controller3 : MonoBehaviour
     public GameObject explosion;
     private float timer;
     public AudioSource enraged;
-    
+    public float moveLocation = .9f;
 
 
     // Start is called before the first frame update
@@ -48,6 +49,17 @@ public class enemy_controller3 : MonoBehaviour
 
     }
 
+    private void OnEnable()
+    {
+
+        BossController.LeftOver += IsLeftOver;
+    }
+
+    private void OnDisable()
+    {
+        BossController.LeftOver -= IsLeftOver;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -55,7 +67,7 @@ public class enemy_controller3 : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        if (Camera.main.WorldToViewportPoint(transform.position).x <= .9)
+        if (Camera.main.WorldToViewportPoint(transform.position).x <= moveLocation)
         {
 
 
@@ -82,11 +94,11 @@ public class enemy_controller3 : MonoBehaviour
 
     void IsGoingUp()
     {
-        if (Camera.main.WorldToViewportPoint(transform.position).y >= .7 || Camera.main.WorldToViewportPoint(transform.position).y == 0)
+        if (Camera.main.WorldToViewportPoint(transform.position).y >= .8 || Camera.main.WorldToViewportPoint(transform.position).y == 0)
         {
             goingUp = false;
         }
-        else if (Camera.main.WorldToViewportPoint(transform.position).y <= .3)
+        else if (Camera.main.WorldToViewportPoint(transform.position).y <= .2)
         {
             goingUp = true; 
         }
@@ -110,6 +122,11 @@ public class enemy_controller3 : MonoBehaviour
         //spawnPoint.y -= (bullet.GetComponent<Renderer>().bounds.size.y / 2);
         spawnPoint.x -= (2.2f);
         GameObject spawnedBullet = GameObject.Instantiate(bullet, spawnPoint, transform.rotation);
+        if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            spawnedBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(spawnedBullet.GetComponent<enemy_bullet_controller>().speedX, spawnedBullet.GetComponent<enemy_bullet_controller>().speedY);
+        }
+
 
     }
     void SpawnBullet2()
@@ -117,8 +134,12 @@ public class enemy_controller3 : MonoBehaviour
         Vector3 spawnPoint1 = transform.position;
         spawnPoint1.y -= (2.1f);
         spawnPoint1.x -= (2.2f);
-        GameObject.Instantiate(bullet, spawnPoint1, transform.rotation);
-       
+        GameObject spawnedBullet = GameObject.Instantiate(bullet, spawnPoint1, transform.rotation);
+        if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            spawnedBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(spawnedBullet.GetComponent<enemy_bullet_controller>().speedX, spawnedBullet.GetComponent<enemy_bullet_controller>().speedY);
+        }
+
 
     }
     void SpawnBullet3()
@@ -126,7 +147,11 @@ public class enemy_controller3 : MonoBehaviour
         Vector3 spawnPoint2 = transform.position;
         spawnPoint2.y += (2.1f);
         spawnPoint2.x -= (2.2f);
-        GameObject.Instantiate(bullet, spawnPoint2, transform.rotation);
+        GameObject spawnedBullet = GameObject.Instantiate(bullet, spawnPoint2, transform.rotation);
+        if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            spawnedBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(spawnedBullet.GetComponent<enemy_bullet_controller>().speedX, spawnedBullet.GetComponent<enemy_bullet_controller>().speedY);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -141,6 +166,7 @@ public class enemy_controller3 : MonoBehaviour
         }
         if (health == 0)
         {
+            TrackStats.SharedInstance.EnemiesDestroyed += 1;
             this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
             GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
             boom.transform.localScale = new Vector3(this.transform.localScale.x, this.transform.localScale.y);
@@ -151,6 +177,19 @@ public class enemy_controller3 : MonoBehaviour
        
 
     }
+
+   private void IsLeftOver()
+    {
+        TrackStats.SharedInstance.EnemiesDestroyed += 1;
+        this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
+        boom.transform.localScale = new Vector3(this.transform.localScale.x, this.transform.localScale.y);
+        float animationTime = boom.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length;
+        Destroy(boom.gameObject, animationTime);
+        StopCoroutine("FireBullet2");
+    }
+
+
 
     IEnumerator FireBullet1()
     {

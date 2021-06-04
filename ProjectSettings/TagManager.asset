@@ -16,6 +16,7 @@ TagManager:
   - Wave4B
   - Wave5B
   - snipeTarget
+  - Enemy3
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - Enemy Bullets
   - Boss Enemy
   - snipeTarget
-  - 
+  - CheeseController
   - 
   - 
   - 

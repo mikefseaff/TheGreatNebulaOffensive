@@ -91,7 +91,8 @@ public class enemy_manager : MonoBehaviour
         Vector3 spawnPoint = Camera.main.ViewportToWorldPoint(new Vector3(x, 0, 0));
         spawnPoint.z = 0;
         spawnPoint.y = 0;
-        GameObject.Instantiate(enemy3, spawnPoint, new Quaternion(0, 0, 0, 0));
+        GameObject tmp = GameObject.Instantiate(enemy3, spawnPoint, new Quaternion(0, 0, 0, 0));
+        tmp.GetComponent<enemy_controller3>().moveLocation = .9f;
     }
     
 

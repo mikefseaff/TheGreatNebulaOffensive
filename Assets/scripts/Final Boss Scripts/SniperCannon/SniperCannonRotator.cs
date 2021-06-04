@@ -51,13 +51,29 @@ public class SniperCannonRotator : MonoBehaviour
         if (canRotate)
         {
 
-            Vector3 relativePos = player.transform.position - transform.position;
+            //Vector3 relativePos = player.transform.position - transform.position;
 
-            
 
-            Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
-            transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
-           
+            //if(relativePos.x < 0)
+            //{
+            //    Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+            //    transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+
+            //}
+            //else
+            //{
+            //    Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+            //    rotation.z *= -1f;
+            //    transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+            //}
+
+            var dir = player.transform.position - transform.position;
+            var angle = Mathf.Atan2(dir.y*-1, dir.x*-1) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+
+
+
         }
        
     }

@@ -6,17 +6,20 @@ public class HangerController : SheildGeneratorController
 {
     public GameObject spawnPoint;
     private float timer;
+    public GameObject Enemy3;
   
     void Start()
     {
         gameObject.GetComponent<Animator>().enabled = false;
+        StartCoroutine(Die(this.gameObject));
+        //Enemy3.SetActive(false);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        StartCoroutine(Die(this.gameObject));
+        
     }
 
     private void OnEnable()
@@ -29,9 +32,11 @@ public class HangerController : SheildGeneratorController
 
     private void OnDisable()
     {
+        
 
         BossController.Shoot -= IsPhase;
         BossController.LeftOver -= StopInvoke;
+        
 
     }
 
@@ -47,6 +52,12 @@ public class HangerController : SheildGeneratorController
             
             gameObject.GetComponent<Animator>().enabled = true;
             InvokeRepeating("SpawnEnemy", 1.75f, .2f);
+            Vector3 tmpSpawnPoint = new Vector3(spawnPoint.transform.position.x,0f, spawnPoint.transform.position.z);
+            tmpSpawnPoint.x += .65f;
+            GameObject tmp = GameObject.Instantiate(Enemy3, tmpSpawnPoint, new Quaternion(0, 0, 0, 0));
+            tmp.GetComponent<enemy_controller3>().moveLocation = .7f;
+            tmp.GetComponent<enemy_controller3>().maxTimerDelay = 1;
+            
         }
       
 
@@ -62,7 +73,7 @@ public class HangerController : SheildGeneratorController
         GameObject enemy = Enemy2Pool.SharedInstance.GetPooledEnemy();
         if (enemy != null)
         {
-            Vector3 spawnPointTmp = new Vector3(spawnPoint.transform.position.x + Random.Range(-2,2), spawnPoint.transform.position.y + Random.Range(-4.5f,4.5f), spawnPoint.transform.position.z);
+            Vector3 spawnPointTmp = new Vector3(spawnPoint.transform.position.x + Random.Range(-2,2), spawnPoint.transform.position.y + Random.Range(-2f,2f), spawnPoint.transform.position.z);
             enemy.transform.position = new Vector3(spawnPointTmp.x, spawnPointTmp.y, spawnPointTmp.z);
             enemy.SetActive(true);
             enemy.GetComponent<Rigidbody2D>().velocity = new Vector2(enemy.GetComponent<enemy_controller2>().moveSpeed*-1,0);
@@ -84,8 +95,9 @@ public class HangerController : SheildGeneratorController
             StartCoroutine("HitDelay");
 
         }
-        if (health == 0)
+        if (health <= 0)
         {
+           
             this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
             GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
             boom.transform.localScale = new Vector3(this.transform.root.transform.localScale.x, this.transform.root.transform.localScale.y);
@@ -94,6 +106,9 @@ public class HangerController : SheildGeneratorController
             PhaseController.SharedInstance.UniversalPhaseNumber += 1;
             Debug.Log(PhaseController.SharedInstance.UniversalPhaseNumber);
             DestroyedEvent();
+            //GameObject tmpEnemy3 = GameObject.FindGameObjectWithTag("Enemy3");
+            //tmpEnemy3.GetComponent<enemy_controller3>().selfDestroy();
+           
             Destroy(this.gameObject);
 
         }

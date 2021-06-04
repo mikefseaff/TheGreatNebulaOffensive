@@ -50,6 +50,6 @@ public class LaserGunManager : MonoBehaviour
 
     private void StartInvoke()
     {
-        InvokeRepeating("AttackEvent", 1, 15);
+        InvokeRepeating("AttackEvent", 1, 10);
     }
 }

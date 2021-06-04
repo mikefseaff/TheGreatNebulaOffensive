@@ -91,7 +91,7 @@ public class LaserCannonRotator : MonoBehaviour
         
         while (true)
         {
-            transform.Rotate(0, 0, rotation.z*-3);
+            transform.Rotate(0, 0, rotation.z*-5);
             
             if(transform.rotation.z <= rotation.w || (transform.rotation.z >= (rotation.w*-1) && wayToRotate == 1))
             {
@@ -115,7 +115,7 @@ public class LaserCannonRotator : MonoBehaviour
         while (true)
         {
 
-            transform.Rotate(0, 0, -.3f * wayToRotate);
+            transform.Rotate(0, 0, -.5f * wayToRotate);
             //Debug.Log(transform.rotation.z);
 
 
@@ -198,7 +198,7 @@ public class LaserCannonRotator : MonoBehaviour
         while (true)
         {
 
-            transform.Rotate(0, 0, .6f*wayToRotate);
+            transform.Rotate(0, 0, .9f*wayToRotate);
             //Debug.Log(transform.rotation.z);
 
             Debug.Log(transform.rotation.z);
@@ -220,7 +220,7 @@ public class LaserCannonRotator : MonoBehaviour
         while (true)
         {
 
-            transform.Rotate(0, 0, -.6f * wayToRotate);
+            transform.Rotate(0, 0, -.9f * wayToRotate);
             //Debug.Log(transform.rotation.z);
 
             Debug.Log(transform.rotation.z);

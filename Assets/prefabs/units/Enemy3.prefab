@@ -160,12 +160,13 @@ MonoBehaviour:
   speedY: 2
   bullet: {fileID: 6247267510164517976, guid: 1135905552f04804e88faa7c26d50b5a, type: 3}
   maxTimerDelay: 56
-  timerMin: 0.35
-  timerMax: 0.35
+  timerMin: 0.3
+  timerMax: 0.3
   canfireBullets: 1
   explosion: {fileID: 8800585099716028810, guid: 991157e4dfd58904dbf971360e90c556,
     type: 3}
   enraged: {fileID: -6363979443623314479}
+  moveLocation: 0
 --- !u!82 &-6363979443623314479
 AudioSource:
   m_ObjectHideFlags: 0
