@@ -11,7 +11,7 @@ public class CheeseController : MonoBehaviour
     public bool canFire;
     void Start()
     {
-        canFire = true;
+        StartCoroutine("RepeatAntiCheese");
     }
 
     // Update is called once per frame
@@ -27,22 +27,34 @@ public class CheeseController : MonoBehaviour
 
     public void startAntiCheese()
     {
-        if(canFire)
+        
         StartCoroutine("AntiCheese");
+    }
+
+    IEnumerator RepeatAntiCheese()
+    {
+        while (true)
+        {
+            float randTime = Random.Range(8f, 14f);
+            Debug.Log(randTime);
+            yield return new WaitForSeconds(randTime);
+            startAntiCheese();
+        }
+       
     }
     IEnumerator AntiCheese()
     {
-        canFire = false;
+        
         Laser_ChargeUp.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         Laser_ChargeUp.SetActive(false);
         Laser.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         Laser.SetActive(false);
         Laser_FadeOut.SetActive(true);
         yield return new WaitForSeconds(1f);
         Laser_FadeOut.SetActive(false);
-        canFire = true;
+        
     }
         
 }
