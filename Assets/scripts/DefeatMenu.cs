@@ -60,7 +60,7 @@ public class DefeatMenu : MonoBehaviour
 
     IEnumerator Fade(GameObject imageMiddle, GameObject imageBeginning)
     {
-        while (timer < 1.5f)
+        while (timer < 1.8f)
         {
             
            
@@ -68,7 +68,7 @@ public class DefeatMenu : MonoBehaviour
             yield return new WaitForSeconds(.25f);
             
         }
-        if (timer >= 1.5f)
+        if (timer >= 1.8f)
         {
             Debug.Log("fade test");
             imageMiddle.SetActive(true);
