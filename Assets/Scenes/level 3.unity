@@ -4508,7 +4508,7 @@ PrefabInstance:
     - target: {fileID: 8454087688214841237, guid: df5cb4039dc7b664e9ff3db962b86b37,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8454087688214841239, guid: df5cb4039dc7b664e9ff3db962b86b37,
         type: 3}
@@ -4712,7 +4712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92470ac682b25774d9b9bff52460ef8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UniversalPhaseNumber: 0
+  UniversalPhaseNumber: 4
 --- !u!4 &1125805865 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1935696852227722714, guid: 6f8f5ebdc511c584b9d6fc0006697508,

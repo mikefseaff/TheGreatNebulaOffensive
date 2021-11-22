@@ -15,29 +15,34 @@ using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
     //Canvas elements to be controlled by the manager
+    public GameObject MainButtonsPanel;
     public GameObject OptionsPanel;
     public GameObject StatsPanel;
+    public GameObject HowToPlayPanel;
     public Text statsText;
     public Slider volume;
-    public GameObject LevelSelect;
     public GameObject LevelSelectMenu;
     public GameObject LaunchLevel1;
     public GameObject LaunchLevel2;
     public GameObject LaunchLevel3;
 
+    public delegate void Fade();
+    public static event Fade FadeOutStart;
+    public string LevelToLoad;
+
     
-
-
     private void Start()
     {
         writeStats();
         AudioListener.volume = TrackStats.SharedInstance.AudioLevel;
         volume.value = TrackStats.SharedInstance.AudioLevel;
-        if(TrackStats.SharedInstance.NumLevelOneCompleted > 0)
-        {
-            LevelSelect.SetActive(true);
-        }
         Time.timeScale = 1f;
+        FadeOut.LoadLevel += LoadNewLevel;
+    }
+    public void FadeEvent()
+    {
+        if (FadeOutStart != null)
+            FadeOutStart();
     }
 
     //"play" button that loads the level based on completion of previous levels
@@ -69,26 +74,42 @@ public class MenuManager : MonoBehaviour
     //opens the options menu
     public void Options()
     {
-        OptionsPanel.SetActive(true);
+        
+        MainButtonsPanel.GetComponent<Animator>().SetBool("faded", true);
+        MainButtonsPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        OptionsPanel.GetComponent<Animator>().SetBool("faded", false);
+        OptionsPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
     //shows the stats panel
     public void Stats()
     {
-        if(StatsPanel.activeInHierarchy == true)
+        if (StatsPanel.GetComponent<CanvasGroup>().alpha == 1)
         {
-            StatsPanel.SetActive(false);
+            StatsPanel.GetComponent<Animator>().SetBool("faded", true);
+            StatsPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
         else
         {
-            StatsPanel.SetActive(true);
+            StatsPanel.GetComponent<Animator>().SetBool("faded", false);
+            StatsPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
         }
     }
 
     //closes the options menu and returns to the main menu
     public void Menu()
     {
-        OptionsPanel.SetActive(false);
+        
+        MainButtonsPanel.GetComponent<Animator>().SetBool("faded", false);
+        MainButtonsPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        LevelSelectMenu.GetComponent<Animator>().SetBool("faded", true);
+        LevelSelectMenu.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        OptionsPanel.GetComponent<Animator>().SetBool("faded", true);
+        OptionsPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        StatsPanel.GetComponent<Animator>().SetBool("faded", true);
+        StatsPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        HowToPlayPanel.GetComponent<Animator>().SetBool("faded", true);
+        HowToPlayPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     //gets slider value and sets volume
@@ -100,44 +121,61 @@ public class MenuManager : MonoBehaviour
     //openes the level select screen and shows launch buttons is player has beaten the level
     public void selectLevel()
     {
-        if (LevelSelectMenu.activeInHierarchy == true)
+        MainButtonsPanel.GetComponent<Animator>().SetBool("faded", true);
+        MainButtonsPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        LevelSelectMenu.GetComponent<Animator>().SetBool("faded", false);
+        LevelSelectMenu.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+        if (TrackStats.SharedInstance.NumLevelOneCompleted == 0)
         {
-            LevelSelectMenu.SetActive(false);
+            LaunchLevel1.SetActive(false);
         }
-        else
+        if (TrackStats.SharedInstance.NumLevelTwoCompleted == 0)
         {
-            LevelSelectMenu.SetActive(true);
-            if (TrackStats.SharedInstance.NumLevelOneCompleted == 0)
-            {
-                LaunchLevel1.SetActive(false);
-            }
-            if (TrackStats.SharedInstance.NumLevelTwoCompleted == 0)
-            {
-                LaunchLevel2.SetActive(false);
-            }
-            if (TrackStats.SharedInstance.NumLevelThreeCompleted == 0)
-            {
-                LaunchLevel3.SetActive(false);
-            }
+            LaunchLevel2.SetActive(false);
+        }
+        if (TrackStats.SharedInstance.NumLevelThreeCompleted == 0)
+        {
+            LaunchLevel3.SetActive(false);
+        }
 
 
-        }
+        
+    }
+
+    public void HowToPlay()
+    {
+        HowToPlayPanel.GetComponent<Animator>().SetBool("faded", false);
+        HowToPlayPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        MainButtonsPanel.GetComponent<Animator>().SetBool("faded", true);
+        MainButtonsPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     //level load buttons
     public void LoadLevel1()
     {
-        SceneManager.LoadScene("level 1");
+        FadeEvent();
+        LevelToLoad = "level 1";
+        //SceneManager.LoadScene("level 1");
     }
 
     public void LoadLevel2()
     {
-        SceneManager.LoadScene("level 2");
+        FadeEvent();
+        LevelToLoad = "level 2";
+        //SceneManager.LoadScene("level 2");
     }
 
     public void LoadLevel3()
     {
-        SceneManager.LoadScene("level 3");
+        FadeEvent();
+        LevelToLoad = "level 3";
+        //SceneManager.LoadScene("level 3");
+    }
+
+    public void LoadNewLevel()
+    {
+        SceneManager.LoadScene(LevelToLoad);
     }
 
     //writes the stats to the stats page

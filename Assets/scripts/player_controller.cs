@@ -19,6 +19,7 @@ public class player_controller : MonoBehaviour
     public Text abilityChargeDisplay;
 
     public int deaths;
+    public Slider AbilityChargeSlider;
 
     // Start is called before the first frame update
     void Start()
@@ -108,7 +109,8 @@ public class player_controller : MonoBehaviour
     {
         if (currentSpecialCharge <= 25)
         {
-            abilityChargeDisplay.text = "Ability Charge: " + currentSpecialCharge * 4 + " %";
+            abilityChargeDisplay.text = currentSpecialCharge * 4 + "%";
+            AbilityChargeSlider.value = currentSpecialCharge * 4;
         }
     }
         

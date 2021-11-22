@@ -9,6 +9,9 @@ public class LevelStartManager : MonoBehaviour
     public AudioSource backgroundMusic;
     public GameObject inLevelUI;
     public GameObject debriefMenu;
+    public Canvas DebriefCanvas;
+    public GameObject PauseMenu;
+    public GameObject PauseMenuController;
     void Start()
     {
         Time.timeScale = 0f;
@@ -24,9 +27,14 @@ public class LevelStartManager : MonoBehaviour
 
     public void Launch()
     {
+        DebriefCanvas.GetComponent<Animator>().SetBool("faded", true);
+        DebriefCanvas.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        DebriefCanvas.GetComponent<CanvasGroup>().interactable = false;
         Time.timeScale = 1f;
         inLevelUI.SetActive(true);
-        debriefMenu.SetActive(false);
+        Invoke("hideDebriefmenu", 1);
+        PauseMenu.SetActive(true);
+        PauseMenuController.SetActive(true);
         backgroundMusic.Play();
     }
 
@@ -34,5 +42,9 @@ public class LevelStartManager : MonoBehaviour
     {
         SceneManager.LoadScene("Main Menu");
         Time.timeScale = 1f;
+    }
+    public void hideDebriefmenu()
+    {
+        debriefMenu.SetActive(false);
     }
 }

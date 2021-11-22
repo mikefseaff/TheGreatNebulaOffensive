@@ -29,7 +29,7 @@ public class TrackStats : MonoBehaviour
         SharedInstance = this;
         if (!PlayerPrefs.HasKey("AudioLevel"))
         {
-
+            Debug.Log("no volume");
             PlayerPrefs.SetFloat("AudioLevel", .5f);
         }
         Load();

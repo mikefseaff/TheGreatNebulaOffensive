@@ -42,7 +42,15 @@ public class enemy_controller3 : MonoBehaviour
 
             StartCoroutine("BulletDelay");
             StartCoroutine("BulletDelay2");
+        if(SceneManager.GetActiveScene().name == "level 2")
+        {
             StartCoroutine("MovementDelay");
+        }
+        else if(SceneManager.GetActiveScene().name == "level 3")
+        {
+            rb.velocity = new Vector2(speedX, 0);
+        }
+           
             StartCoroutine(Die(this.gameObject));
         player = GameObject.FindGameObjectWithTag("Player");
         bullet.GetComponent<enemy_bullet_controller>().speedY = 0;

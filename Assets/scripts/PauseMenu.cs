@@ -9,7 +9,7 @@ public class PauseMenu : MonoBehaviour
 {
     public bool isPaused;
 
-    public GameObject pauseMenuCanvas;
+    public Canvas pauseMenuCanvas;
 
     public AudioSource backgroundMusic;
 
@@ -26,14 +26,20 @@ public class PauseMenu : MonoBehaviour
     {
         if (isPaused)
         {
-            pauseMenuCanvas.SetActive(true);
-            Time.timeScale = 0f;
+            pauseMenuCanvas.GetComponent<Animator>().SetBool("faded",false);
+            pauseMenuCanvas.GetComponent<CanvasGroup>().interactable = true;
+            pauseMenuCanvas.GetComponent<CanvasGroup>().blocksRaycasts = true;
+            Invoke("stopTime", .12f);
+            //Time.timeScale = 0f;
             backgroundMusic.Pause();
         }
         else if (!isPaused && isPlaying)
         {
-            pauseMenuCanvas.SetActive(false);
-            Time.timeScale = 1f;
+            pauseMenuCanvas.GetComponent<Animator>().SetBool("faded", true);
+            pauseMenuCanvas.GetComponent<CanvasGroup>().interactable = false;
+            pauseMenuCanvas.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            Time.timeScale = 0f;
+            resumeTime();
             
            
             
@@ -43,6 +49,14 @@ public class PauseMenu : MonoBehaviour
         {
             isPaused = !isPaused;
         }
+    }
+    private void stopTime()
+    {
+        Time.timeScale = 0;
+    }
+    private void resumeTime()
+    {
+        Time.timeScale = 1;
     }
     public void Resume()
     {

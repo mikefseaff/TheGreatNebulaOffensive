@@ -138,6 +138,9 @@ MonoBehaviour:
   speedY: -6
   explosion: {fileID: 8800585099716028810, guid: 991157e4dfd58904dbf971360e90c556,
     type: 3}
+  moveToTarget: 0
+  targetToMoveTo: {x: 0, y: 0}
+  isSniperBullet: 0
 --- !u!82 &-5722559998255811362
 AudioSource:
   m_ObjectHideFlags: 0

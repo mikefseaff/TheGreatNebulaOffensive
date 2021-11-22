@@ -2,29 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class VictoryMenu1 : MonoBehaviour
 {
     public bool isVictory;
     public GameObject victoryMenuCanvas;
+    public Canvas VictoryCanvas;
     public AudioSource backgroundMusic;
     public GameObject player;
     public GameObject EnemyManager1;
     public float timer;
+    public Text PostBattleStats;
+    public string LevelToLoad;
     // Start is called before the first frame update
-
-
+    public delegate void Fade();
+    public static event Fade FadeOutStart;
+    public GameObject PauseMenu;
+    public GameObject PauseMenuController;
+    private void Start()
+    {
+        FadeOut.LoadLevel += LoadNewLevel;
+    }
     // Update is called once per frame
     void Update()
     {
         if (isVictory)
         {
             victoryMenuCanvas.SetActive(true);
-            Time.timeScale = 0f;
+            VictoryCanvas.GetComponent<Animator>().SetBool("faded", false);
+            Invoke("stopTime", .5f);
+            //Time.timeScale = 0f;
             backgroundMusic.Pause();
             player.GetComponent<Collider2D>().enabled = false;
             TrackStats.SharedInstance.NumLevelOneCompleted += 1;
             TrackStats.SharedInstance.Save();
+            writeStats();
+            PauseMenu.SetActive(false);
+            PauseMenuController.SetActive(false);
             enabled = false;
         }
         else
@@ -37,11 +53,46 @@ public class VictoryMenu1 : MonoBehaviour
             StartCoroutine("VictoryDelay");
         }
     }
+    private void stopTime()
+    {
+        Time.timeScale = 0;
+    }
+    public void FadeEvent()
+    {
+        if (FadeOutStart != null)
+            FadeOutStart();
+    }
 
     public void Continue()
     {
-        SceneManager.LoadScene("Level 2");
+        FadeEvent();
+        LevelToLoad = "level 2";
     }
+    public void Menu()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
+    public void LoadNewLevel()
+    {
+        SceneManager.LoadScene(LevelToLoad);
+    }
+    public void writeStats()
+    {
+        PostBattleStats.text = "Enemies Destroyed: " + TrackStats.SharedInstance.EnemiesDestroyed + '\n' + '\n' +
+
+                    "Bullets Fired: " + TrackStats.SharedInstance.BulletsFired + '\n' + '\n' +
+
+                   "Number of Special Abilities Used: " + TrackStats.SharedInstance.TotalSpecialAbilitiesUsed + '\n' + '\n' +
+
+                    "Total Deaths: " + TrackStats.SharedInstance.TotalDeaths + '\n' + '\n' +
+
+                   "Times Level One Completed: " + TrackStats.SharedInstance.NumLevelOneCompleted + '\n' + '\n' +
+
+                   "Times Level Two Completed: " + TrackStats.SharedInstance.NumLevelTwoCompleted + '\n' + '\n' +
+
+                   "Times Level Three Completed: " + TrackStats.SharedInstance.NumLevelThreeCompleted + '\n' + '\n';
+    }
+
     IEnumerator VictoryDelay()
     {
         while (timer <= .8f)
