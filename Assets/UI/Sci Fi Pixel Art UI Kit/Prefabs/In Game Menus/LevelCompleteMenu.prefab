@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 179983458453749008}
   - component: {fileID: 179983458453749010}
   - component: {fileID: 179983458453749011}
+  - component: {fileID: 7442595162103963983}
   m_Layer: 0
   m_Name: Text (2)
   m_TagString: Untagged
@@ -77,30 +78,19 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
-  m_Text: 'Enemies Destroyed: 173
-
-
-    Bullets Fired: 186
-
-
-    Number of Special
-    Abilities Used: 5
-
-
-    Total Deaths: 3
-
-
-    Times Level One Completed: 2
-
-
-    Times
-    Level Two Completed: 1
-
-
-    Times Level Three Completed: 1
-
-
-'
+  m_Text: 
+--- !u!114 &7442595162103963983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179983458453749009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16fc9b7317062f34fad272d261bc68ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &8850234951711622750
 AudioSource:
   m_ObjectHideFlags: 0
@@ -497,7 +487,7 @@ Animator:
   m_GameObject: {fileID: 8850234950892593907}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f4bd61e72820a394d826d376e1a0e9ac, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9f01ea6f9388616498fa11a0e1a51862, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -847,7 +837,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8850234951506148770
 Transform:
   m_ObjectHideFlags: 0
@@ -2141,7 +2131,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8850234951711622750}
     - target: {fileID: 6128448622182300389, guid: f3dbc0be4bf0e8f4db981a63a6887bfe,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -2155,7 +2145,7 @@ PrefabInstance:
     - target: {fileID: 6128448622182300389, guid: f3dbc0be4bf0e8f4db981a63a6887bfe,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Launch
+      value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 6128448622182300389, guid: f3dbc0be4bf0e8f4db981a63a6887bfe,
         type: 3}
@@ -2166,11 +2156,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 8850234951711622750}
+      objectReference: {fileID: 0}
     - target: {fileID: 6128448622182300389, guid: f3dbc0be4bf0e8f4db981a63a6887bfe,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: Play
+      value: Continue
       objectReference: {fileID: 0}
     - target: {fileID: 6128448622182300389, guid: f3dbc0be4bf0e8f4db981a63a6887bfe,
         type: 3}

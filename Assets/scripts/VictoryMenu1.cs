@@ -21,9 +21,13 @@ public class VictoryMenu1 : MonoBehaviour
     public static event Fade FadeOutStart;
     public GameObject PauseMenu;
     public GameObject PauseMenuController;
-    private void Start()
+    private void Awake()
     {
         FadeOut.LoadLevel += LoadNewLevel;
+    }
+    private void OnDisable()
+    {
+        FadeOut.LoadLevel -= LoadNewLevel;
     }
     // Update is called once per frame
     void Update()

@@ -58,7 +58,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &8673087880346937426
 MonoBehaviour:
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -150,7 +150,7 @@ PrefabInstance:
     - target: {fileID: 3427772872422685321, guid: 9df3d7f900c9ac64b9562f40979d196e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -912.875
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3427772872422685321, guid: 9df3d7f900c9ac64b9562f40979d196e,
         type: 3}
@@ -195,12 +195,12 @@ PrefabInstance:
     - target: {fileID: 3427772872422685321, guid: 9df3d7f900c9ac64b9562f40979d196e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -68.07535
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3427772872422685321, guid: 9df3d7f900c9ac64b9562f40979d196e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -47.979553
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 3427772872422685321, guid: 9df3d7f900c9ac64b9562f40979d196e,
         type: 3}
@@ -241,6 +241,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3427772872422685321, guid: 9df3d7f900c9ac64b9562f40979d196e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 3427772872422685321, guid: 9df3d7f900c9ac64b9562f40979d196e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.3012776
+      objectReference: {fileID: 0}
+    - target: {fileID: 3427772872422685321, guid: 9df3d7f900c9ac64b9562f40979d196e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.7874
       objectReference: {fileID: 0}
     - target: {fileID: 3427772872422685322, guid: 9df3d7f900c9ac64b9562f40979d196e,
         type: 3}

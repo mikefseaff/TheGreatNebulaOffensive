@@ -6,14 +6,19 @@ using UnityEngine.SceneManagement;
 public class VictoryMenu3 : MonoBehaviour
 {
     public bool isVictory;
-    public GameObject victoryMenuCanvas;
+    
     public AudioSource backgroundMusic;
-
+    public string LevelToLoad;
+    public delegate void Fade();
+    public static event Fade FadeOutStart;
+    public GameObject PauseMenu;
+    public GameObject PauseMenuController;
     private void OnEnable()
     {
 
         BossController.End += Victory;
-        
+        FadeOut.LoadLevel += LoadNewLevel;
+
 
     }
 
@@ -21,15 +26,22 @@ public class VictoryMenu3 : MonoBehaviour
     {
 
         BossController.End -= Victory;
-        
+        FadeOut.LoadLevel -= LoadNewLevel;
 
+
+    }
+    public void FadeEvent()
+    {
+        if (FadeOutStart != null)
+            FadeOutStart();
     }
 
     // Update is called once per frame
-   void Victory()
+    void Victory()
     {
-        victoryMenuCanvas.SetActive(true);
-        Time.timeScale = 0f;
+        FadeEvent();
+        LevelToLoad = "Thanks For Playing";
+        //Time.timeScale = 0f;
         backgroundMusic.Pause();
     }
 
@@ -38,5 +50,10 @@ public class VictoryMenu3 : MonoBehaviour
 
         SceneManager.LoadScene("Main Menu");
         Time.timeScale = 1f;
+    }
+
+    public void LoadNewLevel()
+    {
+        SceneManager.LoadScene(LevelToLoad);
     }
 }

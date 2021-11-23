@@ -30,19 +30,26 @@ public class MenuManager : MonoBehaviour
     public static event Fade FadeOutStart;
     public string LevelToLoad;
 
-    
+    private void Awake()
+    {
+        FadeOut.LoadLevel += LoadNewLevel;
+    }
     private void Start()
     {
         writeStats();
         AudioListener.volume = TrackStats.SharedInstance.AudioLevel;
         volume.value = TrackStats.SharedInstance.AudioLevel;
         Time.timeScale = 1f;
-        FadeOut.LoadLevel += LoadNewLevel;
+        
     }
     public void FadeEvent()
     {
         if (FadeOutStart != null)
             FadeOutStart();
+    }
+    private void OnDisable()
+    {
+        FadeOut.LoadLevel -= LoadNewLevel;
     }
 
     //"play" button that loads the level based on completion of previous levels

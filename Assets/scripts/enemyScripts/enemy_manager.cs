@@ -23,7 +23,10 @@ public class enemy_manager : MonoBehaviour
     public float timerMin3 = 5f;
     public float timerMax3 = 12f;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        DistantceUpdater.SpawnTimeReduction += ReduceSpawnTime;
+    }
     void Start()
     {
         timer1 = 0;
@@ -65,19 +68,19 @@ public class enemy_manager : MonoBehaviour
         Vector3 enemySize = enemy1.GetComponent<Renderer>().bounds.size;
         spawnPoint.y = Mathf.Clamp(spawnPoint.y, bottomBorder + enemySize.x / 2, topBorder - enemySize.x / 2);
         tempEnemy = GameObject.Instantiate(enemy1, spawnPoint, new Quaternion(0, 0, 0, 0));
-        tempEnemy.GetComponent<enemy_controller1>().speed = -6;
+        tempEnemy.GetComponent<enemy_controller1>().speed = -5;
     }
     void SpawnEnemy2()
     {
         GameObject tempEnemy;
         float x = 1.25f;
-        Vector3 spawnPoint = Camera.main.ViewportToWorldPoint(new Vector3(x, Random.Range(.3f, .7f), 0));
+        Vector3 spawnPoint = Camera.main.ViewportToWorldPoint(new Vector3(x, Random.Range(.3f, .8f), 0));
         spawnPoint.z = 0;
 
         // adjust x-axis position
         float dist = (this.transform.position - Camera.main.transform.position).z;
         float bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, .3f, dist)).y;
-        float topBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, .7f, dist)).y;
+        float topBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, .8f, dist)).y;
         Vector3 enemySize = enemy2.GetComponent<Renderer>().bounds.size;
         spawnPoint.y = Mathf.Clamp(spawnPoint.y, bottomBorder + enemySize.x / 2, topBorder - enemySize.x / 2);
         tempEnemy = GameObject.Instantiate(enemy2, spawnPoint, new Quaternion(0, 0, 0, 0));
@@ -93,6 +96,14 @@ public class enemy_manager : MonoBehaviour
         spawnPoint.y = 0;
         GameObject tmp = GameObject.Instantiate(enemy3, spawnPoint, new Quaternion(0, 0, 0, 0));
         tmp.GetComponent<enemy_controller3>().moveLocation = .9f;
+    }
+
+    void ReduceSpawnTime()
+    {
+        timerMin1 -= .1f;
+        timerMax1 -= .1f;
+        timerMin2 -= .1f;
+        timerMax2 -= .1f;
     }
     
 
