@@ -39,6 +39,10 @@ public class FadeOut : MonoBehaviour
     {
         if (LoadLevel != null)
             LoadLevel();
+        else
+        {
+            Debug.Log("nothing subscribed");
+        }
     }
     private void OnDisable()
     {
@@ -105,6 +109,7 @@ public class FadeOut : MonoBehaviour
     }
     private void FadeOutAndLoadScene()
     {
+        Debug.Log("FADEOUTANDLOADSCENE");
         LoadEvent();
 
     }

@@ -39,6 +39,7 @@ public class BackToMenu : MonoBehaviour
     }
     public void LoadNewLevel()
     {
+        Debug.Log("Level Loaded");
         SceneManager.LoadScene(LevelToLoad);
     }
 }

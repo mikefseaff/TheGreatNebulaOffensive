@@ -26,7 +26,7 @@ public class VictoryMenu3 : MonoBehaviour
     {
 
         BossController.End -= Victory;
-        FadeOut.LoadLevel -= LoadNewLevel;
+        //FadeOut.LoadLevel -= LoadNewLevel;
 
 
     }
@@ -54,6 +54,7 @@ public class VictoryMenu3 : MonoBehaviour
 
     public void LoadNewLevel()
     {
+        FadeOut.LoadLevel -= LoadNewLevel;
         SceneManager.LoadScene(LevelToLoad);
     }
 }

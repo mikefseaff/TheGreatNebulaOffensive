@@ -1092,6 +1092,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1271493754758689044, guid: 80dd67c8275f42641a9b1b59975069ca,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 689207a195dc6a94cae405eb827e0ad6, type: 3}
     - target: {fileID: 3288094201936766522, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1105,34 +1110,43 @@ PrefabInstance:
     - target: {fileID: 4623318709862821360, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}
       propertyPath: m_Text
-      value: The alien battleships are heavily armored and pack quite a punch so
-        it will take a while to bring the beast down.
+      value: LOST CONNECTION
       objectReference: {fileID: 0}
     - target: {fileID: 4623318710519226726, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}
       propertyPath: m_Text
-      value: The aliens have adapted their Class-S fighter to be more mobile, so
-        beware their new movement!
+      value: LOST CONNECTION
       objectReference: {fileID: 0}
     - target: {fileID: 4623318710599816071, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}
       propertyPath: m_Text
-      value: 'There is no time to lose pilot! In order to prevent future attacks
-        we need you to charge through the nebula that the aliens came through. There
-        seems to be a large battleship at the other end of the nebula, but it has
-        not moved in some time... Ha! Maybe the aliens are scared and are now on
-        the defensive! Regardless its time to take the fight to them, good luck! '
+      value: '............I...ts.........
+
+        A.........TR.....a...P
+
+        .............S..a.......vE......you
+
+        ....r.....se....lf...!!! '
       objectReference: {fileID: 0}
     - target: {fileID: 4623318710965628173, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}
       propertyPath: m_Text
-      value: There have been reports of the aliens being able to fire massive lasers
-        over long distances, so keep an eye out for any warning.
+      value: LOST CONNECTION
+      objectReference: {fileID: 0}
+    - target: {fileID: 6010218626086501339, guid: 80dd67c8275f42641a9b1b59975069ca,
+        type: 3}
+      propertyPath: typeSpeed
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 7800260432745953257, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}
       propertyPath: m_Text
-      value: 'MISSION II: DEVASTATION'
+      value: 'MISSION III: EXTERMINATION'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7800260432745953257, guid: 80dd67c8275f42641a9b1b59975069ca,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 62
       objectReference: {fileID: 0}
     - target: {fileID: 8409741230893929733, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}
@@ -1144,7 +1158,17 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 8695667805193002972, guid: 80dd67c8275f42641a9b1b59975069ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8695667806023716176, guid: 80dd67c8275f42641a9b1b59975069ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695667806101288560, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1274,6 +1298,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 260.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695667806899782337, guid: 80dd67c8275f42641a9b1b59975069ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8695667806899782338, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}
@@ -3352,7 +3381,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3ac41bb55afe88046a83bd1c89df5978, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.152
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4616,7 +4645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92470ac682b25774d9b9bff52460ef8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UniversalPhaseNumber: 4
+  UniversalPhaseNumber: 0
 --- !u!4 &1125805865 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1935696852227722714, guid: 6f8f5ebdc511c584b9d6fc0006697508,
@@ -4776,6 +4805,7 @@ MonoBehaviour:
   enimesToPool: {fileID: 4944056411439678682, guid: 4d7ec9abca2601f4e93a999a7c9fe47d,
     type: 3}
   amountToPool: 35
+  SpawnPoint: {fileID: 1425296021}
 --- !u!1001 &1190689305
 PrefabInstance:
   m_ObjectHideFlags: 0

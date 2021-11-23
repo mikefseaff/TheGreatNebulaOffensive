@@ -175,7 +175,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: There have been reports of the aliens being able to fire massive lasers
-        over long distances, so keep an eye out for any warning.
+        over long distances, we are not sure where they originate from but keep an
+        eye out for any warning.
       objectReference: {fileID: 0}
     - target: {fileID: 7800260432745953257, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}

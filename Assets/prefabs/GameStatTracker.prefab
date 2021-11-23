@@ -49,3 +49,5 @@ MonoBehaviour:
   TotalDeaths: 0
   NumLevelOneCompleted: 0
   NumLevelTwoCompleted: 0
+  NumLevelThreeCompleted: 0
+  AudioLevel: 0

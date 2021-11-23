@@ -133,10 +133,10 @@ public class MenuManager : MonoBehaviour
         LevelSelectMenu.GetComponent<Animator>().SetBool("faded", false);
         LevelSelectMenu.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
-        if (TrackStats.SharedInstance.NumLevelOneCompleted == 0)
-        {
-            LaunchLevel1.SetActive(false);
-        }
+        //if (TrackStats.SharedInstance.NumLevelOneCompleted == 0)
+        //{
+        //    LaunchLevel1.SetActive(false);
+        //}
         if (TrackStats.SharedInstance.NumLevelTwoCompleted == 0)
         {
             LaunchLevel2.SetActive(false);
@@ -147,7 +147,16 @@ public class MenuManager : MonoBehaviour
         }
 
 
-        
+        if (TrackStats.SharedInstance.NumLevelOneCompleted >= 1)
+        {
+            LaunchLevel2.SetActive(true);
+        }
+        if (TrackStats.SharedInstance.NumLevelTwoCompleted >= 1)
+        {
+            LaunchLevel3.SetActive(true);
+        }
+
+
     }
 
     public void HowToPlay()

@@ -7,6 +7,7 @@ public class UITypeWriter : MonoBehaviour
 {
     Text txt;
     string story;
+    public float typeSpeed;
     //public AudioSource typeAudio;
     void Start()
     {
@@ -25,7 +26,7 @@ public class UITypeWriter : MonoBehaviour
         {
             txt.text += c;
             //typeAudio.Play();
-            yield return new WaitForSecondsRealtime(0.02f);
+            yield return new WaitForSecondsRealtime(typeSpeed);
         }
     }
     

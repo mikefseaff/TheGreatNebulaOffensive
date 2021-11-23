@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4944056411439678686}
   - component: {fileID: 4944056411439678687}
   - component: {fileID: 4944056411439678684}
+  - component: {fileID: -1722598413535377856}
   m_Layer: 10
   m_Name: Enemy2
   m_TagString: Untagged
@@ -177,3 +178,16 @@ MonoBehaviour:
   timerMax: 2
   canfireBullets: 1
   canMove: 1
+--- !u!114 &-1722598413535377856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4944056411439678682}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63fbbe18c76622844b23fd80c3d14735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnPoint: {fileID: 0}

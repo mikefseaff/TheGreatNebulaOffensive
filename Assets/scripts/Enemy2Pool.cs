@@ -8,6 +8,7 @@ public class Enemy2Pool : MonoBehaviour
     public List<GameObject> pooledEnemies;
     public GameObject enimesToPool;
     public int amountToPool = 10;
+    public GameObject SpawnPoint;
 
     private void Awake()
     {
@@ -21,6 +22,9 @@ public class Enemy2Pool : MonoBehaviour
         for (int i = 0; i < amountToPool; i++)
         {
             tmp = Instantiate(enimesToPool);
+            tmp.GetComponent<enemy_controller2>().frequency = Random.Range(5, 11);
+            tmp.GetComponent<enemy_controller2>().magnitude = Random.Range(.5f, 1f);
+            tmp.GetComponent<HangerRespawn>().SpawnPoint = SpawnPoint;
             tmp.SetActive(false);
             pooledEnemies.Add(tmp);
         }

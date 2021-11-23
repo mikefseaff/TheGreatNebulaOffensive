@@ -24,10 +24,10 @@ public class VictoryMenu2 : MonoBehaviour
     {
         FadeOut.LoadLevel += LoadNewLevel;
     }
-    private void OnDisable()
-    {
-        FadeOut.LoadLevel -= LoadNewLevel;
-    }
+    //private void OnDisable()
+    //{
+    //    FadeOut.LoadLevel -= LoadNewLevel;
+    //}
     void Update()
     {
         if (isVictory)
@@ -80,6 +80,7 @@ public class VictoryMenu2 : MonoBehaviour
     }
     public void LoadNewLevel()
     {
+        FadeOut.LoadLevel -= LoadNewLevel;
         SceneManager.LoadScene(LevelToLoad);
     }
     public void writeStats()
