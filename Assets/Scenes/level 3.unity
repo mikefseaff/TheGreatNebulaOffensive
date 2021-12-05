@@ -1110,12 +1110,12 @@ PrefabInstance:
     - target: {fileID: 4623318709862821360, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}
       propertyPath: m_Text
-      value: LOST CONNECTION
+      value: CONNECTION LOST
       objectReference: {fileID: 0}
     - target: {fileID: 4623318710519226726, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}
       propertyPath: m_Text
-      value: LOST CONNECTION
+      value: CONNECTION LOST
       objectReference: {fileID: 0}
     - target: {fileID: 4623318710599816071, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}
@@ -1131,7 +1131,7 @@ PrefabInstance:
     - target: {fileID: 4623318710965628173, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}
       propertyPath: m_Text
-      value: LOST CONNECTION
+      value: CONNECTION LOST
       objectReference: {fileID: 0}
     - target: {fileID: 6010218626086501339, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}

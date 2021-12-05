@@ -178,6 +178,11 @@ PrefabInstance:
         over long distances, we are not sure where they originate from but keep an
         eye out for any warning.
       objectReference: {fileID: 0}
+    - target: {fileID: 4623318710965628173, guid: 80dd67c8275f42641a9b1b59975069ca,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 7800260432745953257, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}
       propertyPath: m_Text
