@@ -1432,6 +1432,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8454087688214841237, guid: df5cb4039dc7b664e9ff3db962b86b37,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8454087688214841239, guid: df5cb4039dc7b664e9ff3db962b86b37,
         type: 3}
       propertyPath: abilityChargeDisplay
@@ -14610,6 +14615,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7063564104362744028, guid: 9a9467d9dd8e7464caf12251d9fcc2aa,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8125379299784247827, guid: 9a9467d9dd8e7464caf12251d9fcc2aa,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -14747,6 +14757,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FadingMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2190233709531784421, guid: 73ae198b1dbbf5d4d98cdca026238276,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4212630740938513066, guid: 73ae198b1dbbf5d4d98cdca026238276,
         type: 3}
@@ -14934,6 +14949,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MissionLogManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 249766142550224455, guid: 537f4d9341eb5cd4d84e9975fb19d6ac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6473777373073318598, guid: 537f4d9341eb5cd4d84e9975fb19d6ac,
         type: 3}

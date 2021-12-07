@@ -486,6 +486,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7063564104362744028, guid: 9a9467d9dd8e7464caf12251d9fcc2aa,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8125379299784247827, guid: 9a9467d9dd8e7464caf12251d9fcc2aa,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -495,6 +500,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Resume
+      objectReference: {fileID: 0}
+    - target: {fileID: 8150396996546885926, guid: 9a9467d9dd8e7464caf12251d9fcc2aa,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8150396996546885926, guid: 9a9467d9dd8e7464caf12251d9fcc2aa,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8150396996792044104, guid: 9a9467d9dd8e7464caf12251d9fcc2aa,
         type: 3}
