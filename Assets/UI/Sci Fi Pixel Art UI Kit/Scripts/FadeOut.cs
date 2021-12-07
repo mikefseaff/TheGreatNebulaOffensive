@@ -86,7 +86,7 @@ public class FadeOut : MonoBehaviour
         while (CanvsGroup.alpha < 1)
         {
             CanvsGroup.alpha += .01f;
-            Debug.Log("corutine");
+            //Debug.Log("corutine");
             yield return new WaitForSecondsRealtime(.01f);
             
         }

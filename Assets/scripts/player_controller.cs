@@ -20,6 +20,7 @@ public class player_controller : MonoBehaviour
 
     public int deaths;
     public Slider AbilityChargeSlider;
+    public bool canShoot;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class player_controller : MonoBehaviour
         currentSpecialCharge = 0;
         Debug.Log(Time.timeScale);
         abilityChargeDisplay = abilityChargeDisplay.GetComponent<Text>();
+        canShoot = true;
 
     }
 
@@ -45,7 +47,7 @@ public class player_controller : MonoBehaviour
 
     void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && canShoot)
         {
             GameObject bullet = PlayerBulletObjectPool.SharedInstance.GetPooledBullet();
             if (bullet != null)
@@ -119,7 +121,7 @@ public class player_controller : MonoBehaviour
 
         if (collision.gameObject.layer == 10)
         {
-           
+            canShoot = false;
             GameObject.Destroy(collision.gameObject);
             this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
             GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
@@ -129,7 +131,7 @@ public class player_controller : MonoBehaviour
         }
         if (collision.gameObject.layer == 12)
         {
-
+            canShoot = false;
             this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
             GameObject boom = GameObject.Instantiate(explosion, this.transform.position, new Quaternion(0, 0, 0, 0));
             boom.transform.localScale = new Vector3(collision.transform.localScale.x, this.transform.localScale.y);

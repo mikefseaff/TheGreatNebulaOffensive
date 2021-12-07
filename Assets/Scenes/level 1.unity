@@ -11706,7 +11706,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: Great work pilot! The aliens surrounding our world are defeated and
-        we can begin to repair our defenses for furture attacks. We are in debt to
+        we can begin to repair our defenses for future attacks. We are in debt to
         you... But it isn't over yet. When you are ready we have a new mission for
         you.
       objectReference: {fileID: 0}

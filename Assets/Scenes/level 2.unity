@@ -174,9 +174,9 @@ PrefabInstance:
     - target: {fileID: 4623318710965628173, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}
       propertyPath: m_Text
-      value: There have been reports of the aliens being able to fire massive lasers
-        over long distances, we are not sure where they originate from but keep an
-        eye out for any warning.
+      value: There have been reports of massive laser beams cutting through the nebula,
+        we are not sure where they originate from but keep an eye out for any warning
+        from your ships computer.
       objectReference: {fileID: 0}
     - target: {fileID: 4623318710965628173, guid: 80dd67c8275f42641a9b1b59975069ca,
         type: 3}

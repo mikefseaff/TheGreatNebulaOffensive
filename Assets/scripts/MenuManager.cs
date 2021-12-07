@@ -170,6 +170,7 @@ public class MenuManager : MonoBehaviour
     //level load buttons
     public void LoadLevel1()
     {
+        
         FadeEvent();
         LevelToLoad = "level 1";
         //SceneManager.LoadScene("level 1");

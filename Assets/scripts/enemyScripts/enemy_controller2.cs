@@ -37,6 +37,7 @@ public class enemy_controller2 : MonoBehaviour
     public float timerMax = 25f;
     public bool canfireBullets = true;
     public bool canMove = true;
+    private bool stopFunctionality = false;
 
    // public float bulletSpeedCheck;
 
@@ -124,6 +125,7 @@ public class enemy_controller2 : MonoBehaviour
             this.gameObject.SetActive(false);
         if (Camera.main.WorldToViewportPoint(transform.position).y <= 0)
             this.gameObject.SetActive(false);
+       
     }
 
     // checks x location to see when to switch directional movement 
@@ -152,6 +154,11 @@ public class enemy_controller2 : MonoBehaviour
 
         transform.localScale = localScale;
 
+    }
+
+    void stopAllFunctionality()
+    {
+        enabled = false;
     }
 
     // method to move the enemy from the left to the right 

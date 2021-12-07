@@ -27,7 +27,7 @@ public class TrackStats : MonoBehaviour
     {
         //sets default audio level
         SharedInstance = this;
-        if (!PlayerPrefs.HasKey("AudioLevel") || PlayerPrefs.GetInt("AudioLevel") == 0)
+        if (!PlayerPrefs.HasKey("AudioLevel") || PlayerPrefs.GetFloat("AudioLevel") == 0)
         {
             Debug.Log("no volume");
             AudioLevel = .3f;
@@ -55,6 +55,13 @@ public class TrackStats : MonoBehaviour
         PlayerPrefs.SetFloat("AudioLevel", AudioLevel);
         
 
+    }
+
+    public void SaveSound()
+    {
+        PlayerPrefs.SetFloat("AudioLevel", AudioLevel);
+        Debug.Log(AudioLevel);
+        AudioLevel = PlayerPrefs.GetFloat("AudioLevel");
     }
     //loads data from player prefs 
     private void Load()

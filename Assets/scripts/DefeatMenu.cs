@@ -24,7 +24,8 @@ public class DefeatMenu : MonoBehaviour
             backgroundMusic.Pause();
             //imageMiddle.SetActive(false);
             DefeatAnimation();
-            enabled = false; 
+            enabled = false;
+            Time.timeScale = 0;
             
         }
         else
@@ -65,7 +66,8 @@ public class DefeatMenu : MonoBehaviour
             
            
             timer += .1f;
-            yield return new WaitForSeconds(.25f);
+            yield return new WaitForSecondsRealtime(.25f);
+            
             
         }
         if (timer >= 1.8f)

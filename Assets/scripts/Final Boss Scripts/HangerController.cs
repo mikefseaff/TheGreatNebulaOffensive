@@ -45,19 +45,19 @@ public class HangerController : SheildGeneratorController
     {
         if (PhaseController.SharedInstance.UniversalPhaseNumber == 5)
         {
-            InvokeRepeating("SpawnEnemy", 1, 2f);
+            InvokeRepeating("SpawnEnemy", 1f, 2f);
         }
         else if(PhaseController.SharedInstance.UniversalPhaseNumber == 6)
         {
             
             gameObject.GetComponent<Animator>().enabled = true;
-            InvokeRepeating("SpawnEnemy", 1.75f, .2f);
+            InvokeRepeating("SpawnEnemy", 1.75f, .5f);
             Vector3 tmpSpawnPoint = new Vector3(spawnPoint.transform.position.x,0f, spawnPoint.transform.position.z);
             tmpSpawnPoint.x += .65f;
             GameObject tmp = GameObject.Instantiate(Enemy3, tmpSpawnPoint, new Quaternion(0, 0, 0, 0));
             tmp.GetComponent<enemy_controller3>().moveLocation = .7f;
             tmp.GetComponent<enemy_controller3>().maxTimerDelay = 1;
-            
+            tmp.GetComponent<enemy_controller3>().health = 69;
         }
       
 
