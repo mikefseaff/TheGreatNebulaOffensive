@@ -25,10 +25,13 @@ public class MenuManager : MonoBehaviour
     public GameObject LaunchLevel1;
     public GameObject LaunchLevel2;
     public GameObject LaunchLevel3;
+    public GameObject CreditsPanel;
+    public bool canOpenCredits;
 
     public delegate void Fade();
     public static event Fade FadeOutStart;
     public string LevelToLoad;
+
 
     private void Awake()
     {
@@ -36,6 +39,7 @@ public class MenuManager : MonoBehaviour
     }
     private void Start()
     {
+        canOpenCredits = true;
         writeStats();
         AudioListener.volume = TrackStats.SharedInstance.AudioLevel;
         volume.value = TrackStats.SharedInstance.AudioLevel;
@@ -55,6 +59,7 @@ public class MenuManager : MonoBehaviour
     //"play" button that loads the level based on completion of previous levels
     public void StartGame()
     {
+        
         TrackStats.SharedInstance.Save();
         if (TrackStats.SharedInstance.NumLevelTwoCompleted > 0)
         {
@@ -81,11 +86,12 @@ public class MenuManager : MonoBehaviour
     //opens the options menu
     public void Options()
     {
-        
+        canOpenCredits = false;
         MainButtonsPanel.GetComponent<Animator>().SetBool("faded", true);
         MainButtonsPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
         OptionsPanel.GetComponent<Animator>().SetBool("faded", false);
         OptionsPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        CreditsPanel.GetComponent<Animator>().SetBool("faded", true);
     }
 
     //shows the stats panel
@@ -117,6 +123,7 @@ public class MenuManager : MonoBehaviour
         StatsPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
         HowToPlayPanel.GetComponent<Animator>().SetBool("faded", true);
         HowToPlayPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        canOpenCredits = true;
     }
 
     //gets slider value and sets volume
@@ -128,6 +135,8 @@ public class MenuManager : MonoBehaviour
     //openes the level select screen and shows launch buttons is player has beaten the level
     public void selectLevel()
     {
+        canOpenCredits = false;
+        CreditsPanel.GetComponent<Animator>().SetBool("faded", true);
         MainButtonsPanel.GetComponent<Animator>().SetBool("faded", true);
         MainButtonsPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
         LevelSelectMenu.GetComponent<Animator>().SetBool("faded", false);
@@ -161,10 +170,31 @@ public class MenuManager : MonoBehaviour
 
     public void HowToPlay()
     {
+
         HowToPlayPanel.GetComponent<Animator>().SetBool("faded", false);
         HowToPlayPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
         MainButtonsPanel.GetComponent<Animator>().SetBool("faded", true);
         MainButtonsPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        CreditsPanel.GetComponent<Animator>().SetBool("faded", true);
+        canOpenCredits = false;
+    }
+
+    public void Credits()
+    {
+        if (canOpenCredits)
+        {
+            if (CreditsPanel.GetComponent<Animator>().GetBool("faded") == true)
+            {
+                CreditsPanel.GetComponent<Animator>().SetBool("faded", false);
+            }
+            else if (CreditsPanel.GetComponent<Animator>().GetBool("faded") == false)
+            {
+                CreditsPanel.GetComponent<Animator>().SetBool("faded", true);
+            }
+        }
+        
+
+
     }
 
     //level load buttons
