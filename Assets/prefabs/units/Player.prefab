@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8454087688214841237}
   - component: {fileID: 8454087688214841238}
   - component: {fileID: 8454087688214841239}
+  - component: {fileID: 5340958700880822859}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -155,10 +156,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  bullet: {fileID: 4010014135567168431, guid: d6a31e9663164a247bdb7a61039a61ac, type: 3}
   specialAbility: {fileID: 3854205833863595780, guid: 732734d1ac54f864d84bc66bc758c0bd,
     type: 3}
   explosion: {fileID: 8800585099716028810, guid: 991157e4dfd58904dbf971360e90c556,
     type: 3}
   currentSpecialCharge: 0
   maxSpecialCharge: 25
+  abilityChargeDisplay: {fileID: 0}
+  deaths: 0
+  AbilityChargeSlider: {fileID: 0}
+  canShoot: 0
+--- !u!114 &5340958700880822859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8454087688214841224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13bedbc7c50616f4b8b71c3ba38da24d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}

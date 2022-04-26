@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class GodMode : MonoBehaviour
 {
     public GameObject player;
-    public Text enabledText;
     void Start()
     {
         
@@ -15,7 +14,10 @@ public class GodMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown("p"))
+        {
+            setGodMode();
+        }
     }
 
     public void setGodMode()
@@ -23,12 +25,12 @@ public class GodMode : MonoBehaviour
         if(player.GetComponent<CircleCollider2D>().isTrigger == false)
         {
             player.GetComponent<CircleCollider2D>().isTrigger = true;
-            enabledText.text = "ON";
+            Debug.Log("GODMODE ON");
         }
         else if (player.GetComponent<CircleCollider2D>().isTrigger == true)
         {
             player.GetComponent<CircleCollider2D>().isTrigger = false;
-            enabledText.text = "OFF";
+            Debug.Log("GODMODE OFF");
         }
         
     }

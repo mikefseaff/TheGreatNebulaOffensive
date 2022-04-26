@@ -4521,6 +4521,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5340958700880822859, guid: df5cb4039dc7b664e9ff3db962b86b37,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 755855680}
     - target: {fileID: 8454087688214841234, guid: df5cb4039dc7b664e9ff3db962b86b37,
         type: 3}
       propertyPath: m_RootOrder
@@ -4530,6 +4535,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454087688214841237, guid: df5cb4039dc7b664e9ff3db962b86b37,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8454087688214841239, guid: df5cb4039dc7b664e9ff3db962b86b37,
         type: 3}
